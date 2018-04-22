@@ -2,7 +2,7 @@ package com.example.Views;
 
 import java.awt.*;
 
-public class RoundedRectangularStyle extends GameStyle {
+public class RoundedRectangularStyle extends AbstractGameStyle {
 
     public RoundedRectangularStyle(Color newColor, double newWidth, double newHeight) {
         super(newColor, newWidth, newHeight);
