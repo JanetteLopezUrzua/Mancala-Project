@@ -1,18 +1,27 @@
 package com.example.Views;
 
 import java.awt.*;
-import java.awt.geom.GeneralPath;
 
 public abstract class GameStyle {
 
-    Color color;
-    GeneralPath shape;
+    protected Color color;
+    protected Shape shape;
+
+    protected static double WIDTH;
+    protected static double HEIGHT;
+
+    public GameStyle(Color newColor, double newWidth, double newHeight) {
+        color = newColor;
+        WIDTH = newWidth;
+        HEIGHT = newHeight;
+    }
 
     public void draw(Graphics2D g2) {
-        makeshape();
+        makeshape(WIDTH * 0.1, HEIGHT * 0.1, WIDTH * 0.9, HEIGHT * 0.9);
         g2.setColor(color);
+//        g2.
         g2.draw(shape);
     }
 
-    public abstract void makeshape();
+    public abstract void makeshape(double x, double y, double width, double height);
 }
