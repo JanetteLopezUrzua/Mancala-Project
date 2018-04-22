@@ -1,6 +1,7 @@
 package com.example.Model;
 
-import javafx.scene.control.TextFormatter;
+import com.example.Views.Mancala;
+import com.example.Views.Pit;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 
 public class State {
     private ArrayList<ChangeListener> views;
+    protected ArrayList<Pit> pits;
+    protected ArrayList<Mancala> mancalas;
 
     public void State(){
 
