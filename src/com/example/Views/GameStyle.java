@@ -3,7 +3,7 @@ package com.example.Views;
 import java.awt.*;
 import java.awt.geom.GeneralPath;
 
-public abstract class Style {
+public abstract class GameStyle {
 
     Color color;
     GeneralPath shape;
