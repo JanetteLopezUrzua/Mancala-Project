@@ -1,11 +1,15 @@
 package com.example.Views;
 
-import javax.swing.text.Style;
+import java.awt.*;
 
 public class RectangularStyle extends GameStyle {
 
+    public RectangularStyle(Color newColor, double newWidth, double newHeight) {
+        super(newColor, newWidth, newHeight);
+    }
+
     @Override
-    public void makeshape() {
+    public void makeshape(double x, double y, double width, double height) {
 
     }
 }
