@@ -23,5 +23,5 @@ public abstract class AbstractGameStyle {
         g2.draw(shape);
     }
 
-    public abstract void makeshape(double x, double y, double width, double height);
+    public abstract Shape makeshape(double x, double y, double width, double height);
 }

@@ -1,6 +1,7 @@
 package com.example.Views;
 
 import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 
 public class RoundedRectangularStyle extends AbstractGameStyle {
 
@@ -9,7 +10,8 @@ public class RoundedRectangularStyle extends AbstractGameStyle {
     }
 
     @Override
-    public void makeshape(double x, double y, double width, double height) {
-
+    public Shape makeshape(double x, double y, double width, double height) {
+        return new RoundRectangle2D.Double(x, y, width, height, 10, 10);
+//        Shape shape = new RoundRectangle2D.Double();
     }
 }

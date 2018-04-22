@@ -1,6 +1,7 @@
 package com.example.Views;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 
 public class EllipticStyle extends AbstractGameStyle {
 
@@ -9,7 +10,7 @@ public class EllipticStyle extends AbstractGameStyle {
     }
 
     @Override
-    public void makeshape(double x, double y, double width, double height) {
-
+    public Shape makeshape(double x, double y, double width, double height) {
+        return new Ellipse2D.Double(x, y, width, height);
     }
 }
