@@ -11,7 +11,7 @@ public class RoundedRectangularStyle extends AbstractGameStyle {
 
     @Override
     public Shape makeshape(double x, double y, double width, double height) {
-        return new RoundRectangle2D.Double(x, y, width, height, 10, 10);
+        return new RoundRectangle2D.Double(x, y, width, height, 100, 100);
 //        Shape shape = new RoundRectangle2D.Double();
     }
 }

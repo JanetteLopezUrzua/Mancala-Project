@@ -17,7 +17,7 @@ public abstract class AbstractGameStyle {
     }
 
     public void draw(Graphics2D g2) {
-        makeshape(WIDTH * 0.1, HEIGHT * 0.1, WIDTH * 0.9, HEIGHT * 0.9);
+        shape = makeshape(WIDTH * 0.05, HEIGHT * 0.1, WIDTH * 0.9, HEIGHT * 0.9);
         g2.setColor(color);
 //        g2.
         g2.draw(shape);
