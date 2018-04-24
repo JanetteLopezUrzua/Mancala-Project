@@ -2,7 +2,9 @@ package com.example;
 
 import com.example.Views.Board;
 import com.example.Views.RectangularStyle;
+import com.example.Views.View;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class MancalaTester {
@@ -12,7 +14,22 @@ public class MancalaTester {
 
     public static void main(String[] args) {
 //        Color color = new Color(Color.AQUA);
+        JFrame frame = new JFrame();
 
-        Board board = new Board(new RectangularStyle(Color.GRAY, BOARD_WIDTH, BOARD_HEIGHT));
+        View board = new Board(new RectangularStyle(Color.GRAY, BOARD_WIDTH, BOARD_HEIGHT));
+
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+
+                board.draw((Graphics2D) g);
+            }
+        };
+
+//        frame.setLayout();
+        frame.add(panel);
+
+
     }
 }
