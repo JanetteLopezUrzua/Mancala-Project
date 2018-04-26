@@ -1,20 +1,45 @@
 package com.example.views;
 
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-public abstract class View {
+//we dont want views to be instantiated w/o extending, so the constructor is protected
+//NOT a candidate for abstract class, because there's no templating/delegation of responsibility
+public abstract class View extends JPanel implements ChangeListener {
 
-    private Color color;
+    private double x, y, w, h;
+    private Style style;
 
     //choose a color for the view
-    View(){
-        this.color = Color.BLACK;
+    View(double x, double y, double w, double h, Style style){
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.style = style;
+        this.style.makeshape(x, y, w, h);
     }
 
-    void setColor(Color color){
-        this.color = color;
+    //every view draws using the grahpics context
+    public void draw(Graphics2D g2) {
+//        Shape shape = style.getShape();
+        g2.setColor(style.getColor());
+        g2.draw(style.getShape());
     }
 
-    //every view has its own way of being drawn
-    abstract public void draw(Graphics2D g2);
+    public void setStyle(Style style){
+        this.style = style;
+    }
+
+    public Style getStyle(){
+        return style;
+    }
+
+    //when the state is changed by the model, redraw the panel
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        repaint();
+    }
 }

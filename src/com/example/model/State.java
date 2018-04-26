@@ -1,42 +1,32 @@
 package com.example.model;
 
-import com.example.views.Hole;
+import com.example.views.HoleView;
 import com.example.views.Mancala;
 import com.example.views.Pit;
 
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.util.ArrayList;
 
 public class State {
     private ArrayList<ChangeListener> views;
-    protected ArrayList<Hole> holes;
+    protected ArrayList<HoleView> holes;
 
-    public void State(){
-        Hole mancala = new Mancala('A', false);
-        holes.add(mancala);
-        for(int c = 0; c < 12; c++) {
-            Hole pit;
-            if(c < 6)
-                pit = new Pit('A', true);
-            else
-                pit = new Pit('B', true);
-
-            holes.add(pit);
-        }
-
-        mancala = new Mancala('B', false);
-
-        holes.add(mancala);
-    }
-
-    public void attach(){
-
-    }
-
-    public void update(){
-        for(ChangeListener c: views){
-            c.stateChanged(new ChangeEvent(this));      //pass the state as the changeEvent
-        }
+    public State(){
+//        HoleView mancala = new Mancala('A', false);
+//        Hole mancala = new Mancala();
+//        holes.add(mancala);
+//        for(int c = 0; c < 12; c++) {
+//            HoleView pit;
+//            if(c < 6)
+//                pit = new Pit();
+//            else
+//                pit = new Pit();
+//
+//            holes.add(pit);
+//        }
+//
+//        mancala = new Mancala();
+//
+//        holes.add(mancala);
     }
 }

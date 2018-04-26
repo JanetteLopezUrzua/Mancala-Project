@@ -6,24 +6,14 @@ import java.awt.*;
 
 public class Board extends View {
 
-    AbstractGameStyle style;
-    State currentState;
-    State previousState;
 
-    public Board() {
-        State state = new State();
+    public Board(double x, double y, double w, double h, Style style) {
+        super(x, y, w, h, style);
     }
 
-    public Board(AbstractGameStyle newStyle) {
-        style = newStyle;
+
+    public void draw(Graphics2D g2){
+        super.draw(g2);
     }
 
-    @Override
-    public void draw(Graphics2D g2) {
-        style.draw(g2);
-    }
-
-    public void initialize() {
-
-    }
 }

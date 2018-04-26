@@ -16,7 +16,7 @@ public class MancalaTester {
 //        Color color = new Color(Color.AQUA);
         JFrame frame = new JFrame();
 
-        View board = new Board(new RoundedRectangularStyle(Color.GRAY, BOARD_WIDTH, BOARD_HEIGHT));
+        View board = new Board(0, 0, BOARD_WIDTH, BOARD_HEIGHT, new RoundedRectangularStyle(Color.BLACK));
 
         JPanel panel = new JPanel() {
             @Override
@@ -32,7 +32,7 @@ public class MancalaTester {
         frame.setLayout(new BorderLayout());
         frame.add(panel, BorderLayout.CENTER);
 //        frame.pack();
-        frame.setSize( new Dimension(BOARD_WIDTH , BOARD_HEIGHT + 50 ));
+        frame.setSize( new Dimension(BOARD_WIDTH , BOARD_HEIGHT + 50));
         frame.setVisible(true);
 
     }
