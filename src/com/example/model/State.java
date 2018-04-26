@@ -1,8 +1,8 @@
-package com.example.Model;
+package com.example.model;
 
-import com.example.Views.Hole;
-import com.example.Views.Mancala;
-import com.example.Views.Pit;
+import com.example.views.Hole;
+import com.example.views.Mancala;
+import com.example.views.Pit;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;

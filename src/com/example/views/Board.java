@@ -1,6 +1,6 @@
-package com.example.Views;
+package com.example.views;
 
-import com.example.Model.State;
+import com.example.model.State;
 
 import java.awt.*;
 

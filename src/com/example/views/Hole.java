@@ -1,4 +1,4 @@
-package com.example.Views;
+package com.example.views;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;

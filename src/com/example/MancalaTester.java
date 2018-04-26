@@ -1,9 +1,8 @@
 package com.example;
 
-import com.example.Views.Board;
-import com.example.Views.RectangularStyle;
-import com.example.Views.RoundedRectangularStyle;
-import com.example.Views.View;
+import com.example.views.Board;
+import com.example.views.concrete.RoundedRectangularStyle;
+import com.example.views.View;
 
 import javax.swing.*;
 import java.awt.*;

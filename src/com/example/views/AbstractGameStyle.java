@@ -1,4 +1,4 @@
-package com.example.Views;
+package com.example.views;
 
 import java.awt.*;
 

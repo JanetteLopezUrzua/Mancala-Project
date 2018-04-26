@@ -1,4 +1,6 @@
-package com.example.Views;
+package com.example.views.concrete;
+
+import com.example.views.AbstractGameStyle;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
