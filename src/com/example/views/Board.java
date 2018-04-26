@@ -8,9 +8,15 @@ import java.util.ArrayList;
 
 public class Board extends View {
 
-    AbstractGameStyle style;
-    State currentState;
-    State previousState;
+    private AbstractGameStyle style;
+    private State currentState;
+    private State previousState;
+
+    private double MANCALA_WIDTH;
+    private double MANCALA_HEIGHT;
+
+    private double PIT_WIDTH;
+    private double PIT_HEIGHT;
 
     public Board() {
         State state = new State();
@@ -18,6 +24,10 @@ public class Board extends View {
 
     public Board(AbstractGameStyle newStyle) {
         style = newStyle;
+        MANCALA_WIDTH = style.getWIDTH() / 9;
+        MANCALA_HEIGHT = style.getHEIGHT();
+        PIT_WIDTH = style.getWIDTH() / 10;
+        PIT_HEIGHT = style.getHEIGHT() / 2;
 //        initialize();
 
     }
