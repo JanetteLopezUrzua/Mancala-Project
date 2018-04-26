@@ -15,7 +15,10 @@ public class Board extends View {
     }
 
     public Board(AbstractGameStyle newStyle) {
+        State state = new State();
         style = newStyle;
+
+
     }
 
     @Override
@@ -24,6 +27,13 @@ public class Board extends View {
     }
 
     public void initialize() {
+        Mancala mancala = new Mancala('A', false);
 
+        Pit pit;
+
+        for(int c = 0; c < 12; c++) {
+            if(c < 6)
+                pit = new Pit('A', true)
+        }
     }
 }
