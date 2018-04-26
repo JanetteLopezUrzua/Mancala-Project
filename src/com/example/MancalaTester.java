@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class MancalaTester {
 
-    public static final int BOARD_WIDTH = 800;
-    public static final int BOARD_HEIGHT = 300;
+    public static final int BOARD_WIDTH = 1200;
+    public static final int BOARD_HEIGHT = 400;
 
     public static void main(String[] args) {
 //        Color color = new Color(Color.AQUA);

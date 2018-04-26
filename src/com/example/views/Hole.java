@@ -7,19 +7,29 @@ import java.util.ArrayList;
 public abstract class Hole extends View implements ChangeListener {
 
 
-    char player; // "A" or "B"
-    boolean isPit; // true for pit, false for mancala
-    ArrayList<Stone> stones;
+    private char player; // "A" or "B"
+    private boolean isPit; // true for pit, false for mancala
+    private ArrayList<Stone> stones;
+    AbstractGameStyle style;
 
-    public Hole(char newPlayer, boolean newType) {
+    public Hole(char newPlayer, boolean newType, AbstractGameStyle newStyle) {
         player = newPlayer;
         isPit = newType;
+        style = newStyle;
     }
 
     //when the state is changed by the model, redraw
     @Override
     public void stateChanged(ChangeEvent e) {
 
+    }
+
+    public char getPlayer() {
+        return player;
+    }
+
+    public boolean isPit() {
+        return isPit;
     }
 
     //using a spiral function, locate points and use them to draw stones

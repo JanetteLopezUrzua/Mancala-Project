@@ -1,8 +1,10 @@
 package com.example.views;
 
 import com.example.model.State;
+import com.example.views.concrete.EllipticStyle;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Board extends View {
 
@@ -15,9 +17,8 @@ public class Board extends View {
     }
 
     public Board(AbstractGameStyle newStyle) {
-        State state = new State();
         style = newStyle;
-
+//        initialize();
 
     }
 
@@ -27,13 +28,24 @@ public class Board extends View {
     }
 
     public void initialize() {
-        Mancala mancala = new Mancala('A', false);
+        State state = new State();
+        ArrayList<Hole> holes = new ArrayList<>();
+
+        Mancala mancala = new Mancala('B', false, new EllipticStyle(Color.GRAY, style.getWIDTH(), style.getHEIGHT()));
+        holes.add(mancala);
 
         Pit pit;
 
-        for(int c = 0; c < 12; c++) {
-            if(c < 6)
-                pit = new Pit('A', true)
-        }
+//        for(int c = 0; c < 12; c++) {
+//            if(c < 6)
+//                pit = new Pit('A', true);
+//            else
+//                pit = new Pit('B', true);
+//
+//            holes.add(pit);
+//        }
+//
+//        mancala = new Mancala('A', false);
+//        holes.add(mancala);
     }
 }

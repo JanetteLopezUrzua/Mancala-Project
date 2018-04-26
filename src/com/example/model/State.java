@@ -13,21 +13,22 @@ public class State {
     protected ArrayList<Hole> holes;
 
     public void State(){
-        Hole mancala = new Mancala('A', false);
-        holes.add(mancala);
-        for(int c = 0; c < 12; c++) {
-            Hole pit;
-            if(c < 6)
-                pit = new Pit('A', true);
-            else
-                pit = new Pit('B', true);
 
-            holes.add(pit);
-        }
-
-        mancala = new Mancala('B', false);
-
-        holes.add(mancala);
+//        Hole mancala = new Mancala('A', false);
+//        holes.add(mancala);
+//        for(int c = 0; c < 12; c++) {
+//            Hole pit;
+//            if(c < 6)
+//                pit = new Pit('A', true);
+//            else
+//                pit = new Pit('B', true);
+//
+//            holes.add(pit);
+//        }
+//
+//        mancala = new Mancala('B', false);
+//
+//        holes.add(mancala);
     }
 
     public void attach(){

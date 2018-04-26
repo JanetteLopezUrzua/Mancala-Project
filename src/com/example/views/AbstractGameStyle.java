@@ -4,11 +4,11 @@ import java.awt.*;
 
 public abstract class AbstractGameStyle {
 
-    protected Color color;
-    protected Shape shape;
+    private Color color;
+    private Shape shape;
 
-    protected static double WIDTH;
-    protected static double HEIGHT;
+    private double WIDTH;
+    private double HEIGHT;
 
     public AbstractGameStyle(Color newColor, double newWidth, double newHeight) {
         color = newColor;
@@ -24,4 +24,20 @@ public abstract class AbstractGameStyle {
     }
 
     public abstract Shape makeshape(double x, double y, double width, double height);
+
+    public double getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public double getWIDTH() {
+        return WIDTH;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Shape getShape() {
+        return shape;
+    }
 }
