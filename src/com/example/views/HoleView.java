@@ -19,8 +19,8 @@ public abstract class HoleView extends View implements MouseListener {
     ArrayList<Stone> stones;
     Model model;
 
-    public HoleView(double x, double y, double w, double h, Style style) {
-        super(x, y , w, h, style);
+    public HoleView(Style style) {
+        super(style);
 
 //        player = newPlayer;
 //        isPit = newType;

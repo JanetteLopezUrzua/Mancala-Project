@@ -9,9 +9,10 @@ import java.util.ArrayList;
 
 public class State {
     private ArrayList<ChangeListener> views;
-    protected ArrayList<HoleView> holes;
+//    protected ArrayList<HoleView> holes;
 
-    public State(){
+
+    public State() {
 //        HoleView mancala = new Mancala('A', false);
 //        Hole mancala = new Mancala();
 //        holes.add(mancala);
@@ -21,12 +22,5 @@ public class State {
 //                pit = new Pit();
 //            else
 //                pit = new Pit();
-//
-//            holes.add(pit);
-//        }
-//
-//        mancala = new Mancala();
-//
-//        holes.add(mancala);
     }
 }

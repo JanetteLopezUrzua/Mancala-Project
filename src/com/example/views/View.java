@@ -9,17 +9,13 @@ import java.awt.*;
 //NOT a candidate for abstract class, because there's no templating/delegation of responsibility
 public abstract class View extends JPanel implements ChangeListener {
 
-    private double x, y, w, h;
+//    private double x, y, w, h;
     private Style style;
 
     //choose a color for the view
-    View(double x, double y, double w, double h, Style style){
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+    View(Style style){
         this.style = style;
-        this.style.makeshape(x, y, w, h);
+        this.style.makeshape(this.getX(), this.getY(), this.getWidth(), this.getHeight());
     }
 
     //every view draws using the grahpics context

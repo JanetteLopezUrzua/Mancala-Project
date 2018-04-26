@@ -1,22 +1,25 @@
 package com.example;
 
+
 import com.example.views.Board;
-import com.example.views.concrete.RoundedRectangularStyle;
+import com.example.views.ShapedBoard;
 import com.example.views.View;
+import com.example.views.concrete.RoundedRectangularStyle;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MancalaTester {
 
-    public static final int BOARD_WIDTH = 800;
-    public static final int BOARD_HEIGHT = 300;
+    public static final int BOARD_WIDTH = 1200;
+    public static final int BOARD_HEIGHT = 400;
 
     public static void main(String[] args) {
-//        Color color = new Color(Color.AQUA);
-        JFrame frame = new JFrame();
 
-        View board = new Board(0, 0, BOARD_WIDTH, BOARD_HEIGHT, new RoundedRectangularStyle(Color.BLACK));
+
+        ShapedBoard frame = new ShapedBoard(new RoundedRectangularStyle(Color.GRAY), BOARD_WIDTH, BOARD_HEIGHT);
+
+        View board = new Board(new RoundedRectangularStyle(Color.BLACK));
 
         JPanel panel = new JPanel() {
             @Override

@@ -8,12 +8,8 @@ public class Mancala extends HoleView {
 //    public Mancala(char newPlayer, boolean newType) {
 ////        super(newPlayer, newType);
 //    }
-    public Mancala(double x, double y, double w, double h, Style style) {
-        super(x, y, w, h, style);
-    }
-
-    @Override
-    public void draw(Graphics2D g2) {
+    public Mancala(Style style) {
+        super(style);
 
     }
 }
