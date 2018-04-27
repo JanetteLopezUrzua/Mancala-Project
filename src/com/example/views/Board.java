@@ -19,14 +19,23 @@ public class Board extends View {
 
 
     public Board(Style newStyle) {
-
         super(newStyle);
+        setSize(newStyle.getWIDTH(), getHeight());
         MANCALA_WIDTH = this.getWidth() / 9;
         MANCALA_HEIGHT = this.getHeight();
         PIT_WIDTH = this.getWidth() / 10;
         PIT_HEIGHT = this.getHeight() / 2;
-//        initialize();
+        initialize();
 
+    }
+
+    @Override
+    public void setSize(int width, int height){
+        super.setSize(width, height);
+        MANCALA_WIDTH = this.getWidth() / 9;
+        MANCALA_HEIGHT = this.getHeight();
+        PIT_WIDTH = this.getWidth() / 10;
+        PIT_HEIGHT = this.getHeight() / 2;
     }
 
     private void createUpperLowerPanels() {
@@ -43,25 +52,31 @@ public class Board extends View {
         super.draw(g2);
     }
 
-//    public void initialize() {
-//        State state = new State();
-//        ArrayList<Hole> holes = new ArrayList<>();
-//
-//        Mancala mancala = new Mancala('B', false, new EllipticStyle(Color.GRAY, style.getWIDTH(), style.getHEIGHT()));
-//        holes.add(mancala);
-//
-//        Pit pit;
-//
-////        for(int c = 0; c < 12; c++) {
-////            if(c < 6)
-////                pit = new Pit('A', true);
-////            else
-////                pit = new Pit('B', true);
+    public void initialize() {
+              State state = new State();
+        ArrayList<Hole> holes = new ArrayList<>();
+
+        Mancala mancalaB = new Mancala('B', false, new EllipticStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT));
+        holes.add(mancalaB);
+
 ////
-////            holes.add(pit);
-////        }
+////        Pit pit;
 ////
-////        mancala = new Mancala('A', false);
-////        holes.add(mancala);
-//    }
+//////        for(int c = 0; c < 12; c++) {
+//////            if(c < 6)
+//////                pit = new Pit('A', true);
+//////            else
+//////                pit = new Pit('B', true);
+//////
+//////            holes.add(pit);
+//////        }
+//////
+         Mancala mancalaA = new Mancala('A', false, new EllipticStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT));
+         holes.add(mancalaA);
+
+         add(mancalaB, BorderLayout.WEST);
+         add(mancalaA, BorderLayout.EAST);
+
+         repaint();
+    }
 }

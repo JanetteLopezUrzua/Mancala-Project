@@ -18,11 +18,17 @@ public abstract class View extends JPanel implements ChangeListener {
         this.style.makeshape(this.getX(), this.getY(), this.getWidth(), this.getHeight());
     }
 
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        draw((Graphics2D) g);
+    }
+
     //every view draws using the grahpics context
     public void draw(Graphics2D g2) {
 //        Shape shape = style.getShape();
         g2.setColor(style.getColor());
-        g2.draw(style.getShape());
+//        g2.;
+        g2.fill(style.getShape());
     }
 
     public void setStyle(Style style){
