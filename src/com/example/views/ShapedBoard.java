@@ -6,11 +6,11 @@ import javax.swing.*;
 
 public class ShapedBoard extends JFrame {
 
-    AbstractGameStyle style;
+    Style style;
     Shape shape;
 
 
-    public ShapedBoard(AbstractGameStyle newStyle, int width, int height) {
+    public ShapedBoard(Style newStyle, int width, int height) {
         super("ShapedWindow");
 
         style = newStyle;

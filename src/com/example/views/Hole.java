@@ -10,9 +10,9 @@ public abstract class Hole extends View implements ChangeListener {
     private char player; // "A" or "B"
     private boolean isPit; // true for pit, false for mancala
     private ArrayList<Stone> stones;
-    AbstractGameStyle style;
+    Style style;
 
-    public Hole(char newPlayer, boolean newType, AbstractGameStyle newStyle) {
+    public Hole(char newPlayer, boolean newType, Style newStyle) {
         player = newPlayer;
         isPit = newType;
         style = newStyle;

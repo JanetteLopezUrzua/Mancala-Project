@@ -1,11 +1,11 @@
 package com.example.views.concrete;
 
-import com.example.views.AbstractGameStyle;
+import com.example.views.Style;
 
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
-public class RoundedRectangularStyle extends AbstractGameStyle {
+public class RoundedRectangularStyle extends Style {
 
     public RoundedRectangularStyle(Color newColor, double newWidth, double newHeight) {
         super(newColor, newWidth, newHeight);

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Board extends View {
 
-    private AbstractGameStyle style;
+    private Style style;
     private State currentState;
     private State previousState;
 
@@ -22,7 +22,7 @@ public class Board extends View {
         State state = new State();
     }
 
-    public Board(AbstractGameStyle newStyle) {
+    public Board(Style newStyle) {
         style = newStyle;
         MANCALA_WIDTH = style.getWIDTH() / 9;
         MANCALA_HEIGHT = style.getHEIGHT();

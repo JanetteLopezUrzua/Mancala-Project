@@ -1,11 +1,11 @@
 package com.example.views.concrete;
 
-import com.example.views.AbstractGameStyle;
+import com.example.views.Style;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
-public class EllipticStyle extends AbstractGameStyle {
+public class EllipticStyle extends Style {
 
     public EllipticStyle(Color newColor, double newWidth, double newHeight) {
         super(newColor, newWidth, newHeight);

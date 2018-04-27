@@ -2,7 +2,7 @@ package com.example.views;
 
 import java.awt.*;
 
-public abstract class AbstractGameStyle {
+public abstract class Style {
 
     private Color color;
     private Shape shape;
@@ -10,7 +10,7 @@ public abstract class AbstractGameStyle {
     private double WIDTH;
     private double HEIGHT;
 
-    public AbstractGameStyle(Color newColor, double newWidth, double newHeight) {
+    public Style(Color newColor, double newWidth, double newHeight) {
 
         color = newColor;
         WIDTH = newWidth;

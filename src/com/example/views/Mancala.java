@@ -5,7 +5,7 @@ import java.awt.*;
 public class Mancala extends Hole{
 
     //draw the Mancala as a rounded rectangle
-    public Mancala(char newPlayer, boolean newType, AbstractGameStyle newStyle) {
+    public Mancala(char newPlayer, boolean newType, Style newStyle) {
         super(newPlayer, newType, newStyle);
     }
 

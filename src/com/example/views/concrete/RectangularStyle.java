@@ -1,11 +1,11 @@
 package com.example.views.concrete;
 
-import com.example.views.AbstractGameStyle;
+import com.example.views.Style;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-public class RectangularStyle extends AbstractGameStyle {
+public class RectangularStyle extends Style {
 
     public RectangularStyle(Color newColor, double newWidth, double newHeight) {
         super(newColor, newWidth, newHeight);
