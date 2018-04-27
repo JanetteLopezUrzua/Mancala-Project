@@ -17,6 +17,8 @@ public class Board extends View {
     private int PIT_WIDTH;
     private int PIT_HEIGHT;
 
+    private int LABEL_HEIGHT;
+
 
     public Board(Style newStyle) {
 
@@ -25,6 +27,7 @@ public class Board extends View {
         MANCALA_HEIGHT = this.getHeight();
         PIT_WIDTH = this.getWidth() / 10;
         PIT_HEIGHT = this.getHeight() / 2;
+        LABEL_HEIGHT = this.getHeight() / 8;
 //        initialize();
 
     }
@@ -33,7 +36,8 @@ public class Board extends View {
         JPanel upperPanel = new JPanel(new BorderLayout());
         JPanel lowerPanel = new JPanel(new BorderLayout());
 
-        upperPanel.setPreferredSize(new Dimension(getStyle().getWIDTH(), getStyle().getWIDTH()));
+        upperPanel.setPreferredSize(new Dimension(getStyle().getWIDTH(), ));
+        lowerPanel.setPreferredSize(new Dimension(getStyle().getWIDTH(), ));
 
         add(upperPanel, BorderLayout.NORTH);
         add(lowerPanel, BorderLayout.SOUTH);
