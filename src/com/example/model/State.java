@@ -1,9 +1,5 @@
 package com.example.model;
 
-import com.example.views.HoleView;
-import com.example.views.Mancala;
-import com.example.views.Pit;
-
 import javax.swing.event.ChangeListener;
 import java.util.ArrayList;
 

@@ -2,6 +2,7 @@ package com.example;
 
 
 import com.example.views.Board;
+import com.example.views.FrameDragListener;
 import com.example.views.ShapedBoard;
 import com.example.views.View;
 import com.example.views.concrete.EllipticStyle;
@@ -33,6 +34,10 @@ public class MancalaTester {
 
         panel.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
 
+        FrameDragListener frameDragListener = new FrameDragListener(frame);
+
+        frame.addMouseListener(frameDragListener);
+        frame.addMouseMotionListener(frameDragListener);
         frame.setLayout(new BorderLayout());
         frame.add(panel, BorderLayout.CENTER);
 //        frame.pack();

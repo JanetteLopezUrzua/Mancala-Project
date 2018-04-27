@@ -7,11 +7,13 @@ import java.util.ArrayList;
 public abstract class Hole extends View implements ChangeListener {
 
     private ArrayList<Stone> stones;
-    Style style;
+    char player;
+    boolean isPit;
 
-    public Hole(Style newStyle) {
+    public Hole(char newPlayer, boolean newType, Style newStyle) {
         super(newStyle);
-        style = newStyle;
+        player = newPlayer;
+        isPit = newType;
     }
 
     //when the state is changed by the model, redraw

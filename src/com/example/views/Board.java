@@ -7,8 +7,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Board extends View {
-
-    private Style style;
     private State currentState;
     private State previousState;
 
@@ -20,8 +18,8 @@ public class Board extends View {
 
 
     public Board(Style newStyle) {
+
         super(newStyle);
-        style = newStyle;
         MANCALA_WIDTH = this.getWidth() / 9;
         MANCALA_HEIGHT = this.getHeight();
         PIT_WIDTH = this.getWidth() / 10;
