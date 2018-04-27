@@ -6,31 +6,44 @@ public abstract class Style {
 
     private Color color;
     private Shape shape;
-    private boolean fill;
 
-    public Style(Color newColor) {
+    private double WIDTH;
+    private double HEIGHT;
+
+    public Style(Color newColor, double newWidth, double newHeight) {
 
         color = newColor;
+        WIDTH = newWidth;
+        HEIGHT = newHeight;
 
-        //the view will be responsible for making a shape
-//        shape = makeshape(newWidth * 0.05, newHeight* 0.05, newWidth * 0.90, newHeight * 0.95);
+        shape = makeshape(WIDTH * 0.05, HEIGHT * 0.05, WIDTH * 0.90, HEIGHT * 0.95);
     }
 
-    public abstract void makeshape(double x, double y, double width, double height);
+    public void draw(Graphics2D g2) {
 
-    public Shape getShape(){
-        return shape;
+        g2.setColor(color);
+        Stroke oldStroke = g2.getStroke();
+        g2.setStroke(new BasicStroke(2));
+//        g2.
+        g2.draw(shape);
+        g2.setStroke(oldStroke);
     }
 
-    public Color getColor(){
+    public abstract Shape makeshape(double x, double y, double width, double height);
+
+    public double getHEIGHT() {
+        return HEIGHT;
+    }
+
+    public double getWIDTH() {
+        return WIDTH;
+    }
+
+    public Color getColor() {
         return color;
     }
 
-    public void fillColor(boolean fill){
-        this.fill = fill;
-    }
-
-    public void setShape(Shape shape){
-        this.shape = shape;
+    public Shape getShape() {
+        return shape;
     }
 }

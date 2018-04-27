@@ -34,7 +34,7 @@ public abstract class HoleView extends View implements MouseListener {
     //use some strategy to render a stone
     public void addStone() {
         //run algorith to determine new position of stone
-        stones.add(new Stone(0,0,10,10, new EllipticStyle(Color.BLACK)));
+//        stones.add(new Stone(0,0,10,10, new EllipticStyle(Color.BLACK, )));
     }
 
     public void removeStone() {
