@@ -19,15 +19,15 @@ public abstract class Style {
         shape = makeshape((int) (WIDTH * 0.05),  (int) (HEIGHT * 0.05), (int) (WIDTH * 0.90), (int) (HEIGHT * 0.95));
     }
 
-    public void draw(Graphics2D g2) {
-
-        g2.setColor(color);
-        Stroke oldStroke = g2.getStroke();
-        g2.setStroke(new BasicStroke(2));
-//        g2.
-        g2.draw(shape);
-        g2.setStroke(oldStroke);
-    }
+//    public void draw(Graphics2D g2) {
+//
+//        g2.setColor(color);
+//        Stroke oldStroke = g2.getStroke();
+//        g2.setStroke(new BasicStroke(2));
+////        g2.
+//        g2.draw(shape);
+//        g2.setStroke(oldStroke);
+//    }
 
     public abstract Shape makeshape(int x, int y, int width, int height);
 
