@@ -4,6 +4,7 @@ package com.example;
 import com.example.views.Board;
 import com.example.views.ShapedBoard;
 import com.example.views.View;
+import com.example.views.concrete.EllipticStyle;
 import com.example.views.concrete.RoundedRectangularStyle;
 
 import javax.swing.*;

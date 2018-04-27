@@ -12,7 +12,7 @@ public class RectangularStyle extends Style {
     }
 
     @Override
-    public Shape makeshape(double x, double y, double width, double height) {
-        return new Rectangle2D.Double(x, y, width, height);
+    public void makeshape(double x, double y, double width, double height) {
+        this.setShape(new Rectangle2D.Double(x, y, width, height));
     }
 }

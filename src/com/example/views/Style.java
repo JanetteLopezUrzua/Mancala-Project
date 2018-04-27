@@ -16,7 +16,7 @@ public abstract class Style {
 //        shape = makeshape(newWidth * 0.05, newHeight* 0.05, newWidth * 0.90, newHeight * 0.95);
     }
 
-    public abstract Shape makeshape(double x, double y, double width, double height);
+    public abstract void makeshape(double x, double y, double width, double height);
 
     public Shape getShape(){
         return shape;
@@ -28,5 +28,9 @@ public abstract class Style {
 
     public void fillColor(boolean fill){
         this.fill = fill;
+    }
+
+    public void setShape(Shape shape){
+        this.shape = shape;
     }
 }

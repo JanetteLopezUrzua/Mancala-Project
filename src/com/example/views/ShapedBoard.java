@@ -20,6 +20,7 @@ public class ShapedBoard extends JFrame {
         style = newStyle;
         shape = style.getShape();
 
+
         setLayout(new BorderLayout());
 
         // It is best practice to set the window's shape in

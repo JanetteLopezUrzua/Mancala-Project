@@ -12,8 +12,7 @@ public class RoundedRectangularStyle extends Style {
     }
 
     @Override
-    public Shape makeshape(double x, double y, double width, double height) {
-        return new RoundRectangle2D.Double(x, y, width, height, 100, 100);
-//        Shape shape = new RoundRectangle2D.Double();
+    public void makeshape(double x, double y, double width, double height) {
+        this.setShape(new RoundRectangle2D.Double(x, y, width, height, 100, 100));
     }
 }
