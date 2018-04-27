@@ -7,12 +7,12 @@ import java.awt.geom.Rectangle2D;
 
 public class RectangularStyle extends Style {
 
-    public RectangularStyle(Color newColor, double newWidth, double newHeight) {
+    public RectangularStyle(Color newColor, int newWidth, int newHeight) {
         super(newColor, newWidth, newHeight);
     }
 
     @Override
-    public Shape makeshape(double x, double y, double width, double height) {
+    public Shape makeshape(int x, int y, int width, int height) {
         return new Rectangle2D.Double(x, y, width, height);
     }
 }

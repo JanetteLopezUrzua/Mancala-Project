@@ -8,12 +8,12 @@ import com.example.views.Style;
 
 public class RoundedRectangularStyle extends Style {
 
-    public RoundedRectangularStyle(Color newColor, double newWidth, double newHeight) {
+    public RoundedRectangularStyle(Color newColor, int newWidth, int newHeight) {
         super(newColor, newWidth, newHeight);
     }
 
     @Override
-    public Shape makeshape(double x, double y, double width, double height) {
+    public Shape makeshape(int x, int y, int width, int height) {
         return new RoundRectangle2D.Double(x, y, width, height, 100, 100);
 //        Shape shape = new RoundRectangle2D.Double();
     }

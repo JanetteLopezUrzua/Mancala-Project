@@ -7,16 +7,16 @@ public abstract class Style {
     private Color color;
     private Shape shape;
 
-    private double WIDTH;
-    private double HEIGHT;
+    private int WIDTH;
+    private int HEIGHT;
 
-    public Style(Color newColor, double newWidth, double newHeight) {
+    public Style(Color newColor, int newWidth, int newHeight) {
 
         color = newColor;
         WIDTH = newWidth;
         HEIGHT = newHeight;
 
-        shape = makeshape(WIDTH * 0.05, HEIGHT * 0.05, WIDTH * 0.90, HEIGHT * 0.95);
+        shape = makeshape((int) (WIDTH * 0.05),  (int) (HEIGHT * 0.05), (int) (WIDTH * 0.90), (int) (HEIGHT * 0.95));
     }
 
     public void draw(Graphics2D g2) {
@@ -29,13 +29,13 @@ public abstract class Style {
         g2.setStroke(oldStroke);
     }
 
-    public abstract Shape makeshape(double x, double y, double width, double height);
+    public abstract Shape makeshape(int x, int y, int width, int height);
 
-    public double getHEIGHT() {
+    public int getHEIGHT() {
         return HEIGHT;
     }
 
-    public double getWIDTH() {
+    public int getWIDTH() {
         return WIDTH;
     }
 

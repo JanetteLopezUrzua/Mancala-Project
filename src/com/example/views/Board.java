@@ -3,6 +3,7 @@ package com.example.views;
 import com.example.model.State;
 import com.example.views.concrete.EllipticStyle;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -10,11 +11,11 @@ public class Board extends View {
     private State currentState;
     private State previousState;
 
-    private double MANCALA_WIDTH;
-    private double MANCALA_HEIGHT;
+    private int MANCALA_WIDTH;
+    private int MANCALA_HEIGHT;
 
-    private double PIT_WIDTH;
-    private double PIT_HEIGHT;
+    private int PIT_WIDTH;
+    private int PIT_HEIGHT;
 
 
     public Board(Style newStyle) {
@@ -26,6 +27,16 @@ public class Board extends View {
         PIT_HEIGHT = this.getHeight() / 2;
 //        initialize();
 
+    }
+
+    private void createUpperLowerPanels() {
+        JPanel upperPanel = new JPanel(new BorderLayout());
+        JPanel lowerPanel = new JPanel(new BorderLayout());
+
+        upperPanel.setPreferredSize(new Dimension(getStyle().getWIDTH(), getStyle().getWIDTH()));
+
+        add(upperPanel, BorderLayout.NORTH);
+        add(lowerPanel, BorderLayout.SOUTH);
     }
 
     public void draw(Graphics2D g2){
