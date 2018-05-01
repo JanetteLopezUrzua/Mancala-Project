@@ -13,8 +13,8 @@ import java.awt.*;
 
 public class MancalaTester {
 
-    public static final int BOARD_WIDTH = 1200;
-    public static final int BOARD_HEIGHT = 400;
+    private static final int BOARD_WIDTH = 1200;
+    private static final int BOARD_HEIGHT = 400;
 
     public static void main(String[] args) {
 
@@ -24,25 +24,28 @@ public class MancalaTester {
 
         View board = new Board(new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT));
 
-        JPanel panel = new JPanel() {
+        //JPanel panel = new JPanel() {
 //            @Override
 //            protected void paintComponent(Graphics g) {
 //                super.paintComponent(g);
 //
 //                board.draw((Graphics2D) g);
 //            }
-        };
+        //};
 
-        panel.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+        //panel.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+
+
 
         FrameDragListener frameDragListener = new FrameDragListener(frame);
 
         frame.addMouseListener(frameDragListener);
         frame.addMouseMotionListener(frameDragListener);
 
-        frame.setLayout(new FlowLayout());
+        //frame.setLayout(new FlowLayout());
+        frame.setLayout(new BorderLayout());
 //        frame.add(panel, BorderLayout.CENTER);
-        frame.add(board);
+        frame.add(board, BorderLayout.CENTER);
         frame.setResizable(true);
 //        frame.pack();
         frame.setSize( new Dimension(BOARD_WIDTH , BOARD_HEIGHT + 50));
