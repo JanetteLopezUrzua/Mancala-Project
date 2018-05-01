@@ -25,10 +25,6 @@ public class Board extends View {
     public Board(Style newStyle) {
         super(newStyle);
         setSize(newStyle.getWidth(), getHeight());
-//        MANCALA_WIDTH = this.getWidth() / 9;
-//        MANCALA_HEIGHT = this.getHeight();
-//        PIT_WIDTH = this.getWidth() / 10;
-//        PIT_HEIGHT = this.getHeight() / 2;
           setLayout(new BorderLayout());
         initialize();
 
@@ -87,7 +83,7 @@ public class Board extends View {
     private void initialize() {
 
         createUpperLowerPanels();
-        State state = new State();
+        State state;
         ArrayList<Hole> holes = new ArrayList<>();
 
         //Add mancala B to the array of holes = holes[0]
@@ -125,6 +121,7 @@ public class Board extends View {
              holdPits.add(holes.get(i));
          }
 
+         state =  new State(holes);
          //Set a border on the holdPits JPanel to fit the pits in the middle of the board
          holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
 
