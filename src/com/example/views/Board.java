@@ -49,8 +49,8 @@ public class Board extends View {
         JPanel upperPanel = new JPanel(new BorderLayout());
         JPanel lowerPanel = new JPanel(new BorderLayout());
 
-//        upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), ));
-//        lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), ));
+        upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), getStyle().getHeight() / 10));
+        lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), getStyle().getHeight() / 10));
 
         add(upperPanel, BorderLayout.NORTH);
         add(lowerPanel, BorderLayout.SOUTH);
@@ -65,6 +65,8 @@ public class Board extends View {
      * Initialize the board view
      */
     private void initialize() {
+
+        createUpperLowerPanels();
         State state = new State();
         ArrayList<Hole> holes = new ArrayList<>();
 
@@ -78,9 +80,9 @@ public class Board extends View {
         Pit pit;
         for(int c = 0; c < 12; c++) {
             if(c < 6)
-                pit = new Pit('A', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH));
+                pit = new Pit('A', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH), 3);
             else
-                pit = new Pit('B', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH));
+                pit = new Pit('B', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH), 3);
 
             holes.add(pit);
         }
