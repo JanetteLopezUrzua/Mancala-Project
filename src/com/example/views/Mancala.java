@@ -6,7 +6,7 @@ public class Mancala extends Hole {
 
     //draw the Mancala as a rounded rectangle
 
-    public Mancala(char newPlayer, boolean newType, Style newStyle) {
-        super(newPlayer, newType, newStyle);
+    public Mancala(char newPlayer, boolean isPit, Style newStyle) {
+        super(newPlayer, isPit, newStyle);
     }
 }

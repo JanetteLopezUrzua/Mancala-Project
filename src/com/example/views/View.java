@@ -15,7 +15,8 @@ public abstract class View extends JPanel implements ChangeListener {
     //choose a color for the view
     View(Style style){
         this.style = style;
-        this.style.makeshape(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+        this.style.makeshape(this.getX(), this.getY(), style.getWidth(), style.getHeight());
+        this.setSize(new Dimension(style.getWidth(), style.getHeight()));
     }
 
     public void paintComponent(Graphics g) {
@@ -25,10 +26,11 @@ public abstract class View extends JPanel implements ChangeListener {
 
     //every view draws using the grahpics context
     public void draw(Graphics2D g2) {
-//        Shape shape = style.getShape();
+        this.setSize(new Dimension(style.getWidth(), style.getHeight()));
+        Shape shape = style.getShape();
         g2.setColor(style.getColor());
-//        g2.;
-        g2.fill(style.getShape());
+        g2.draw(shape);
+//        g2.fill(style.getShape());
     }
 
     public void setStyle(Style style){

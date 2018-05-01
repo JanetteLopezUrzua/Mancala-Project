@@ -22,11 +22,11 @@ public class Board extends View {
 
     public Board(Style newStyle) {
         super(newStyle);
-        setSize(newStyle.getWIDTH(), getHeight());
-        MANCALA_WIDTH = this.getWidth() / 9;
-        MANCALA_HEIGHT = this.getHeight();
-        PIT_WIDTH = this.getWidth() / 10;
-        PIT_HEIGHT = this.getHeight() / 2;
+        setSize(newStyle.getWidth(), getHeight());
+//        MANCALA_WIDTH = this.getWidth() / 9;
+//        MANCALA_HEIGHT = this.getHeight();
+//        PIT_WIDTH = this.getWidth() / 10;
+//        PIT_HEIGHT = this.getHeight() / 2;
         initialize();
 
     }
@@ -34,7 +34,7 @@ public class Board extends View {
     @Override
     public void setSize(int width, int height){
         super.setSize(width, height);
-        MANCALA_WIDTH = this.getWidth() / 9;
+        MANCALA_WIDTH = this.getWidth() / 15;
         MANCALA_HEIGHT = this.getHeight();
         PIT_WIDTH = this.getWidth() / 10;
         PIT_HEIGHT = this.getHeight() / 2;
@@ -47,8 +47,8 @@ public class Board extends View {
         JPanel upperPanel = new JPanel(new BorderLayout());
         JPanel lowerPanel = new JPanel(new BorderLayout());
 
-        upperPanel.setPreferredSize(new Dimension(getStyle().getWIDTH(), ));
-        lowerPanel.setPreferredSize(new Dimension(getStyle().getWIDTH(), ));
+//        upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), ));
+//        lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), ));
 
         add(upperPanel, BorderLayout.NORTH);
         add(lowerPanel, BorderLayout.SOUTH);

@@ -35,14 +35,15 @@ public class MancalaTester {
 
         panel.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
 
-//        FrameDragListener frameDragListener = new FrameDragListener(frame);
-//
-//        frame.addMouseListener(frameDragListener);
-//        frame.addMouseMotionListener(frameDragListener);
+        FrameDragListener frameDragListener = new FrameDragListener(frame);
+
+        frame.addMouseListener(frameDragListener);
+        frame.addMouseMotionListener(frameDragListener);
 
         frame.setLayout(new FlowLayout());
 //        frame.add(panel, BorderLayout.CENTER);
         frame.add(board);
+        frame.setResizable(true);
 //        frame.pack();
         frame.setSize( new Dimension(BOARD_WIDTH , BOARD_HEIGHT + 50));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

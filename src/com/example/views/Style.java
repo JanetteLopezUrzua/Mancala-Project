@@ -31,11 +31,11 @@ public abstract class Style {
 
     public abstract Shape makeshape(int x, int y, int width, int height);
 
-    public int getHEIGHT() {
+    public int getHeight() {
         return HEIGHT;
     }
 
-    public int getWIDTH() {
+    public int getWidth() {
         return WIDTH;
     }
 

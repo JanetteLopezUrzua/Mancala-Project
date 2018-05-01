@@ -10,10 +10,10 @@ public abstract class Hole extends View implements ChangeListener {
     char player;
     boolean isPit;
 
-    public Hole(char newPlayer, boolean newType, Style newStyle) {
+    public Hole(char newPlayer, boolean _isPit, Style newStyle) {
         super(newStyle);
         player = newPlayer;
-        isPit = newType;
+        isPit = _isPit;
     }
 
     //when the state is changed by the model, redraw
