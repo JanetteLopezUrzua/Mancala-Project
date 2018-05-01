@@ -2,6 +2,7 @@ package com.example.views;
 
 import com.example.model.State;
 import com.example.views.concrete.EllipticStyle;
+import com.example.views.concrete.RoundedRectangularStyle;
 import org.omg.PortableInterceptor.HOLDING;
 
 import javax.swing.*;
@@ -70,22 +71,22 @@ public class Board extends View {
         setLayout(new BorderLayout());
 
         //Add mancala B to the array of holes = holes[0]
-        Mancala mancalaB = new Mancala('B', false, new EllipticStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT));
+        Mancala mancalaB = new Mancala('B', false, new RoundedRectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT));
         holes.add(mancalaB);
 
         //Add Pits to the array of holes
         Pit pit;
         for(int c = 0; c < 12; c++) {
             if(c < 6)
-                pit = new Pit('A', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_HEIGHT));
+                pit = new Pit('A', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH));
             else
-                pit = new Pit('B', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_HEIGHT));
+                pit = new Pit('B', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH));
 
             holes.add(pit);
         }
 
         //Add mancala A to the array of holes = holes[13]
-         Mancala mancalaA = new Mancala('A', false, new EllipticStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT));
+         Mancala mancalaA = new Mancala('A', false, new RoundedRectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT));
          holes.add(mancalaA);
 
          //Set a Border on the JPanel to fit the mancalas in the board

@@ -19,8 +19,8 @@ public class MancalaTester {
     public static void main(String[] args) {
 
 
-//        ShapedBoard frame = new ShapedBoard(new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
-        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
+        ShapedBoard frame = new ShapedBoard(new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
+//        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
 
         View board = new Board(new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT));
 
