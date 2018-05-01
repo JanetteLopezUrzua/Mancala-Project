@@ -29,6 +29,7 @@ public class Board extends View {
 //        MANCALA_HEIGHT = this.getHeight();
 //        PIT_WIDTH = this.getWidth() / 10;
 //        PIT_HEIGHT = this.getHeight() / 2;
+          setLayout(new BorderLayout());
         initialize();
 
     }
@@ -37,7 +38,7 @@ public class Board extends View {
     public void setSize(int width, int height){
         super.setSize(width, height);
         MANCALA_WIDTH = this.getWidth() / 15;
-        MANCALA_HEIGHT = this.getHeight() - 50;
+        MANCALA_HEIGHT = this.getHeight() - 135;
         PIT_WIDTH = this.getWidth() / 12;
         PIT_HEIGHT = this.getHeight() / 3;
         LABEL_HEIGHT = this.getHeight() / 8;
@@ -46,11 +47,30 @@ public class Board extends View {
     }
 
     private void createUpperLowerPanels() {
-        JPanel upperPanel = new JPanel(new BorderLayout());
-        JPanel lowerPanel = new JPanel(new BorderLayout());
+        JPanel upperPanel = new JPanel(new GridLayout(0, 6, 30 , 0));
+        JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 30 , 0));
 
-        upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), getStyle().getHeight() / 10));
-        lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), getStyle().getHeight() / 10));
+        upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(),LABEL_HEIGHT));
+        lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
+
+        //upperPanel.setBackground(Color.PINK);
+        //lowerPanel.setBackground(Color.pink);
+
+        JLabel label;
+        for(int k = 1; k<=12; k++)
+        {
+            if(k <= 6){
+                label = new JLabel("A" + k);
+                lowerPanel.add(label);
+            }
+            else{
+                label = new JLabel("B" + (k));
+                upperPanel.add(label);
+            }
+        }
+
+        upperPanel.setBorder((BorderFactory.createEmptyBorder(0,140,0,0)));
+        lowerPanel.setBorder((BorderFactory.createEmptyBorder(0,140,0,0)));
 
         add(upperPanel, BorderLayout.NORTH);
         add(lowerPanel, BorderLayout.SOUTH);
@@ -70,14 +90,13 @@ public class Board extends View {
         State state = new State();
         ArrayList<Hole> holes = new ArrayList<>();
 
-        setLayout(new BorderLayout());
-
         //Add mancala B to the array of holes = holes[0]
         Mancala mancalaB = new Mancala('B', false, new RoundedRectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT));
         holes.add(mancalaB);
 
         //Add Pits to the array of holes
         Pit pit;
+        JLabel label;
         for(int c = 0; c < 12; c++) {
             if(c < 6)
                 pit = new Pit('A', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH), 3);
@@ -92,7 +111,7 @@ public class Board extends View {
          holes.add(mancalaA);
 
          //Set a Border on the JPanel to fit the mancalas in the board
-         setBorder(BorderFactory.createEmptyBorder(30,100,0,150));
+         setBorder(BorderFactory.createEmptyBorder(25,100,55,150));
 
          //Add mancalas to the Board JPanel
          add(mancalaB, BorderLayout.WEST);
@@ -106,10 +125,13 @@ public class Board extends View {
              holdPits.add(holes.get(i));
          }
 
-         //Set a border on the holdPits JPanel to fir the pits in the middle of the board
-         holdPits.setBorder(BorderFactory.createEmptyBorder(30,90,0,0));
+         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
+         holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
 
          //Add holdPits JPanel to the Board JPanel
          add(holdPits, BorderLayout.CENTER);
+
+
+
     }
 }
