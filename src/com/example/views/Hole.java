@@ -68,11 +68,15 @@ public abstract class Hole extends View implements ChangeListener {
 
             y -= radiusStep; //
 
-            stone = new Stone(x, y, new EllipticStyle(Color.RED, 10, 10));
+//            stone = new Stone(x, y, new EllipticStyle(Color.RED, 10, 10));
+//
+//            add(stone);
+//            repaint();
 
-            add(stone);
-            repaint();
-//            g2.draw(new EllipticStyle(Color.RED, 10, 10).makeshape(x, y, 5, 5));
+//            stone = new Stone( x, y, new EllipticStyle(Color.RED, 10, 10));
+//            add(stone);
+
+            g2.draw(new EllipticStyle(Color.RED, 10, 10).makeshape(x, y, 5, 5));
 
 //            diameter += 2 * radiusStep; //
 //
@@ -112,9 +116,12 @@ public abstract class Hole extends View implements ChangeListener {
             theta += chord / away;
 
             stone = new Stone( (int) x, (int) y, new EllipticStyle(Color.RED, 10, 10));
-            Shape shape = new EllipticStyle(Color.RED, 10, 10).makeshape((int) x, (int) y, 10, 10);
+//            Shape shape = new EllipticStyle(Color.RED, 10, 10).makeshape((int) x, (int) y, 10, 10);
+            Shape shape = new EllipticStyle(Color.RED, 10, 10).getShape();
 //            add(stone);
-            g2.draw(shape);
+            g2.setColor(Color.RED);
+            g2.fill(shape);
+//            g2.draw(shape);
         }
     }
 
