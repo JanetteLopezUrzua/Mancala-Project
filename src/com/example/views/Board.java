@@ -31,7 +31,6 @@ public class Board extends View {
 //        PIT_HEIGHT = this.getHeight() / 2;
           setLayout(new BorderLayout());
         initialize();
-
     }
 
     @Override
@@ -57,6 +56,7 @@ public class Board extends View {
         //lowerPanel.setBackground(Color.pink);
 
         JLabel label;
+        int s = 1;
         for(int k = 1; k<=12; k++)
         {
             if(k <= 6){
@@ -64,8 +64,9 @@ public class Board extends View {
                 lowerPanel.add(label);
             }
             else{
-                label = new JLabel("B" + (k));
+                label = new JLabel("B" + (k-s));
                 upperPanel.add(label);
+                s+=2;
             }
         }
 
