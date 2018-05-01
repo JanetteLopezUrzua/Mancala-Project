@@ -73,13 +73,13 @@ public abstract class Hole extends View implements ChangeListener {
 //            add(stone);
 //            repaint();
 
-//            stone = new Stone( x, y, new EllipticStyle(Color.RED, 10, 10));
+            stone = new Stone(x, y, new EllipticStyle(Color.RED, 10, 10));
 //            add(stone);
 
             g2.draw(new EllipticStyle(Color.RED, 10, 10).makeshape(x, y, 5, 5));
            // add(stone);
             repaint();
-            g2.draw(new EllipticStyle(Color.RED, 10, 10).makeshape(x, y, 5, 5));
+            g2.fill(stone.getStyle().makeshape(x, y, 5, 5));
 
 //            diameter += 2 * radiusStep; //
 //
@@ -92,41 +92,41 @@ public abstract class Hole extends View implements ChangeListener {
 
     }
 
-    public void initStones(Graphics2D g2) {
-
-        int centerX = getWidth() / 2;
-        int centerY = getHeight() / 2;
-
-        Stone stone;
-
-        for ( double theta = chord / awayStep; theta <= numOfStones; ) {
-
-
-            // How far away from center
-            double away = awayStep * theta;
-            //
-            // How far around the center.
-            double around = theta + rotation;
-            //
-            // Convert 'around' and 'away' to X and Y.
-            double x = centerX + Math.cos ( around ) * away;
-            double y = centerY + Math.sin ( around ) * away;
-            //
-            // Now that you know it, do it.
-
-            // to a first approximation, the points are on a circle
-            // so the angle between them is chord/radius
-            theta += chord / away;
-
-            stone = new Stone( (int) x, (int) y, new EllipticStyle(Color.RED, 10, 10));
-//            Shape shape = new EllipticStyle(Color.RED, 10, 10).makeshape((int) x, (int) y, 10, 10);
-            Shape shape = new EllipticStyle(Color.RED, 10, 10).getShape();
-//            add(stone);
-            g2.setColor(Color.RED);
-            g2.fill(shape);
-//            g2.draw(shape);
-        }
-    }
+//    public void initStones(Graphics2D g2) {
+//
+//        int centerX = getWidth() / 2;
+//        int centerY = getHeight() / 2;
+//
+//        Stone stone;
+//
+//        for ( double theta = chord / awayStep; theta <= numOfStones; ) {
+//
+//
+//            // How far away from center
+//            double away = awayStep * theta;
+//            //
+//            // How far around the center.
+//            double around = theta + rotation;
+//            //
+//            // Convert 'around' and 'away' to X and Y.
+//            double x = centerX + Math.cos ( around ) * away;
+//            double y = centerY + Math.sin ( around ) * away;
+//            //
+//            // Now that you know it, do it.
+//
+//            // to a first approximation, the points are on a circle
+//            // so the angle between them is chord/radius
+//            theta += chord / away;
+//
+//            stone = new Stone( (int) x, (int) y, new EllipticStyle(Color.RED, 10, 10));
+////            Shape shape = new EllipticStyle(Color.RED, 10, 10).makeshape((int) x, (int) y, 10, 10);
+//            Shape shape = new EllipticStyle(Color.RED, 10, 10).getShape();
+////            add(stone);
+//            g2.setColor(Color.RED);
+//            g2.fill(shape);
+////            g2.draw(shape);
+//        }
+//    }
 
     //when the state is changed by the model, redraw
     @Override
