@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 public class State {
     private ArrayList<ChangeListener> views;
-//    protected ArrayList<HoleView> holes;
+    private ArrayList<Hole> holes;
+
 
 
     public State() {
@@ -18,5 +19,9 @@ public class State {
 //                pit = new Pit();
 //            else
 //                pit = new Pit();
+    }
+
+    public ArrayList<Hole> getHoles(){
+        return holes;
     }
 }
