@@ -15,32 +15,26 @@ public class Board extends View {
     private State currentState;
     private State previousState;
 
-    private int MANCALA_WIDTH;
-    private int MANCALA_HEIGHT;
-
-    private int PIT_WIDTH;
-    private int PIT_HEIGHT;
-
     private int LABEL_HEIGHT;
 
+    private Style pitStyle;
+    private Style mancalaStyle;
 
-    public Board(Style newStyle) {
-        super(newStyle);
-        setSize(newStyle.getWidth(), getHeight());
-          setLayout(new BorderLayout());
+
+    public Board(Style boardStyle,  Style pitStyle, Style mancalaStyle) {
+        super(boardStyle);
+        setSize(boardStyle.getWidth(), getHeight());
+        setLayout(new BorderLayout());
+        this.pitStyle = pitStyle;
+        this.mancalaStyle = mancalaStyle;
         initialize();
     }
 
     @Override
     public void setSize(int width, int height){
         super.setSize(width, height);
-        MANCALA_WIDTH = this.getWidth() / 15;
-        MANCALA_HEIGHT = this.getHeight() - 135;
-        PIT_WIDTH = this.getWidth() / 12;
-        PIT_HEIGHT = this.getHeight() / 3;
-        LABEL_HEIGHT = this.getHeight() / 8;
-//        initialize();
 
+        LABEL_HEIGHT = this.getHeight() / 8;
     }
 
     private void createUpperLowerPanels() {
@@ -49,9 +43,6 @@ public class Board extends View {
 
         upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(),LABEL_HEIGHT));
         lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
-
-        //upperPanel.setBackground(Color.PINK);
-        //lowerPanel.setBackground(Color.pink);
 
         JLabel label;
         int s = 1;
@@ -116,7 +107,7 @@ public class Board extends View {
         ArrayList<Hole> holes = new ArrayList<>();
 
         //Add mancala B to the array of holes = holes[0]
-        Mancala mancalaB = new Mancala('B', false, new RoundedRectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT));
+        Mancala mancalaB = new Mancala('B', false, mancalaStyle);
         holes.add(mancalaB);
 
         //Add Pits to the array of holes
@@ -124,10 +115,9 @@ public class Board extends View {
         JLabel label;
         for(int c = 0; c < 12; c++) {
             if(c < 6)
-                pit = new Pit('A', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH), 3);
+                pit = new Pit('A', true, pitStyle, 3);
             else
-                pit = new Pit('B', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH), 3);
-
+                pit = new Pit('B', true, pitStyle, 3);
             holes.add(pit);
             //
             Pit finalPit = pit;
@@ -162,7 +152,7 @@ public class Board extends View {
         }
 
         //Add mancala A to the array of holes = holes[13]
-         Mancala mancalaA = new Mancala('A', false, new RoundedRectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT));
+         Mancala mancalaA = new Mancala('A', false, mancalaStyle);
          holes.add(mancalaA);
 
          //Set a Border on the JPanel to fit the mancalas in the board
