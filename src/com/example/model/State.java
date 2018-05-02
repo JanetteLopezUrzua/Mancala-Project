@@ -13,4 +13,8 @@ public class State {
     public State(ArrayList<Hole> _holes) {
         holes = _holes;
     }
+
+    public ArrayList<Hole> getHoles() {
+        return holes;
+    }
 }
