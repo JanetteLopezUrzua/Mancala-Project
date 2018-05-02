@@ -108,7 +108,9 @@ public class Board extends View {
             pit.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    turn(state.getHoles().indexOf(finalPit));
+                    if(finalPit.contains(e.getX(), e.getY())) {
+//                    turn(state.getHoles().indexOf(finalPit));
+                    }
                 }
 
                 @Override
@@ -159,7 +161,8 @@ public class Board extends View {
          //Add holdPits JPanel to the Board JPanel
          add(holdPits, BorderLayout.CENTER);
 
-
-
+         //Create a "Hand" to hold stones that are currently being used in a turn
+//        Hand hand = new Hand(new RoundedRectangularStyle(Color.BLACK, this.getWidth(), this.getHeight() / 12));
+//        add(hand, BorderLayout.SOUTH);
     }
 }

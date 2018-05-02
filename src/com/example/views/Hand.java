@@ -12,11 +12,12 @@ public class Hand extends View {
         setLayout(new FlowLayout());
     }
 
-    public void addToHand(){
-
+    //add a collection of stones to the hand
+    public void addToHand(ArrayList<Stone> stones){
+        this.stones = stones;
     }
-
-    public void takeFromHand(){
-
+    //take a specified stone out of the hand
+    public void takeFromHand(Stone stone){
+        this.stones.remove(stone);
     }
 }
