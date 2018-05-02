@@ -139,7 +139,7 @@ public class MancalaTester {
         frame.add(board, BorderLayout.CENTER);
         frame.setResizable(true);
 
-        frame.setSize( new Dimension(BOARD_WIDTH , BOARD_HEIGHT + 50));
+        frame.setSize(new Dimension(BOARD_WIDTH , BOARD_HEIGHT + 50));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         frame.setVisible(true);

@@ -95,7 +95,7 @@ public class Board extends View {
             System.out.println("Transfer to your mancala");
         }
 
-        return selectedPit;
+        return -1;
     }
 
 
