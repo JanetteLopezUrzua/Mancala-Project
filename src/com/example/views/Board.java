@@ -98,9 +98,13 @@ public class Board extends View {
             Hole hole = holes.get(selectedPit);
             if( (hole.getPlayer() == player && !hole.isPit()) || hole.isPit() )
                 holes.get(selectedPit).addStone();
+            numOfStones--;
         }
 
-//        if( holes.get(selectedPit).getStones() )
+        int oppositePit = (selectedPit + 6) % 12;
+        if( holes.get(selectedPit).getPlayer() == player && holes.get(oppositePit).getStones() >= 1 ) {
+            System.out.println("Transfer to your mancala");
+        }
 
         return -1;
     }
@@ -135,7 +139,8 @@ public class Board extends View {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if(finalPit.contains(e.getX(), e.getY())) {
-//                    turn(state.getHoles().indexOf(finalPit));
+                        System.out.println("You clicked pit!");
+                        turn(currentState.getHoles().indexOf(finalPit));
                     }
                 }
 
