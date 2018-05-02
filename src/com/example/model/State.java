@@ -1,5 +1,7 @@
 package com.example.model;
 
+import com.example.views.Hole;
+
 import javax.swing.event.ChangeListener;
 import java.util.ArrayList;
 
@@ -7,18 +9,8 @@ public class State {
     private ArrayList<ChangeListener> views;
     private ArrayList<Hole> holes;
 
-
-
-    public State() {
-//        HoleView mancala = new Mancala('A', false);
-//        Hole mancala = new Mancala();
-//        holes.add(mancala);
-//        for(int c = 0; c < 12; c++) {
-//            HoleView pit;
-//            if(c < 6)
-//                pit = new Pit();
-//            else
-//                pit = new Pit();
+    public State(ArrayList<Hole> _holes) {
+        holes = _holes;
     }
 
     public ArrayList<Hole> getHoles(){
