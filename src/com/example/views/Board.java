@@ -35,7 +35,7 @@ public class Board extends View {
     public void setSize(int width, int height){
         super.setSize(width, height);
         MANCALA_WIDTH = this.getWidth() / 15;
-        MANCALA_HEIGHT = this.getHeight() - 135;
+        MANCALA_HEIGHT = 2 * this.getHeight() / 3;
         PIT_WIDTH = this.getWidth() / 12;
         PIT_HEIGHT = this.getHeight() / 3;
         LABEL_HEIGHT = this.getHeight() / 8;
@@ -97,12 +97,12 @@ public class Board extends View {
             selectedPit %= holes.size();
             Hole hole = holes.get(selectedPit);
             if( (hole.getPlayer() == player && !hole.isPit()) || hole.isPit() )
-                holes.get(selectedPit).addStone();
+                hole.addStone();
         }
 
 //        if( holes.get(selectedPit).getStones() )
 
-        return -1;
+        return selectedPit;
     }
 
 
@@ -180,14 +180,12 @@ public class Board extends View {
 //             holdPits.add(holes.get(i));
 //         }
 
-        for(int i =1; i <= 6; i++){
+        for(int i = 1; i <= 6; i++){
              holdPits.add(holes.get(i));
          }
-
         for(int i = 12; i > 6; i--){
             holdPits.add(holes.get(i));
         }
-
 
          currentState =  new State(holes);
          //Set a border on the holdPits JPanel to fit the pits in the middle of the board
@@ -198,6 +196,6 @@ public class Board extends View {
 
          //Create a "Hand" to hold stones that are currently being used in a turn
         Hand hand = new Hand(new RoundedRectangularStyle(Color.BLACK, this.getWidth()/2, this.getHeight() / 12));
-        add(hand, BorderLayout.SOUTH);
+//        add(hand, BorderLayout.SOUTH);
     }
 }

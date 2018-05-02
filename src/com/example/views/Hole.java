@@ -76,7 +76,7 @@ public abstract class Hole extends View implements ChangeListener {
             stone = new Stone(x, y, new EllipticStyle(Color.RED, 10, 10));
 //            add(stone);
 
-            g2.draw(new EllipticStyle(Color.RED, 10, 10).makeshape(x, y, 5, 5));
+            g2.fill(new EllipticStyle(Color.RED, 10, 10).makeshape(x, y, 5, 5));
            // add(stone);
             repaint();
 //            g2.fill(stone.getStyle().makeshape(x, y, 5, 5));
