@@ -17,7 +17,7 @@ public class MancalaTester {
     private static final int BOARD_HEIGHT = 400;
 
     public static void main(String[] args) {
-
+/*
         //Create Menu
         JFrame menu = new JFrame();
         menu.setLayout(new BorderLayout());
@@ -78,19 +78,13 @@ public class MancalaTester {
         //add holdButtons panel to Menu JFrame
         menu.add(holdButtons, BorderLayout.CENTER);
 
-        /*//set size of buttons
-        button1.setPreferredSize(new Dimension(30, 10));
-        button2.setPreferredSize(new Dimension(30, 10));
-        button3.setPreferredSize(new Dimension(30, 10));*/
-
-
         menu.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
         menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         menu.setVisible(true);
+        */
 
 
 
-/*
 
         ShapedBoard frame = new ShapedBoard(new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
 //        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
@@ -112,7 +106,6 @@ public class MancalaTester {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         frame.setVisible(true);
-*/
     }
 
 }

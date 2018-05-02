@@ -108,7 +108,7 @@ public class Board extends View {
             pit.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    turn(state.getHoles().indexOf(finalPit));
+                    //turn(state.getHoles().indexOf(finalPit));
                 }
 
                 @Override
