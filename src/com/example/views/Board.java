@@ -109,7 +109,7 @@ public class Board extends View {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if(finalPit.contains(e.getX(), e.getY())) {
-//                    turn(state.getHoles().indexOf(finalPit));
+//                        turn(state.getHoles().indexOf(finalPit));
                     }
                 }
 
@@ -162,7 +162,7 @@ public class Board extends View {
          add(holdPits, BorderLayout.CENTER);
 
          //Create a "Hand" to hold stones that are currently being used in a turn
-//        Hand hand = new Hand(new RoundedRectangularStyle(Color.BLACK, this.getWidth(), this.getHeight() / 12));
-//        add(hand, BorderLayout.SOUTH);
+        Hand hand = new Hand(new RoundedRectangularStyle(Color.BLACK, this.getWidth()/2, this.getHeight() / 12));
+        add(hand, BorderLayout.SOUTH);
     }
 }

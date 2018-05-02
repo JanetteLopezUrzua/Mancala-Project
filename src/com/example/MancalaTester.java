@@ -6,6 +6,7 @@ import com.example.views.FrameDragListener;
 import com.example.views.ShapedBoard;
 import com.example.views.View;
 import com.example.views.concrete.EllipticStyle;
+import com.example.views.concrete.RectangularStyle;
 import com.example.views.concrete.RoundedRectangularStyle;
 
 import javax.swing.*;
@@ -86,10 +87,10 @@ public class MancalaTester {
 
 
 
-        ShapedBoard frame = new ShapedBoard(new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
+        ShapedBoard frame = new ShapedBoard(new RectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
 //        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
 
-        View board = new Board(new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT));
+        View board = new Board(new RectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT));
 
         FrameDragListener frameDragListener = new FrameDragListener(frame);
 
