@@ -1,27 +1,31 @@
 package com.example;
 
 
-import com.example.views.Board;
-import com.example.views.FrameDragListener;
-import com.example.views.ShapedBoard;
-import com.example.views.View;
+import com.example.views.*;
 import com.example.views.concrete.EllipticStyle;
 import com.example.views.concrete.RectangularStyle;
 import com.example.views.concrete.RoundedRectangularStyle;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 
 public class MancalaTester {
 
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 400;
 
+    private static final int MANCALA_WIDTH = BOARD_WIDTH/15;
+    private static final int MANCALA_HEIGHT = BOARD_HEIGHT - 135;
+
+    private static final int PIT_WIDTH = BOARD_WIDTH/12;
+
     public static void main(String[] args) {
-/*
+
         //Create Menu
         JFrame menu = new JFrame();
         menu.setLayout(new BorderLayout());
+        menu.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
 
         //Create panel for title and prompt
         JPanel titleAndPrompt = new JPanel(new BorderLayout());
@@ -79,16 +83,50 @@ public class MancalaTester {
         //add holdButtons panel to Menu JFrame
         menu.add(holdButtons, BorderLayout.CENTER);
 
-        menu.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
-        menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //set 3 different styles
+        //Style 1
+        Style boardStyle1  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
+        Style pitStyle1 = new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH);
+        Style mancalaStyle1 = new RoundedRectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
+
+        //Style 2
+        Style boardStyle2  = new RectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
+        Style pitStyle2 = new RoundedRectangularStyle(Color.RED, PIT_WIDTH+40, PIT_WIDTH-5);
+        Style mancalaStyle2 = new RectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
+
+        //Style 3
+        Style boardStyle3  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
+        Style pitStyle3 = new RectangularStyle(Color.RED, PIT_WIDTH, PIT_WIDTH-5);
+        Style mancalaStyle3 = new EllipticStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
+
+        //add events to the buttons
+        button1.addActionListener(event -> {
+                menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
+                displayBoard(boardStyle1, pitStyle1, mancalaStyle1);
+            }
+        );
+
         menu.setVisible(true);
-        */
 
+        button2.addActionListener(event -> {
+                menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
+                displayBoard(boardStyle2, pitStyle2, mancalaStyle2);
+            }
+        );
 
-        ShapedBoard frame = new ShapedBoard(new RectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
+        button3.addActionListener(event -> {
+                menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
+                displayBoard(boardStyle3, pitStyle3, mancalaStyle3);
+            }
+        );
+    }
+
+    static void displayBoard(Style boardStyle, Style pitStyle, Style mancalaStyle){
+
+        ShapedBoard frame = new ShapedBoard(new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
 //        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
 
-        View board = new Board(new RectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT));
+        View board = new Board(boardStyle, pitStyle, mancalaStyle);
 
         FrameDragListener frameDragListener = new FrameDragListener(frame);
 
@@ -105,6 +143,7 @@ public class MancalaTester {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         frame.setVisible(true);
+
     }
 
 }
