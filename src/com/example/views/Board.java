@@ -7,6 +7,8 @@ import org.omg.PortableInterceptor.HOLDING;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class Board extends View {
@@ -25,10 +27,6 @@ public class Board extends View {
     public Board(Style newStyle) {
         super(newStyle);
         setSize(newStyle.getWidth(), getHeight());
-//        MANCALA_WIDTH = this.getWidth() / 9;
-//        MANCALA_HEIGHT = this.getHeight();
-//        PIT_WIDTH = this.getWidth() / 10;
-//        PIT_HEIGHT = this.getHeight() / 2;
           setLayout(new BorderLayout());
         initialize();
     }
@@ -88,7 +86,7 @@ public class Board extends View {
     private void initialize() {
 
         createUpperLowerPanels();
-        State state = new State();
+        State state;
         ArrayList<Hole> holes = new ArrayList<>();
 
         //Add mancala B to the array of holes = holes[0]
@@ -105,6 +103,34 @@ public class Board extends View {
                 pit = new Pit('B', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH), 3);
 
             holes.add(pit);
+            //
+            Pit finalPit = pit;
+            pit.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    turn(state.getHoles().indexOf(finalPit));
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
         }
 
         //Add mancala A to the array of holes = holes[13]
@@ -126,6 +152,7 @@ public class Board extends View {
              holdPits.add(holes.get(i));
          }
 
+         state =  new State(holes);
          //Set a border on the holdPits JPanel to fit the pits in the middle of the board
          holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
 
