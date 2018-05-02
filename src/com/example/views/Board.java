@@ -79,6 +79,32 @@ public class Board extends View {
         super.draw(g2);
     }
 
+    public void turn(int startingPit) {
+
+        while (move(startingPit) != -1);
+    }
+
+    public int move(int selectedPit) {
+
+        ArrayList<Hole> holes = currentState.getHoles();
+        if(selectedPit > holes.size() )
+            return -1;
+
+        char player = holes.get(selectedPit).getPlayer();
+        int numOfStones = holes.get(selectedPit).takeStones();
+        while(numOfStones > 0) {
+            selectedPit++;
+            selectedPit %= holes.size();
+            Hole hole = holes.get(selectedPit);
+            if( (hole.getPlayer() == player && !hole.isPit()) || hole.isPit() )
+                holes.get(selectedPit).addStone();
+        }
+
+//        if( holes.get(selectedPit).getStones() )
+
+        return -1;
+    }
+
 
     /**
      * Initialize the board view
@@ -86,7 +112,7 @@ public class Board extends View {
     private void initialize() {
 
         createUpperLowerPanels();
-        State state;
+//        State state;
         ArrayList<Hole> holes = new ArrayList<>();
 
         //Add mancala B to the array of holes = holes[0]
@@ -150,11 +176,20 @@ public class Board extends View {
          JPanel holdPits = new JPanel(new GridLayout(2,6));
 
          //Add pits to the holdPits JPanel
-         for(int i =1; i<=12; i++){
+//         for(int i =1; i<=12; i++){
+//             holdPits.add(holes.get(i));
+//         }
+
+        for(int i =1; i <= 6; i++){
              holdPits.add(holes.get(i));
          }
 
-         state =  new State(holes);
+        for(int i = 12; i > 6; i--){
+            holdPits.add(holes.get(i));
+        }
+
+
+         currentState =  new State(holes);
          //Set a border on the holdPits JPanel to fit the pits in the middle of the board
          holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
 

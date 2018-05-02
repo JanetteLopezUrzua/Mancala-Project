@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public abstract class Hole extends View implements ChangeListener {
 
     private ArrayList<Stone> stones;
-    char player;
-    boolean isPit;
-    int numOfStones;
+    private char player;
+    private boolean isPit;
+    private int numOfStones;
 
     int coils = 3;
     int radius = 50;
@@ -141,9 +141,30 @@ public abstract class Hole extends View implements ChangeListener {
 
     public void addStone() {
 //        stones.add(new Stone());
+        numOfStones++;
     }
 
     public void removeStone() {
-        stones.remove(0);
+//        stones.remove(0);
+        numOfStones--;
+    }
+
+    public char getPlayer() {
+        return player;
+    }
+
+    public boolean isPit() {
+        return isPit;
+    }
+
+    public int getStones() {
+        return numOfStones;
+    }
+
+    public int takeStones() {
+
+        int temp = numOfStones;
+        numOfStones = 0;
+        return temp;
     }
 }
