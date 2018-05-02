@@ -7,6 +7,8 @@ import org.omg.PortableInterceptor.HOLDING;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class Board extends View {
@@ -127,6 +129,36 @@ public class Board extends View {
                 pit = new Pit('B', true, new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH), 3);
 
             holes.add(pit);
+            //
+            Pit finalPit = pit;
+            pit.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if(finalPit.contains(e.getX(), e.getY())) {
+//                    turn(state.getHoles().indexOf(finalPit));
+                    }
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
         }
 
         //Add mancala A to the array of holes = holes[13]
@@ -163,5 +195,9 @@ public class Board extends View {
 
          //Add holdPits JPanel to the Board JPanel
          add(holdPits, BorderLayout.CENTER);
+
+         //Create a "Hand" to hold stones that are currently being used in a turn
+//        Hand hand = new Hand(new RoundedRectangularStyle(Color.BLACK, this.getWidth(), this.getHeight() / 12));
+//        add(hand, BorderLayout.SOUTH);
     }
 }
