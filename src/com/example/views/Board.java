@@ -199,7 +199,7 @@ public class Board extends View {
          add(holdPits, BorderLayout.CENTER);
     }
 
-    private void setNumOfStones(int answer){
+    public void setNumOfStones(int answer){
         _numOfStones = answer;
     }
 

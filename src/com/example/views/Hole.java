@@ -77,7 +77,7 @@ public abstract class Hole extends View implements ChangeListener {
             x = getWidth()/2 + (int) xRand;
             y = getHeight()/2 + (int) yRand;
 
-            stone = new Stone(x, y, new EllipticStyle(Color.RED, stoneRad, stoneRad));
+            stone = new Stone(x, y, new EllipticStyle(Color.BLACK, stoneRad, stoneRad));
 
             //measure to prevent overlapping stones from drawing
             boolean draw = true;

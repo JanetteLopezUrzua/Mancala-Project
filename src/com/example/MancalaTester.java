@@ -9,6 +9,7 @@ import com.example.views.concrete.RoundedRectangularStyle;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 public class MancalaTester {
@@ -103,60 +104,29 @@ public class MancalaTester {
 
         menu.setVisible(true);
 
+        //variable to hold answer for number of stones per pit
+        final int numberOfStones;
+
+
         //add events to the buttons
-        button1.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent event) {
-                menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
-                displayBoard(boardStyle1, pitStyle1, mancalaStyle1);
-                String name = JOptionPane.showInputDialog(menu,
-                        "How many stones per pit? (Min = 0, Max = 4)", null); }
-            }
-        );
+        button1.addActionListener( displayQuestionForStones(menu, boardStyle1, pitStyle1, mancalaStyle1));
 
-        button2.addActionListener(new java.awt.event.ActionListener() {
-              @Override
-              public void actionPerformed(java.awt.event.ActionEvent event) {
-                  menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
-                  displayBoard(boardStyle2, pitStyle2, mancalaStyle2);
-                  String name = JOptionPane.showInputDialog(menu,
-                          "How many stones per pit? (Min = 0, Max = 4)", null); }
-              }
-        );
+        button2.addActionListener(displayQuestionForStones(menu, boardStyle2, pitStyle2, mancalaStyle2));
 
-        button3.addActionListener(new java.awt.event.ActionListener() {
-              @Override
-              public void actionPerformed(java.awt.event.ActionEvent event) {
-                  menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
-                  displayBoard(boardStyle3, pitStyle3, mancalaStyle3);
-                  String name = JOptionPane.showInputDialog(menu,
-                          "How many stones per pit? (Min = 0, Max = 4)", null); }
-              }
-        );
+        button3.addActionListener(displayQuestionForStones(menu, boardStyle3, pitStyle3, mancalaStyle3));
     }
 
-        /*static void displayQuestionForStones(JFrame menu){
+    public static ActionListener displayQuestionForStones(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
+        //Pop up button options
+         Object[] options = { "3", "4"};
 
-        //remove all components
-        menu.removeAll();
-
-        //create label for question
-        JLabel question = new JLabel("How many stones per pit? (Min = 0, Max = 4)");
-
-        //create text area for answer
-        JTextField answer = new JTextField();
-
-        //create label for warning
-        JLabel warning = new JLabel warning();
-
-        //Check if number if stones is valid
-        if (answer < 0 || answer > 4){
-
-        }
-
-        menu.add(question, BorderLayout.NORTH);
-        menu.add(answer, BorderLayout.CENTER);
-    }*/
+        return (ActionListener) event -> {
+            menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
+            displayBoard(boardStyle, pitStyle, mancalaStyle);
+            int result = JOptionPane.showOptionDialog(menu, "How many stones per pit?", "Enter Number Of Stones",
+                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+        };
+    }
 
     static void displayBoard(Style boardStyle, Style pitStyle, Style mancalaStyle){
 
