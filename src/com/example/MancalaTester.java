@@ -16,7 +16,7 @@ public class MancalaTester {
 
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 400;
-
+    //private static View board;
     private static final int MANCALA_WIDTH = BOARD_WIDTH/15;
     private static final int MANCALA_HEIGHT = BOARD_HEIGHT - 135;
 
@@ -107,7 +107,6 @@ public class MancalaTester {
         //variable to hold answer for number of stones per pit
         final int numberOfStones;
 
-
         //add events to the buttons
         button1.addActionListener( displayQuestionForStones(menu, boardStyle1, pitStyle1, mancalaStyle1));
 
@@ -116,19 +115,23 @@ public class MancalaTester {
         button3.addActionListener(displayQuestionForStones(menu, boardStyle3, pitStyle3, mancalaStyle3));
     }
 
-    public static ActionListener displayQuestionForStones(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
+    static ActionListener displayQuestionForStones(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
         //Pop up button options
          Object[] options = { "3", "4"};
 
         return (ActionListener) event -> {
             menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
-            displayBoard(boardStyle, pitStyle, mancalaStyle);
+            View b = displayBoard(boardStyle, pitStyle, mancalaStyle);
             int result = JOptionPane.showOptionDialog(menu, "How many stones per pit?", "Enter Number Of Stones",
                     JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+
+            if(result == JOptionPane.YES_OPTION)
+            {
+            }
         };
     }
 
-    static void displayBoard(Style boardStyle, Style pitStyle, Style mancalaStyle){
+    static View displayBoard(Style boardStyle, Style pitStyle, Style mancalaStyle){
 
         ShapedBoard frame = new ShapedBoard(boardStyle, BOARD_WIDTH, BOARD_HEIGHT + 60);
 //        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
@@ -151,6 +154,8 @@ public class MancalaTester {
 
         Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,BOARD_WIDTH/2,BOARD_HEIGHT/6));
         frame.add(hand, BorderLayout.SOUTH);
+
+        return board;
     }
 
 }
