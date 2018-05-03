@@ -122,6 +122,29 @@ public class MancalaTester {
         );
     }
 
+        /*static void displayQuestionForStones(JFrame menu){
+
+        //remove all components
+        menu.removeAll();
+
+        //create label for question
+        JLabel question = new JLabel("How many stones per pit? (Min = 0, Max = 4)");
+
+        //create text area for answer
+        JTextField answer = new JTextField();
+
+        //create label for warning
+        JLabel warning = new JLabel warning();
+
+        //Check if number if stones is valid
+        if (answer < 0 || answer > 4){
+
+        }
+
+        menu.add(question, BorderLayout.NORTH);
+        menu.add(answer, BorderLayout.CENTER);
+    }*/
+
     static void displayBoard(Style boardStyle, Style pitStyle, Style mancalaStyle){
 
         ShapedBoard frame = new ShapedBoard(boardStyle, BOARD_WIDTH, BOARD_HEIGHT + 60);

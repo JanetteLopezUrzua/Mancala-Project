@@ -197,4 +197,6 @@ public class Board extends View {
          //Add holdPits JPanel to the Board JPanel
          add(holdPits, BorderLayout.CENTER);
     }
+
+
 }
