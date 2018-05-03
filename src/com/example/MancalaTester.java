@@ -7,6 +7,7 @@ import com.example.views.concrete.RectangularStyle;
 import com.example.views.concrete.RoundedRectangularStyle;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 
@@ -14,6 +15,7 @@ public class MancalaTester {
 
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 400;
+    private static final int HAND_HEIGHT = 50;
 
     private static final int MANCALA_WIDTH = BOARD_WIDTH/15;
     private static final int MANCALA_HEIGHT = BOARD_HEIGHT - 135;
@@ -95,7 +97,7 @@ public class MancalaTester {
         Style mancalaStyle2 = new RectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
 
         //Style 3
-        Style boardStyle3  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
+        Style boardStyle3  = new EllipticStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
         Style pitStyle3 = new RectangularStyle(Color.RED, PIT_WIDTH, PIT_WIDTH-5);
         Style mancalaStyle3 = new EllipticStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
 
@@ -123,7 +125,7 @@ public class MancalaTester {
 
     static void displayBoard(Style boardStyle, Style pitStyle, Style mancalaStyle){
 
-        ShapedBoard frame = new ShapedBoard(new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
+        ShapedBoard frame = new ShapedBoard(boardStyle, BOARD_WIDTH, BOARD_HEIGHT);
 //        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
 
         View board = new Board(boardStyle, pitStyle, mancalaStyle);
@@ -133,17 +135,19 @@ public class MancalaTester {
         frame.addMouseListener(frameDragListener);
         frame.addMouseMotionListener(frameDragListener);
 
-
         frame.setLayout(new BorderLayout());
 
+        frame.setSize(new Dimension(BOARD_WIDTH , BOARD_HEIGHT + HAND_HEIGHT));
         frame.add(board, BorderLayout.CENTER);
+//        frame.pack();
         frame.setResizable(true);
 
-        frame.setSize(new Dimension(BOARD_WIDTH , BOARD_HEIGHT + 50));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         frame.setVisible(true);
 
+        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,BOARD_WIDTH/2,BOARD_HEIGHT/6));
+//        frame.add(hand, BorderLayout.SOUTH);
     }
 
 }

@@ -7,7 +7,7 @@ public class Hand extends View {
 
     private ArrayList<Stone> stones;
 
-    Hand(Style style) {
+    public Hand(Style style) {
         super(style);
         setLayout(new FlowLayout());
     }

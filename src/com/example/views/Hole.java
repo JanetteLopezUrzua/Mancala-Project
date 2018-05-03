@@ -60,28 +60,24 @@ public abstract class Hole extends View implements ChangeListener {
         int arc = 180; // amount and direction of arc to sweep
 
 
-        for ( int i = 0; i < numOfStones; i++ ) {
+        for (int i = 0; i < numOfStones; i++ ) {
 
-            if (i % 2 == 1) // move the x position every other repetition
-                x -= 2 * radiusStep;
-
-
-            y -= radiusStep; //
-
-//            stone = new Stone(x, y, new EllipticStyle(Color.RED, 10, 10));
+//            if (i % 2 == 1) // move the x position every other repetition
+//                x -= 2 * radiusStep;
 //
-//            add(stone);
-//            repaint();
+//
+//            y -= radiusStep; //
+            double r = getWidth()/2;
+            int stoneRad = 8;
+            double randAngle = Math.random()*2*Math.PI;
+            double xRand = Math.sin(randAngle) * ((Math.random()*r) - stoneRad);
+            double yRand = Math.cos(randAngle) * ((Math.random()*r) - stoneRad);
+            x = getWidth()/2 + (int) xRand;
+            y = getHeight()/2 + (int) yRand;
 
-            stone = new Stone(x, y, new EllipticStyle(Color.RED, 10, 10));
-//            add(stone);
 
-            g2.fill(new EllipticStyle(Color.RED, 10, 10).makeshape(x, y, 5, 5));
-           // add(stone);
-            repaint();
-//            g2.fill(stone.getStyle().makeshape(x, y, 5, 5));
-
-//            diameter += 2 * radiusStep; //
+            stone = new Stone(x, y, new EllipticStyle(Color.RED, stoneRad, stoneRad));
+            g2.fill(stone.getStyle().makeshape(x, y, stoneRad, stoneRad));
 //
 //            g2.drawArc(x, y, diameter, diameter, 0, arc);
 // draw the arc

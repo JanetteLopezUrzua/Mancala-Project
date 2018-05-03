@@ -2,11 +2,14 @@ package com.example.views;
 
 import com.example.model.State;
 import com.example.views.concrete.EllipticStyle;
+import com.example.views.concrete.RectangularStyle;
 import com.example.views.concrete.RoundedRectangularStyle;
 import org.omg.PortableInterceptor.HOLDING;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class Board extends View {
     }
 
     private void createUpperLowerPanels() {
+
         JPanel upperPanel = new JPanel(new GridLayout(0, 6, 30 , 0));
         JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 30 , 0));
 
@@ -70,8 +74,11 @@ public class Board extends View {
     }
 
     public void turn(int startingPit) {
-
-        while (move(startingPit) != -1);
+        int moveResult = 0;
+        while (moveResult != -1){
+            moveResult = move(startingPit);
+            repaint();
+        }
     }
 
     public int move(int selectedPit) {
@@ -186,9 +193,5 @@ public class Board extends View {
 
          //Add holdPits JPanel to the Board JPanel
          add(holdPits, BorderLayout.CENTER);
-
-         //Create a "Hand" to hold stones that are currently being used in a turn
-        Hand hand = new Hand(new RoundedRectangularStyle(Color.BLACK, this.getWidth()/2, this.getHeight() / 12));
-//        add(hand, BorderLayout.SOUTH);
     }
 }

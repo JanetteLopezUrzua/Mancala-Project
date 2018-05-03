@@ -29,7 +29,7 @@ public class ShapedBoard extends JFrame {
 
         setTitle("Mancala");
         setUndecorated(true);
-        setSize(width,height);
+        setSize(width, height);
 
         setResizable(true);
 //        set;
