@@ -30,7 +30,7 @@ public class Board extends View {
         setLayout(new BorderLayout());
         this.pitStyle = pitStyle;
         this.mancalaStyle = mancalaStyle;
-        _numOfStones = 0;
+        _numOfStones = 3;
         initialize();
     }
 
@@ -75,6 +75,9 @@ public class Board extends View {
     }
 
     public void turn(int startingPit) {
+        if(currentState.getPlayerTurn() != currentState.getHoles().get(startingPit).getPlayer())
+            return;
+
         int moveResult = 0;
         while (moveResult != -1){
             moveResult = move(startingPit);
@@ -138,7 +141,10 @@ public class Board extends View {
                 public void mouseClicked(MouseEvent e) {
                     if(finalPit.contains(e.getX(), e.getY())) {
                         System.out.println("You clicked pit!");
-                        turn(currentState.getHoles().indexOf(finalPit));
+                        int index = currentState.getHoles().indexOf(finalPit);
+                        Hole hole = currentState.getHoles().get(index);
+                        if(hole.getStones() > 0)
+                            turn(index);
                     }
                 }
 
@@ -201,6 +207,8 @@ public class Board extends View {
 
     private void setNumOfStones(int answer){
         _numOfStones = answer;
+        currentState.setNumberOfStones(_numOfStones);
+//        repaint();
     }
 
 }

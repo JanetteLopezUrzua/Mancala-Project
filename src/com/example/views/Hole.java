@@ -14,7 +14,7 @@ public abstract class Hole extends View implements ChangeListener {
     private ArrayList<Stone> stones;
     private char player;
     private boolean isPit;
-    private int numOfStones;
+    protected int numOfStones;
 
     int coils = 3;
     int radius = 50;
@@ -28,6 +28,15 @@ public abstract class Hole extends View implements ChangeListener {
     double chord = 10;
 
     double rotation = 5;
+
+    @Override
+    public void draw(Graphics2D g2) {
+        this.setSize(new Dimension(getStyle().getWidth(), getStyle().getHeight()));
+        Shape shape = getStyle().getShape();
+        g2.setColor(getStyle().getColor());
+        g2.draw(shape);
+        initStones2(g2);
+    }
 
     public Hole(char newPlayer, boolean _isPit, Style newStyle) {
         super(newStyle);
@@ -178,5 +187,11 @@ public abstract class Hole extends View implements ChangeListener {
         int temp = numOfStones;
         numOfStones = 0;
         return temp;
+    }
+
+    public void setNumberOfStones(int _numOfStones) {
+
+        numOfStones = _numOfStones;
+        repaint();
     }
 }

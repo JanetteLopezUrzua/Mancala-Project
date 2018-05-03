@@ -23,4 +23,8 @@ public class Model {
             c.stateChanged(new ChangeEvent(this));      //pass the state as the changeEvent
         }
     }
+
+    public void setNumberOfStones(int numOfStones) {
+        currentState.setNumberOfStones(numOfStones);
+    }
 }
