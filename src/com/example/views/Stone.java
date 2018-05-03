@@ -18,6 +18,13 @@ public class Stone {
         return style;
     }
 
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return x;
+    }
 //    //stones are circles
 //    @Override
 //    public void draw(Graphics2D g2) {

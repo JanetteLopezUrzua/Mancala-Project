@@ -26,7 +26,7 @@ public class Board extends View {
 
     public Board(Style boardStyle,  Style pitStyle, Style mancalaStyle) {
         super(boardStyle);
-        setSize(boardStyle.getWidth(), getHeight());
+        setSize(boardStyle.getWidth(), boardStyle.getHeight());
         setLayout(new BorderLayout());
         this.pitStyle = pitStyle;
         this.mancalaStyle = mancalaStyle;

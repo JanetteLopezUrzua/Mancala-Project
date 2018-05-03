@@ -6,6 +6,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Hole extends View implements ChangeListener {
 
@@ -59,7 +61,7 @@ public abstract class Hole extends View implements ChangeListener {
 
         int arc = 180; // amount and direction of arc to sweep
 
-
+        ArrayList<Stone> stonesDrawn = new ArrayList<>();
         for (int i = 0; i < numOfStones; i++ ) {
 
 //            if (i % 2 == 1) // move the x position every other repetition
@@ -75,9 +77,23 @@ public abstract class Hole extends View implements ChangeListener {
             x = getWidth()/2 + (int) xRand;
             y = getHeight()/2 + (int) yRand;
 
-
             stone = new Stone(x, y, new EllipticStyle(Color.RED, stoneRad, stoneRad));
-            g2.fill(stone.getStyle().makeshape(x, y, stoneRad, stoneRad));
+
+            //measure to prevent overlapping stones from drawing
+            boolean draw = true;
+            for(Stone s: stonesDrawn){
+                System.out.println(s.getX() + ", " + x);
+                if(Math.abs(s.getX() - x) < 20 && Math.abs(s.getY() - y) < 20){
+                    i--;
+                    draw = false;
+                    break;
+                }
+            }
+            if(draw){
+                g2.fill(stone.getStyle().makeshape(x, y, stoneRad, stoneRad));
+                stonesDrawn.add(stone);
+            }
+
 //
 //            g2.drawArc(x, y, diameter, diameter, 0, arc);
 // draw the arc
