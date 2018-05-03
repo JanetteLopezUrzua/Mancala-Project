@@ -144,7 +144,7 @@ public class Board extends View {
                     if(finalPit.contains(e.getX(), e.getY())) {
                         int index = currentState.getHoles().indexOf(finalPit);
                         Hole hole = currentState.getHoles().get(index);
-                        System.out.println("Player " + currentState.getPlayerTurn() + " clicked " + index + " " + hole.getPlayer()) ;
+                        System.out.println("Player " + currentState.getPlayerTurn() + " clicked " + hole.getPlayer() + index) ;
                         if(hole.getStones() > 0)
                             turn(index);
                     }
@@ -195,11 +195,11 @@ public class Board extends View {
         }
 
         for(int i = 1; i <= 6; i++){
-             holdPits.add(holes.get(i));
+            holdPits.add(holes.get(i));
         }
 
         Mancala mancalaA = new Mancala('A', false, mancalaStyle);
-        holes.add(6, mancalaA);
+        holes.add(7, mancalaA);
 
         add(mancalaA, BorderLayout.EAST);
 
