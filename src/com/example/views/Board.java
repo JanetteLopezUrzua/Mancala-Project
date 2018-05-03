@@ -27,7 +27,7 @@ public class Board extends View {
     public Board(Style newStyle) {
         super(newStyle);
         setSize(newStyle.getWidth(), getHeight());
-          setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
         initialize();
     }
 
@@ -47,7 +47,7 @@ public class Board extends View {
         JPanel upperPanel = new JPanel(new GridLayout(0, 6, 30 , 0));
         JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 30 , 0));
 
-        upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(),LABEL_HEIGHT));
+        upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
         lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
 
         //upperPanel.setBackground(Color.PINK);
@@ -104,6 +104,8 @@ public class Board extends View {
         int oppositePit = (selectedPit + 6) % 12;
         if( holes.get(selectedPit).getPlayer() == player && holes.get(oppositePit).getStones() >= 1 ) {
             System.out.println("Transfer to your mancala");
+        } else if(holes.get(selectedPit).getStones() > 1) {
+            return selectedPit;
         }
 
         return -1;
