@@ -91,7 +91,7 @@ public abstract class Hole extends View implements ChangeListener {
             //measure to prevent overlapping stones from drawing
             boolean draw = true;
             for(Stone s: stonesDrawn){
-                System.out.println(s.getX() + ", " + x);
+//                System.out.println(s.getX() + ", " + x);
                 if(Math.abs(s.getX() - x) < 20 && Math.abs(s.getY() - y) < 20){
                     i--;
                     draw = false;
