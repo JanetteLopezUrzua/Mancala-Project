@@ -19,7 +19,7 @@ public class Board extends View {
     private State previousState;
 
     private int LABEL_HEIGHT;
-
+    private int _numOfStones;
     private Style pitStyle;
     private Style mancalaStyle;
 
@@ -30,6 +30,7 @@ public class Board extends View {
         setLayout(new BorderLayout());
         this.pitStyle = pitStyle;
         this.mancalaStyle = mancalaStyle;
+        _numOfStones = 0;
         initialize();
     }
 
@@ -126,9 +127,9 @@ public class Board extends View {
         JLabel label;
         for(int c = 0; c < 12; c++) {
             if(c < 6)
-                pit = new Pit('A', true, pitStyle, 3);
+                pit = new Pit('A', true, pitStyle, _numOfStones);
             else
-                pit = new Pit('B', true, pitStyle, 3);
+                pit = new Pit('B', true, pitStyle, _numOfStones);
             holes.add(pit);
             //
             Pit finalPit = pit;
@@ -198,5 +199,8 @@ public class Board extends View {
          add(holdPits, BorderLayout.CENTER);
     }
 
+    private void setNumOfStones(int answer){
+        _numOfStones = answer;
+    }
 
 }

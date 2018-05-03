@@ -27,6 +27,7 @@ public class MancalaTester {
         JFrame menu = new JFrame();
         menu.setLayout(new BorderLayout());
         menu.setSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+        menu.setLocationRelativeTo(null);
 
         //Create panel for title and prompt
         JPanel titleAndPrompt = new JPanel(new BorderLayout());
@@ -96,29 +97,41 @@ public class MancalaTester {
         Style mancalaStyle2 = new RectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
 
         //Style 3
-        Style boardStyle3  = new EllipticStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
+        Style boardStyle3  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
         Style pitStyle3 = new RectangularStyle(Color.RED, PIT_WIDTH, PIT_WIDTH-5);
         Style mancalaStyle3 = new EllipticStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
 
-        //add events to the buttons
-        button1.addActionListener(event -> {
-                menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
-                displayBoard(boardStyle1, pitStyle1, mancalaStyle1);
-            }
-        );
-
         menu.setVisible(true);
 
-        button2.addActionListener(event -> {
+        //add events to the buttons
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent event) {
                 menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
-                displayBoard(boardStyle2, pitStyle2, mancalaStyle2);
+                displayBoard(boardStyle1, pitStyle1, mancalaStyle1);
+                String name = JOptionPane.showInputDialog(menu,
+                        "How many stones per pit? (Min = 0, Max = 4)", null); }
             }
         );
 
-        button3.addActionListener(event -> {
-                menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
-                displayBoard(boardStyle3, pitStyle3, mancalaStyle3);
-            }
+        button2.addActionListener(new java.awt.event.ActionListener() {
+              @Override
+              public void actionPerformed(java.awt.event.ActionEvent event) {
+                  menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
+                  displayBoard(boardStyle2, pitStyle2, mancalaStyle2);
+                  String name = JOptionPane.showInputDialog(menu,
+                          "How many stones per pit? (Min = 0, Max = 4)", null); }
+              }
+        );
+
+        button3.addActionListener(new java.awt.event.ActionListener() {
+              @Override
+              public void actionPerformed(java.awt.event.ActionEvent event) {
+                  menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
+                  displayBoard(boardStyle3, pitStyle3, mancalaStyle3);
+                  String name = JOptionPane.showInputDialog(menu,
+                          "How many stones per pit? (Min = 0, Max = 4)", null); }
+              }
         );
     }
 
