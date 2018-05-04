@@ -45,8 +45,8 @@ public class Board extends View {
 
     private void createUpperLowerPanels() {
 
-        JPanel upperPanel = new JPanel(new GridLayout(0, 6, 100 , 0));
-        JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 110 , 0));
+        JPanel upperPanel = new JPanel(new GridLayout(0, 6, 40 , 0));
+        JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 90 , 0));
 
         //Create button to close board and put it with upperPanel
         close = new JButton("X");
@@ -66,7 +66,7 @@ public class Board extends View {
         JPanel upperPanelAndCloseAndUndo = new JPanel(new BorderLayout(30, 0 ));
 
         //panel to hold lower panel and scores
-        JPanel lowerPanelAndScores = new JPanel(new BorderLayout(10, 0));
+        JPanel lowerPanelAndScores = new JPanel(new BorderLayout(20, 0));
 
         upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
         lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
@@ -86,8 +86,8 @@ public class Board extends View {
             }
         }
 
-        upperPanelAndCloseAndUndo.setBorder((BorderFactory.createEmptyBorder(0,50,0,0)));
-        lowerPanelAndScores.setBorder((BorderFactory.createEmptyBorder(0,45,0,0)));
+        upperPanelAndCloseAndUndo.setBorder((BorderFactory.createEmptyBorder(0,40,0,0)));
+        lowerPanelAndScores.setBorder((BorderFactory.createEmptyBorder(0,20,0,0)));
         lowerPanel.setBorder((BorderFactory.createEmptyBorder(0,10,0,0)));
 
         scoreA.setHorizontalAlignment(JLabel.RIGHT);
@@ -243,11 +243,7 @@ public class Board extends View {
         }
 
          //Set a Border on the JPanel to fit the mancalas in the board
-         setBorder(BorderFactory.createEmptyBorder(25,100,55,150));
-
-         //Add mancalas to the Board JPanel
-         add(mancalaB, BorderLayout.WEST);
-
+         setBorder(BorderFactory.createEmptyBorder(25,120,55,150));
 
          //JPanel with GridLayout to hold the pits
          JPanel holdPits = new JPanel(new GridLayout(2,6));
@@ -269,15 +265,73 @@ public class Board extends View {
         Mancala mancalaA = new Mancala('A', false, mancalaStyle);
         holes.add(7, mancalaA);
 
-        add(mancalaA, BorderLayout.EAST);
+        //Panel to hold pits and mancalas
+        JPanel holdPitsAndMancalas = new JPanel(new BorderLayout());
+
+        //Add mancalas to the holdPitsAndMancalas JPanel
+        holdPitsAndMancalas.add(mancalaB, BorderLayout.WEST);
+        holdPitsAndMancalas.add(mancalaA, BorderLayout.EAST);
 
         currentState =  new State(holes);
 
         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
         holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
 
-        //Add holdPits JPanel to the Board JPanel
-        add(holdPits, BorderLayout.CENTER);
+        //Add holdPits JPanel to the holdPitsAndMancalas JPanel
+        holdPitsAndMancalas.add(holdPits, BorderLayout.CENTER);
+        holdPitsAndMancalas.setBorder(BorderFactory.createEmptyBorder(0,0,0,70));
+
+        //Letters to create labels for mancalas
+        JLabel M = new JLabel("M");
+        JLabel A1 = new JLabel("A");
+        JLabel N = new JLabel("N");
+        JLabel C = new JLabel("C");
+        JLabel A2 = new JLabel("A");
+        JLabel L = new JLabel("L");
+        JLabel A3 = new JLabel("A");
+        JLabel blank = new JLabel("");
+        JLabel A4 = new JLabel("A");
+
+        JLabel M2 = new JLabel("M");
+        JLabel A5 = new JLabel("A");
+        JLabel N2 = new JLabel("N");
+        JLabel C2 = new JLabel("C");
+        JLabel A6 = new JLabel("A");
+        JLabel L2 = new JLabel("L");
+        JLabel A7 = new JLabel("A");
+        JLabel B = new JLabel("B");
+        JLabel blank2 = new JLabel("");
+
+        //create panels to hold mancala labels
+        JPanel labelMancalaA = new JPanel(new GridLayout(0, 1));
+        JPanel labelMancalaB = new JPanel(new GridLayout(0, 1));
+
+        //add letters to label panel A
+        labelMancalaA.add(M);
+        labelMancalaA.add(A1);
+        labelMancalaA.add(N);
+        labelMancalaA.add(C);
+        labelMancalaA.add(A2);
+        labelMancalaA.add(L);
+        labelMancalaA.add(A3);
+        labelMancalaA.add(blank);
+        labelMancalaA.add(A4);
+
+        //add letters to label panel B
+        labelMancalaB.add(M2);
+        labelMancalaB.add(A5);
+        labelMancalaB.add(N2);
+        labelMancalaB.add(C2);
+        labelMancalaB.add(A6);
+        labelMancalaB.add(L2);
+        labelMancalaB.add(A7);
+        labelMancalaB.add(blank2);
+        labelMancalaB.add(B);
+
+        //Add holdPitsAndMancalas and mancala labels to board
+        add(holdPitsAndMancalas, BorderLayout.CENTER);
+        add(labelMancalaB, BorderLayout.WEST);
+        add(labelMancalaA, BorderLayout.EAST);
     }
 
     public void setNumOfStones(int answer){
