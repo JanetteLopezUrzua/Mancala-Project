@@ -18,6 +18,7 @@ public class Board extends View {
     private State currentState;
     private State previousState;
     private JButton close;
+    private JButton undo;
     private int LABEL_HEIGHT;
     private int _numOfStones;
     private Style pitStyle;
@@ -42,7 +43,7 @@ public class Board extends View {
 
     private void createUpperLowerPanels() {
 
-        JPanel upperPanel = new JPanel(new GridLayout(0, 6, 80 , 0));
+        JPanel upperPanel = new JPanel(new GridLayout(0, 6, 90 , 0));
         JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 30 , 0));
 
         //Create button to close board and put it with upperPanel
@@ -50,8 +51,13 @@ public class Board extends View {
         close.setBackground(Color.RED);
         close.setForeground(Color.WHITE);
 
+        //Create button to undo
+        undo = new JButton("Undo");
+        undo.setBackground(Color.BLUE);
+        undo.setForeground(Color.WHITE);
+
         //panel to hold upper panel and close button
-        JPanel upperPanelAndClose = new JPanel(new BorderLayout( ));
+        JPanel upperPanelAndCloseAndUndo = new JPanel(new BorderLayout(70, 0 ));
 
         upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
         lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
@@ -71,12 +77,13 @@ public class Board extends View {
             }
         }
 
-        upperPanelAndClose.setBorder((BorderFactory.createEmptyBorder(0,140,0,0)));
+        upperPanelAndCloseAndUndo.setBorder((BorderFactory.createEmptyBorder(0,20,0,0)));
         lowerPanel.setBorder((BorderFactory.createEmptyBorder(0,140,0,0)));
-        upperPanelAndClose.add(upperPanel, BorderLayout.CENTER);
-        upperPanelAndClose.add(close, BorderLayout.EAST);
+        upperPanelAndCloseAndUndo.add(upperPanel, BorderLayout.CENTER);
+        upperPanelAndCloseAndUndo.add(close, BorderLayout.EAST);
+        upperPanelAndCloseAndUndo.add(undo, BorderLayout.WEST);
 
-        add(upperPanelAndClose, BorderLayout.NORTH);
+        add(upperPanelAndCloseAndUndo, BorderLayout.NORTH);
         add(lowerPanel, BorderLayout.SOUTH);
 
     }
