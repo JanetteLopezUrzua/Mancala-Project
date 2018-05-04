@@ -133,6 +133,7 @@ public class Board extends View {
     }
 
     public void turn(int startingPit) {
+
         if(currentState.getPlayerTurn() != currentState.getHoles().get(startingPit).getPlayer() ||
                 startingPit > currentState.getHoles().size())
             return;
@@ -150,8 +151,10 @@ public class Board extends View {
 
         if(startingPit == -1) {
             currentState.changeTurn();
+            displayTurnPopUp();
             System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
         }
+
     }
 
     public int move(int selectedPit) {
@@ -262,10 +265,6 @@ public class Board extends View {
          JPanel holdPits = new JPanel(new GridLayout(2,6));
 
          //Add pits to the holdPits JPanel
-//         for(int i =1; i<=12; i++){
-//             holdPits.add(holes.get(i));
-//         }
-
         for(int i = 12; i > 6; i--){
             holdPits.add(holes.get(i));
         }
@@ -286,7 +285,7 @@ public class Board extends View {
         holdPitsAndMancalas.add(mancalaA, BorderLayout.EAST);
 
         currentState =  new State(holes);
-
+        displayTurnPopUp();
         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
         holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
 
@@ -361,7 +360,7 @@ public class Board extends View {
             dialog.setModal(false);
             dialog.setVisible(true);
             dialog.setLocation(800, 700);
-            new Timer(5000, e -> dialog.setVisible(false)).start();
+            new Timer(800, e -> dialog.setVisible(false)).start();
         }
         else if(currentState.getPlayerTurn() == 'B') {
             JOptionPane pane = new JOptionPane("Player B", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
@@ -369,7 +368,7 @@ public class Board extends View {
             dialog.setModal(false);
             dialog.setVisible(true);
             dialog.setLocation(800, 180);
-            new Timer(5000, e -> dialog.setVisible(false)).start();
+            new Timer(800, e -> dialog.setVisible(false)).start();
         }
     }
 
