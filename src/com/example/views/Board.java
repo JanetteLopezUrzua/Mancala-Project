@@ -138,12 +138,9 @@ public class Board extends View {
                 startingPit > currentState.getHoles().size())
             return;
 
-        int moveResult = 0;
         while (startingPit > -1) {
 
             startingPit = move(startingPit);
-
-//            System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
             repaint();
         }
 
@@ -159,8 +156,8 @@ public class Board extends View {
 
         selectedPit %= 14;
         ArrayList<Hole> holes = currentState.getHoles();
-//        if(selectedPit > holes.size() )
-//            return;
+
+        long start;
 
         char player = currentState.getPlayerTurn();
         int numOfStones = holes.get(selectedPit).takeStones();
@@ -171,13 +168,11 @@ public class Board extends View {
             if( ( (hole.getPlayer() == player && !hole.isPit()) ) || hole.isPit() ) {
                 holes.get(selectedPit).addStone();
                 numOfStones--;
-//                repaint();
-//                try {
-//                    Thread.sleep(500);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
+                repaint();
+                start = System.currentTimeMillis();
+                while( start + 300 >  System.currentTimeMillis() );
             }
+            repaint();
         }
 
         // Calculate opposite pit formula n + (7 - n) * 2 = k
