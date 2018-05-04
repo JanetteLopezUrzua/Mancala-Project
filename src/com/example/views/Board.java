@@ -43,7 +43,7 @@ public class Board extends View {
 
     private void createUpperLowerPanels() {
 
-        JPanel upperPanel = new JPanel(new GridLayout(0, 6, 90 , 0));
+        JPanel upperPanel = new JPanel(new GridLayout(0, 6, 100 , 0));
         JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 30 , 0));
 
         //Create button to close board and put it with upperPanel
@@ -57,7 +57,7 @@ public class Board extends View {
         undo.setForeground(Color.WHITE);
 
         //panel to hold upper panel and close button
-        JPanel upperPanelAndCloseAndUndo = new JPanel(new BorderLayout(70, 0 ));
+        JPanel upperPanelAndCloseAndUndo = new JPanel(new BorderLayout(30, 0 ));
 
         upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
         lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
@@ -77,7 +77,7 @@ public class Board extends View {
             }
         }
 
-        upperPanelAndCloseAndUndo.setBorder((BorderFactory.createEmptyBorder(0,20,0,0)));
+        upperPanelAndCloseAndUndo.setBorder((BorderFactory.createEmptyBorder(0,50,0,0)));
         lowerPanel.setBorder((BorderFactory.createEmptyBorder(0,140,0,0)));
         upperPanelAndCloseAndUndo.add(upperPanel, BorderLayout.CENTER);
         upperPanelAndCloseAndUndo.add(close, BorderLayout.EAST);
