@@ -203,14 +203,13 @@ public class Board extends View {
 
         add(mancalaA, BorderLayout.EAST);
 
+        currentState =  new State(holes);
 
+        //Set a border on the holdPits JPanel to fit the pits in the middle of the board
+        holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
 
-         currentState =  new State(holes);
-         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
-         holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
-
-         //Add holdPits JPanel to the Board JPanel
-         add(holdPits, BorderLayout.CENTER);
+        //Add holdPits JPanel to the Board JPanel
+        add(holdPits, BorderLayout.CENTER);
     }
 
     public void setNumOfStones(int answer){
@@ -219,4 +218,23 @@ public class Board extends View {
 //        repaint();
     }
 
+    void displayTurnPopUp(){
+
+        if(currentState.getPlayerTurn() == 'A') {
+            JOptionPane pane = new JOptionPane("Player A", JOptionPane.INFORMATION_MESSAGE,JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null );
+            JDialog dialog = pane.createDialog(null, "Turn");
+            dialog.setModal(false);
+            dialog.setVisible(true);
+            dialog.setLocation(800, 700);
+            new Timer(5000, e -> dialog.setVisible(false)).start();
+        }
+        else if(currentState.getPlayerTurn() == 'B') {
+            JOptionPane pane = new JOptionPane("Player B", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+            JDialog dialog = pane.createDialog(null, "Turn");
+            dialog.setModal(false);
+            dialog.setVisible(true);
+            dialog.setLocation(800, 180);
+            new Timer(5000, e -> dialog.setVisible(false)).start();
+        }
+    }
 }

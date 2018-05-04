@@ -90,18 +90,18 @@ public class MancalaTester {
         //set 3 different styles
         //Style 1
         Style boardStyle1  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
-        Style pitStyle1 = new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH);
-        Style mancalaStyle1 = new RoundedRectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
+        Style pitStyle1 = new EllipticStyle(new Color(204,0,0), PIT_WIDTH, PIT_WIDTH);
+        Style mancalaStyle1 = new RoundedRectangularStyle(new Color(0,0,204), MANCALA_WIDTH, MANCALA_HEIGHT);
 
         //Style 2
-        Style boardStyle2  = new RectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
-        Style pitStyle2 = new RoundedRectangularStyle(Color.RED, PIT_WIDTH+40, PIT_WIDTH-5);
-        Style mancalaStyle2 = new RectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
+        Style boardStyle2  = new RectangularStyle(Color.GRAY, BOARD_WIDTH, BOARD_HEIGHT);
+        Style pitStyle2 = new RoundedRectangularStyle(new Color(255,102,95), PIT_WIDTH+40, PIT_WIDTH-5);
+        Style mancalaStyle2 = new RectangularStyle(new Color(102,0,120), MANCALA_WIDTH, MANCALA_HEIGHT);
 
         //Style 3
         Style boardStyle3  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
-        Style pitStyle3 = new RectangularStyle(Color.RED, PIT_WIDTH, PIT_WIDTH-5);
-        Style mancalaStyle3 = new EllipticStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
+        Style pitStyle3 = new RectangularStyle(new Color(0,153,0), PIT_WIDTH, PIT_WIDTH-5);
+        Style mancalaStyle3 = new EllipticStyle(new Color(255,204,51), MANCALA_WIDTH, MANCALA_HEIGHT);
 
         menu.setVisible(true);
 
@@ -148,6 +148,8 @@ public class MancalaTester {
 
 
         frame.add(board, BorderLayout.CENTER);
+
+        //Create 
 //        frame.pack();
         frame.setResizable(true);
 
