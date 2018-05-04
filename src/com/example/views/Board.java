@@ -54,13 +54,6 @@ public class Board extends View {
 
         undo.addActionListener(e -> {
             model.undo();
-//            if(currentState.getUndoCount() < 3){
-//                currentState = previousState;
-//                System.out.println("Player" + currentState.getPlayerTurn() + "'s turn has been undone");
-//                currentState.incrementUndoCount();
-//                undo.setEnabled(false);         //disable to prevent multi-undos
-//            }
-//            else System.out.println("Player" + currentState.getPlayerTurn() + "has already undone 3 times");
         });
     }
 
@@ -72,7 +65,12 @@ public class Board extends View {
         //Create button to close board and put it with upperPanel
         close = new JButton("X");
         close.setBackground(Color.RED);
-        close.setForeground(Color.WHITE);
+        close.setOpaque(true);
+//        close.setForeground(Color.WHITE);
+        close.setBorderPainted(false);
+
+
+        createUndoButton();
 
         //Create score labels
         scoreA = new JLabel("Score A: " + 0);
@@ -116,7 +114,7 @@ public class Board extends View {
 
         upperPanelAndCloseAndUndo.add(upperPanel, BorderLayout.CENTER);
         upperPanelAndCloseAndUndo.add(close, BorderLayout.EAST);
-//        upperPanelAndCloseAndUndo.add(undo, BorderLayout.WEST);
+        upperPanelAndCloseAndUndo.add(undo, BorderLayout.WEST);
 
         lowerPanelAndScores.add(lowerPanel, BorderLayout.CENTER);
         lowerPanelAndScores.add(scoreA, BorderLayout.EAST);
