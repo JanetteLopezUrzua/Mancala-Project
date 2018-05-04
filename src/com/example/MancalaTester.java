@@ -9,6 +9,7 @@ import com.example.views.concrete.RoundedRectangularStyle;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
@@ -149,11 +150,18 @@ public class MancalaTester {
 
         frame.add(board, BorderLayout.CENTER);
 
-        //Create 
+
+
+
 //        frame.pack();
         frame.setResizable(true);
 
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //Close frame
+        ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
+
+        /*close.addActionListener(event -> {
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        });*/
 
         frame.setVisible(true);
 
