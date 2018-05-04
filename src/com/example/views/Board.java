@@ -1,5 +1,6 @@
 package com.example.views;
 
+import com.example.model.Model;
 import com.example.model.State;
 import com.example.views.concrete.EllipticStyle;
 import com.example.views.concrete.RectangularStyle;
@@ -15,8 +16,11 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class Board extends View {
-    private State currentState;
-    private State previousState;
+
+    Model model;
+
+//    private State currentState;
+//    private State previousState;
     private JButton close;
     private JButton undo;
     private JLabel scoreA;
@@ -25,7 +29,6 @@ public class Board extends View {
     private int _numOfStones;
     private Style pitStyle;
     private Style mancalaStyle;
-
 
     public Board(Style boardStyle,  Style pitStyle, Style mancalaStyle) {
         super(boardStyle);
@@ -43,16 +46,7 @@ public class Board extends View {
         LABEL_HEIGHT = this.getHeight() / 8;
     }
 
-    private void createUpperLowerPanels() {
-
-        JPanel upperPanel = new JPanel(new GridLayout(0, 6, 40 , 0));
-        JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 90 , 0));
-
-        //Create button to close board and put it with upperPanel
-        close = new JButton("X");
-        close.setBackground(Color.RED);
-        close.setForeground(Color.WHITE);
-
+    private void createUndoButton() {
         //Create button to undo
         undo = new JButton("Undo");
         undo.setBackground(Color.BLUE);
@@ -67,6 +61,17 @@ public class Board extends View {
             }
             else System.out.println("Player" + currentState.getPlayerTurn() + "has already undone 3 times");
         });
+    }
+
+    private void createUpperLowerPanels() {
+
+        JPanel upperPanel = new JPanel(new GridLayout(0, 6, 40 , 0));
+        JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 90 , 0));
+
+        //Create button to close board and put it with upperPanel
+        close = new JButton("X");
+        close.setBackground(Color.RED);
+        close.setForeground(Color.WHITE);
 
         //Create score labels
         scoreA = new JLabel("Score A: " + 0);
@@ -123,10 +128,10 @@ public class Board extends View {
 
     //Keep score
     public void scoreCount(){
-        if(currentState.getPlayerTurn() == 'A')
-             scoreA.setText("Score A: " + Integer.toString(currentState.getHoles().get(7).getStones()));
-        else if (currentState.getPlayerTurn() == 'B')
-             scoreB.setText("Score B: " + Integer.toString(currentState.getHoles().get(0).getStones()));
+        if(model.getPlayerTurn() == 'A')
+             scoreA.setText("Score A: " + Integer.toString(model.getHoles().get(7).getStones()));
+        else if (model.getPlayerTurn() == 'B')
+             scoreB.setText("Score B: " + Integer.toString(model.getHoles().get(0).getStones()));
     }
 
     public void draw(Graphics2D g2){
@@ -135,8 +140,8 @@ public class Board extends View {
 
     public void turn(int startingPit) {
 
-        if(currentState.getPlayerTurn() != currentState.getHoles().get(startingPit).getPlayer() ||
-                startingPit > currentState.getHoles().size())
+        if(model.getPlayerTurn() != model.getHoles().get(startingPit).getPlayer() ||
+                startingPit > model.getHoles().size())
             return;
 
         while (startingPit > -1) {
@@ -148,9 +153,9 @@ public class Board extends View {
         scoreCount();
 
         if(startingPit == -1) {
-            currentState.changeTurn();
+            model.changeTurn();
             displayTurnPopUp();
-            System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
+            System.out.println("Now it's " + model.getPlayerTurn() + "'s turn!");
         }
 
     }
@@ -158,11 +163,11 @@ public class Board extends View {
     public int move(int selectedPit) {
 
         selectedPit %= 14;
-        ArrayList<Hole> holes = currentState.getHoles();
+        ArrayList<Hole> holes = model.getHoles();
 
         long start;
 
-        char player = currentState.getPlayerTurn();
+        char player = model.getPlayerTurn();
         int numOfStones = holes.get(selectedPit).takeStones();
         while(numOfStones > 0) {
             selectedPit++;
@@ -190,7 +195,7 @@ public class Board extends View {
             return -1;
 
         } else if(holes.get(selectedPit).getStones() > 1) {
-            System.out.println("Still " + currentState.getPlayerTurn() + "'s turn!");
+            System.out.println("Still " + model.getPlayerTurn() + "'s turn!");
             return selectedPit;
         }
         else{
@@ -208,7 +213,7 @@ public class Board extends View {
     private void initialize() {
 
         createUpperLowerPanels();
-//        State state;
+        State state;
         ArrayList<Hole> holes = new ArrayList<>();
 
         //Add mancala B to the array of holes = holes[0]
@@ -230,9 +235,9 @@ public class Board extends View {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if(finalPit.contains(e.getX(), e.getY())) {
-                        int index = currentState.getHoles().indexOf(finalPit);
-                        Hole hole = currentState.getHoles().get(index);
-                        System.out.println("Player " + currentState.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
+                        int index = state.getHoles().indexOf(finalPit);
+                        Hole hole = state.getHoles().get(index);
+                        System.out.println("Player " + state.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
                         if(hole.getStones() > 0)
                             turn(index);
                     }
@@ -286,7 +291,7 @@ public class Board extends View {
         holdPitsAndMancalas.add(mancalaB, BorderLayout.WEST);
         holdPitsAndMancalas.add(mancalaA, BorderLayout.EAST);
 
-        currentState =  new State(holes);
+        state =  new State(holes);
         displayTurnPopUp();
         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
         holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
@@ -350,13 +355,13 @@ public class Board extends View {
 
     public void setNumOfStones(int answer){
         _numOfStones = answer;
-        currentState.setNumberOfStones(_numOfStones);
+        model.setNumberOfStones(_numOfStones);
 //        repaint();
     }
 
     void displayTurnPopUp(){
 
-        if(currentState.getPlayerTurn() == 'A') {
+        if(model.getPlayerTurn() == 'A') {
             JOptionPane pane = new JOptionPane("Player A", JOptionPane.INFORMATION_MESSAGE,JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null );
             JDialog dialog = pane.createDialog(null, "Turn");
             dialog.setModal(false);
@@ -364,7 +369,7 @@ public class Board extends View {
             dialog.setLocation(800, 700);
             new Timer(800, e -> dialog.setVisible(false)).start();
         }
-        else if(currentState.getPlayerTurn() == 'B') {
+        else if(model.getPlayerTurn() == 'B') {
             JOptionPane pane = new JOptionPane("Player B", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
             JDialog dialog = pane.createDialog(null, "Turn");
             dialog.setModal(false);

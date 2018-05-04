@@ -6,11 +6,11 @@ import com.example.views.Pit;
 import javax.swing.event.ChangeListener;
 import java.util.ArrayList;
 
-public class State {
+public class State implements Cloneable {
     private ArrayList<ChangeListener> views;
     private ArrayList<Hole> holes;
     private char playerTurn;
-    private int undoCount;
+
 
     public State(ArrayList<Hole> _holes) {
         holes = _holes;
@@ -40,15 +40,13 @@ public class State {
         }
     }
 
-    public int getUndoCount(){
-        return undoCount;
-    }
-
-    public void setUndoCount(int undoCount){
-        this.undoCount = undoCount;
-    }
-
-    public void incrementUndoCount(){
-        this.undoCount++;
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
