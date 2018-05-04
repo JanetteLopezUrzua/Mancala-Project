@@ -56,8 +56,15 @@ public class Board extends View {
         undo.setBackground(Color.BLUE);
         undo.setForeground(Color.WHITE);
 
+        //Create score labels
+        //JLabel scoreA = new JLabel("Score:" + Integer.toString(currentState.getHoles().get(7).getStones()));
+        //JLabel scoreB = new JLabel("Score:" + Integer.toString(currentState.getHoles().get(0).getStones()));
+
         //panel to hold upper panel and close button
         JPanel upperPanelAndCloseAndUndo = new JPanel(new BorderLayout(30, 0 ));
+
+        //panel to hold lower panel and scores
+        JPanel lowerPanelAndScores = new JPanel(new BorderLayout());
 
         upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
         lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
@@ -78,10 +85,15 @@ public class Board extends View {
         }
 
         upperPanelAndCloseAndUndo.setBorder((BorderFactory.createEmptyBorder(0,50,0,0)));
-        lowerPanel.setBorder((BorderFactory.createEmptyBorder(0,140,0,0)));
+        lowerPanelAndScores.setBorder((BorderFactory.createEmptyBorder(0,140,0,0)));
+
         upperPanelAndCloseAndUndo.add(upperPanel, BorderLayout.CENTER);
         upperPanelAndCloseAndUndo.add(close, BorderLayout.EAST);
         upperPanelAndCloseAndUndo.add(undo, BorderLayout.WEST);
+
+        lowerPanelAndScores.add(lowerPanel, BorderLayout.CENTER);
+        //lowerPanelAndScores.add(scoreA, BorderLayout.EAST);
+        //lowerPanelAndScores.add(scoreB, BorderLayout.WEST);
 
         add(upperPanelAndCloseAndUndo, BorderLayout.NORTH);
         add(lowerPanel, BorderLayout.SOUTH);
