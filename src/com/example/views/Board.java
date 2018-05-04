@@ -19,6 +19,8 @@ public class Board extends View {
     private State previousState;
     private JButton close;
     private JButton undo;
+    private JLabel scoreA;
+    private JLabel scoreB;
     private int LABEL_HEIGHT;
     private int _numOfStones;
     private Style pitStyle;
@@ -44,7 +46,7 @@ public class Board extends View {
     private void createUpperLowerPanels() {
 
         JPanel upperPanel = new JPanel(new GridLayout(0, 6, 100 , 0));
-        JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 30 , 0));
+        JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 110 , 0));
 
         //Create button to close board and put it with upperPanel
         close = new JButton("X");
@@ -57,14 +59,14 @@ public class Board extends View {
         undo.setForeground(Color.WHITE);
 
         //Create score labels
-        //JLabel scoreA = new JLabel("Score:" + Integer.toString(currentState.getHoles().get(7).getStones()));
-        //JLabel scoreB = new JLabel("Score:" + Integer.toString(currentState.getHoles().get(0).getStones()));
+        scoreA = new JLabel("Score A: " + 0);
+        scoreB = new JLabel("Score B: " + 0);
 
         //panel to hold upper panel and close button
         JPanel upperPanelAndCloseAndUndo = new JPanel(new BorderLayout(30, 0 ));
 
         //panel to hold lower panel and scores
-        JPanel lowerPanelAndScores = new JPanel(new BorderLayout());
+        JPanel lowerPanelAndScores = new JPanel(new BorderLayout(10, 0));
 
         upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
         lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
@@ -85,19 +87,35 @@ public class Board extends View {
         }
 
         upperPanelAndCloseAndUndo.setBorder((BorderFactory.createEmptyBorder(0,50,0,0)));
-        lowerPanelAndScores.setBorder((BorderFactory.createEmptyBorder(0,140,0,0)));
+        lowerPanelAndScores.setBorder((BorderFactory.createEmptyBorder(0,45,0,0)));
+        lowerPanel.setBorder((BorderFactory.createEmptyBorder(0,10,0,0)));
+
+        scoreA.setHorizontalAlignment(JLabel.RIGHT);
+        scoreB.setHorizontalAlignment(JLabel.LEFT);
+        scoreA.setFont(new Font("Mosk Typeface", Font.BOLD, 18));
+        scoreB.setFont(new Font("Mosk Typeface", Font.BOLD, 18));
+        scoreA.setForeground(Color.RED);
+        scoreB.setForeground(Color.RED);
 
         upperPanelAndCloseAndUndo.add(upperPanel, BorderLayout.CENTER);
         upperPanelAndCloseAndUndo.add(close, BorderLayout.EAST);
         upperPanelAndCloseAndUndo.add(undo, BorderLayout.WEST);
 
         lowerPanelAndScores.add(lowerPanel, BorderLayout.CENTER);
-        //lowerPanelAndScores.add(scoreA, BorderLayout.EAST);
-        //lowerPanelAndScores.add(scoreB, BorderLayout.WEST);
+        lowerPanelAndScores.add(scoreA, BorderLayout.EAST);
+        lowerPanelAndScores.add(scoreB, BorderLayout.WEST);
 
         add(upperPanelAndCloseAndUndo, BorderLayout.NORTH);
-        add(lowerPanel, BorderLayout.SOUTH);
+        add(lowerPanelAndScores, BorderLayout.SOUTH);
 
+    }
+
+    //Keep score
+    public void scoreCount(){
+        if(currentState.getPlayerTurn() == 'A')
+             scoreA.setText("Score:" + Integer.toString(currentState.getHoles().get(7).getStones()));
+        else if (currentState.getPlayerTurn() == 'B')
+             scoreB.setText("Score:" + Integer.toString(currentState.getHoles().get(0).getStones()));
     }
 
     public void draw(Graphics2D g2){
@@ -105,13 +123,15 @@ public class Board extends View {
     }
 
     public void turn(int startingPit) {
-        if(currentState.getPlayerTurn() != currentState.getHoles().get(startingPit).getPlayer() || startingPit > currentState.getHoles().size())
+        if(currentState.getPlayerTurn() != currentState.getHoles().get(startingPit).getPlayer() ||
+                startingPit > currentState.getHoles().size())
             return;
 
         int moveResult = 0;
         while (startingPit > -1) {
 
             startingPit = move(startingPit);
+            scoreCount();
 //            System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
             repaint();
         }
@@ -148,7 +168,8 @@ public class Board extends View {
         if((player == 'A' && selectedPit == 7) || (player == 'B' && selectedPit == 0))
             return -2;
 
-        if( holes.get(selectedPit).getPlayer() == player && holes.get(oppositePit).getStones() >= 1 && holes.get(selectedPit).getStones() == 1) {
+        if( holes.get(selectedPit).getPlayer() == player && holes.get(oppositePit).getStones() >= 1 &&
+                holes.get(selectedPit).getStones() == 1) {
             System.out.println("Transfer opposite stones to your mancala");
             return -1;
 
@@ -221,9 +242,6 @@ public class Board extends View {
             });
         }
 
-        //Add mancala A to the array of holes = holes[13]
-
-
          //Set a Border on the JPanel to fit the mancalas in the board
          setBorder(BorderFactory.createEmptyBorder(25,100,55,150));
 
@@ -247,6 +265,7 @@ public class Board extends View {
             holdPits.add(holes.get(i));
         }
 
+        //Add mancala A to the array of holes = holes[13]
         Mancala mancalaA = new Mancala('A', false, mancalaStyle);
         holes.add(7, mancalaA);
 
