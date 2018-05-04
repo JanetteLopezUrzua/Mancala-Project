@@ -156,7 +156,7 @@ public class MancalaTester {
 //        frame.pack();
         frame.setResizable(true);
 
-        //Close frame
+        //Close frame and exit application
         ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
 
         /*close.addActionListener(event -> {

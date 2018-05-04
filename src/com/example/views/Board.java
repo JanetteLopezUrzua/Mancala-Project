@@ -143,7 +143,9 @@ public class Board extends View {
         } else if(holes.get(selectedPit).getStones() > 1) {
             System.out.println("Still " + currentState.getPlayerTurn() + "'s turn!");
             return selectedPit;
-
+        }
+        else{
+            System.out.println("Player " +  player + ", please select your pits");
         }
 
         repaint();
@@ -181,7 +183,7 @@ public class Board extends View {
                     if(finalPit.contains(e.getX(), e.getY())) {
                         int index = currentState.getHoles().indexOf(finalPit);
                         Hole hole = currentState.getHoles().get(index);
-                        System.out.println("Player " + currentState.getPlayerTurn() + " clicked " + hole.getPlayer() + index) ;
+                        System.out.println("Player " + currentState.getPlayerTurn() + " clicked " + hole.getPlayer() + (finalPit.getPlayer() == 'B' ? index - currentState.getHoles().size()/2 : index));
                         if(hole.getStones() > 0)
                             turn(index);
                     }
