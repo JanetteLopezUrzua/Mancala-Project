@@ -56,10 +56,10 @@ public abstract class Hole extends View implements ChangeListener {
 
         Stone stone;
 
-        int x = getWidth() / 2;
+        int x = getWidth() / 2 - 8;
 
 
-        int y = getHeight() / 2;
+        int y = getHeight() / 2 - 8;
 
 
         int radiusStep = 10;
@@ -71,6 +71,7 @@ public abstract class Hole extends View implements ChangeListener {
         int arc = 180; // amount and direction of arc to sweep
 
         ArrayList<Stone> stonesDrawn = new ArrayList<>();
+        int stoneDist = 8;
         for (int i = 0; i < numOfStones; i++ ) {
 
 //            if (i % 2 == 1) // move the x position every other repetition
@@ -78,30 +79,48 @@ public abstract class Hole extends View implements ChangeListener {
 //
 //
 //            y -= radiusStep; //
-            double r = getWidth()/2;
+//            double r = getWidth() / 2;
             int stoneRad = 8;
-            double randAngle = Math.random()*2*Math.PI;
-            double xRand = Math.sin(randAngle) * ((Math.random()*r) - stoneRad);
-            double yRand = Math.cos(randAngle) * ((Math.random()*r) - stoneRad);
-            x = getWidth()/2 + (int) xRand;
-            y = getHeight()/2 + (int) yRand;
-
+//            double randAngle = Math.random() * 2 * Math.PI;
+//            double xRand = Math.sin(randAngle) * ((Math.random() * r) - stoneRad);
+//            double yRand = Math.cos(randAngle) * ((Math.random() * r) - stoneRad);
+//            x = getWidth() / 2 + (int) xRand;
+//            y = getHeight() / 2 + (int) yRand;
+            int mod = i % 4;
+            if(mod == 0){
+                x = x + (stoneDist);
+                y = y + (stoneDist);
+            }
+            else if(mod == 1){
+                x = x - (stoneDist);
+                y = y + (stoneDist);
+            }
+            else if(mod == 2){
+                x = x - (stoneDist);
+                y = y - (stoneDist);
+            }
+            else{
+                x = x + (stoneDist);
+                y = y - (stoneDist);
+                stoneDist = stoneDist + stoneRad;
+            }
             stone = new Stone(x, y, new EllipticStyle(Color.BLACK, stoneRad, stoneRad));
 
             //measure to prevent overlapping stones from drawing
-            boolean draw = true;
-            for(Stone s: stonesDrawn){
-//                System.out.println(s.getX() + ", " + x);
-                if(Math.abs(s.getX() - x) < 20 && Math.abs(s.getY() - y) < 20){
-                    i--;
-                    draw = false;
-                    break;
-                }
-            }
-            if(draw){
-                g2.fill(stone.getStyle().makeshape(x, y, stoneRad, stoneRad));
-                stonesDrawn.add(stone);
-            }
+//            boolean draw = true;
+//            for(Stone s: stonesDrawn){
+////                System.out.println(s.getX() + ", " + x);
+//                if(Math.abs(s.getX() - x) < 20 && Math.abs(s.getY() - y) < 20){
+//                    i--;
+//                    draw = false;
+//                    break;
+//                }
+//            }
+//            if(draw){
+////                g2.fill(stone.getStyle().makeshape(x, y, stoneRad, stoneRad));
+//                stonesDrawn.add(stone);
+//            }
+            g2.fill(stone.getStyle().makeshape(x, y, stoneRad, stoneRad));
 
 //
 //            g2.drawArc(x, y, diameter, diameter, 0, arc);

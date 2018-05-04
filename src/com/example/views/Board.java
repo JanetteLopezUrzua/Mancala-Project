@@ -266,7 +266,7 @@ public class Board extends View {
         }
 
          //Set a Border on the JPanel to fit the mancalas in the board
-         setBorder(BorderFactory.createEmptyBorder(25,120,55,150));
+         setBorder(BorderFactory.createEmptyBorder(25,120,145,150));
 
          //JPanel with GridLayout to hold the pits
          JPanel holdPits = new JPanel(new GridLayout(2,6));

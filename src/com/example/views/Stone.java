@@ -7,6 +7,7 @@ public class Stone {
     int x;
     int y;
     private Style style;
+    private boolean moved;
 
     Stone(int _x, int _y, Style style) {
         this.style = style;
@@ -25,6 +26,7 @@ public class Stone {
     public int getY(){
         return x;
     }
+
 //    //stones are circles
 //    @Override
 //    public void draw(Graphics2D g2) {
