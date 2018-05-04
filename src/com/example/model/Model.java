@@ -53,6 +53,10 @@ public class Model {
         return undoCount;
     }
 
+    public void undo() {
+        //TODO Implement undo logic here
+    }
+
     public void increaseUndoCount() {undoCount++;}
     public void decreaseUndoCount() {undoCount--;}
 

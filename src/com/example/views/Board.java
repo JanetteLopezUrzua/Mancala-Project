@@ -52,7 +52,8 @@ public class Board extends View {
         undo.setBackground(Color.BLUE);
         undo.setForeground(Color.WHITE);
 
-//        undo.addActionListener(e ->{
+        undo.addActionListener(e -> {
+            model.undo();
 //            if(currentState.getUndoCount() < 3){
 //                currentState = previousState;
 //                System.out.println("Player" + currentState.getPlayerTurn() + "'s turn has been undone");
@@ -60,7 +61,7 @@ public class Board extends View {
 //                undo.setEnabled(false);         //disable to prevent multi-undos
 //            }
 //            else System.out.println("Player" + currentState.getPlayerTurn() + "has already undone 3 times");
-//        });
+        });
     }
 
     private void createUpperLowerPanels() {
