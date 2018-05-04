@@ -16,7 +16,7 @@ import java.awt.event.WindowEvent;
 public class MancalaTester {
 
     private static final int BOARD_WIDTH = 1200;
-    private static final int BOARD_HEIGHT = 400;
+    private static final int BOARD_HEIGHT = 550;
 /*    //variable to hold answer for number of stones per pit
     private static int numberOfStones;*/
     private static final int MANCALA_WIDTH = BOARD_WIDTH/15;

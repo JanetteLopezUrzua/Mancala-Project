@@ -56,10 +56,10 @@ public abstract class Hole extends View implements ChangeListener {
 
         Stone stone;
 
-        int x = getWidth() / 2;
+        int x = getWidth() / 2 - 8;
 
 
-        int y = getHeight() / 2;
+        int y = getHeight() / 2 - 8;
 
 
         int radiusStep = 10;
