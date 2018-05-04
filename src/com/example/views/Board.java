@@ -79,6 +79,7 @@ public class Board extends View {
                 label = new JLabel("A" + k);
                 lowerPanel.add(label);
             }
+
             else{
                 label = new JLabel("B" + (k-s));
                 upperPanel.add(label);
@@ -159,6 +160,12 @@ public class Board extends View {
             if( ( (hole.getPlayer() == player && !hole.isPit()) ) || hole.isPit() ) {
                 holes.get(selectedPit).addStone();
                 numOfStones--;
+//                repaint();
+//                try {
+//                    Thread.sleep(500);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
             }
         }
 
