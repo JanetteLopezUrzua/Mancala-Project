@@ -79,7 +79,7 @@ public class Board extends View {
             return;
 
         int moveResult = 0;
-        while (startingPit != -1) {
+        while (startingPit > -1) {
 
             startingPit = move(startingPit);
 //            System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
@@ -87,8 +87,10 @@ public class Board extends View {
         }
 
 
-        currentState.changeTurn();
-        System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
+        if(startingPit == -1) {
+            currentState.changeTurn();
+            System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
+        }
     }
 
     public int move(int selectedPit) {
@@ -98,11 +100,11 @@ public class Board extends View {
 //        if(selectedPit > holes.size() )
 //            return;
 
-        char player = holes.get(selectedPit).getPlayer();
+        char player = currentState.getPlayerTurn();
         int numOfStones = holes.get(selectedPit).takeStones();
         while(numOfStones > 0) {
             selectedPit++;
-            selectedPit %= (holes.size() - 1);
+            selectedPit %= holes.size();
             Hole hole = holes.get(selectedPit);
             if( ( (hole.getPlayer() == player && !hole.isPit()) ) || hole.isPit() ) {
                 holes.get(selectedPit).addStone();
@@ -113,6 +115,9 @@ public class Board extends View {
         // Calculate opposite pit formula n + (7 - n) * 2 = k
         int oppositePit = selectedPit + (7 - selectedPit) * 2;
 
+        if((player == 'A' && selectedPit == 7) || (player == 'B' && selectedPit == 0))
+            return -2;
+
         if( holes.get(selectedPit).getPlayer() == player && holes.get(oppositePit).getStones() >= 1 && holes.get(selectedPit).getStones() == 1) {
             System.out.println("Transfer opposite stones to your mancala");
             return -1;
@@ -121,12 +126,9 @@ public class Board extends View {
             System.out.println("Still " + currentState.getPlayerTurn() + "'s turn!");
             return selectedPit;
 
-        } else {
-//            currentState.changeTurn();
-            System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
         }
-        repaint();
 
+        repaint();
         return -1;
     }
 
