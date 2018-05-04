@@ -27,13 +27,6 @@ public class Stone {
         return x;
     }
 
-    public void setMoved(boolean moved){
-        this.moved = moved;
-    }
-
-    public boolean isMoved(){
-        return moved;
-    }
 //    //stones are circles
 //    @Override
 //    public void draw(Graphics2D g2) {
