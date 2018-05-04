@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Board extends View {
     private State currentState;
     private State previousState;
-
+    private JButton close;
     private int LABEL_HEIGHT;
     private int _numOfStones;
     private Style pitStyle;
@@ -42,8 +42,16 @@ public class Board extends View {
 
     private void createUpperLowerPanels() {
 
-        JPanel upperPanel = new JPanel(new GridLayout(0, 6, 30 , 0));
+        JPanel upperPanel = new JPanel(new GridLayout(0, 6, 80 , 0));
         JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 30 , 0));
+
+        //Create button to close board and put it with upperPanel
+        close = new JButton("X");
+        close.setBackground(Color.RED);
+        close.setForeground(Color.WHITE);
+
+        //panel to hold upper panel and close button
+        JPanel upperPanelAndClose = new JPanel(new BorderLayout( ));
 
         upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
         lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
@@ -63,11 +71,14 @@ public class Board extends View {
             }
         }
 
-        upperPanel.setBorder((BorderFactory.createEmptyBorder(0,140,0,0)));
+        upperPanelAndClose.setBorder((BorderFactory.createEmptyBorder(0,140,0,0)));
         lowerPanel.setBorder((BorderFactory.createEmptyBorder(0,140,0,0)));
+        upperPanelAndClose.add(upperPanel, BorderLayout.CENTER);
+        upperPanelAndClose.add(close, BorderLayout.EAST);
 
-        add(upperPanel, BorderLayout.NORTH);
+        add(upperPanelAndClose, BorderLayout.NORTH);
         add(lowerPanel, BorderLayout.SOUTH);
+
     }
 
     public void draw(Graphics2D g2){
@@ -222,14 +233,13 @@ public class Board extends View {
 
         add(mancalaA, BorderLayout.EAST);
 
+        currentState =  new State(holes);
 
+        //Set a border on the holdPits JPanel to fit the pits in the middle of the board
+        holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
 
-         currentState =  new State(holes);
-         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
-         holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
-
-         //Add holdPits JPanel to the Board JPanel
-         add(holdPits, BorderLayout.CENTER);
+        //Add holdPits JPanel to the Board JPanel
+        add(holdPits, BorderLayout.CENTER);
     }
 
     public void setNumOfStones(int answer){
@@ -238,4 +248,28 @@ public class Board extends View {
 //        repaint();
     }
 
+    void displayTurnPopUp(){
+
+        if(currentState.getPlayerTurn() == 'A') {
+            JOptionPane pane = new JOptionPane("Player A", JOptionPane.INFORMATION_MESSAGE,JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null );
+            JDialog dialog = pane.createDialog(null, "Turn");
+            dialog.setModal(false);
+            dialog.setVisible(true);
+            dialog.setLocation(800, 700);
+            new Timer(5000, e -> dialog.setVisible(false)).start();
+        }
+        else if(currentState.getPlayerTurn() == 'B') {
+            JOptionPane pane = new JOptionPane("Player B", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+            JDialog dialog = pane.createDialog(null, "Turn");
+            dialog.setModal(false);
+            dialog.setVisible(true);
+            dialog.setLocation(800, 180);
+            new Timer(5000, e -> dialog.setVisible(false)).start();
+        }
+    }
+
+
+    public JButton getCloseButton(){
+        return close;
+    }
 }

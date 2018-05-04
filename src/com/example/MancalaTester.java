@@ -9,6 +9,7 @@ import com.example.views.concrete.RoundedRectangularStyle;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
@@ -16,7 +17,8 @@ public class MancalaTester {
 
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 400;
-    //private static View board;
+/*    //variable to hold answer for number of stones per pit
+    private static int numberOfStones;*/
     private static final int MANCALA_WIDTH = BOARD_WIDTH/15;
     private static final int MANCALA_HEIGHT = BOARD_HEIGHT - 135;
 
@@ -89,23 +91,20 @@ public class MancalaTester {
         //set 3 different styles
         //Style 1
         Style boardStyle1  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
-        Style pitStyle1 = new EllipticStyle(Color.RED, PIT_WIDTH, PIT_WIDTH);
-        Style mancalaStyle1 = new RoundedRectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
+        Style pitStyle1 = new EllipticStyle(new Color(204,0,0), PIT_WIDTH, PIT_WIDTH);
+        Style mancalaStyle1 = new RoundedRectangularStyle(new Color(0,0,204), MANCALA_WIDTH, MANCALA_HEIGHT);
 
         //Style 2
-        Style boardStyle2  = new RectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
-        Style pitStyle2 = new RoundedRectangularStyle(Color.RED, PIT_WIDTH+40, PIT_WIDTH-5);
-        Style mancalaStyle2 = new RectangularStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
+        Style boardStyle2  = new RectangularStyle(Color.GRAY, BOARD_WIDTH, BOARD_HEIGHT);
+        Style pitStyle2 = new RoundedRectangularStyle(new Color(255,102,95), PIT_WIDTH+40, PIT_WIDTH-5);
+        Style mancalaStyle2 = new RectangularStyle(new Color(102,0,120), MANCALA_WIDTH, MANCALA_HEIGHT);
 
         //Style 3
         Style boardStyle3  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
-        Style pitStyle3 = new RectangularStyle(Color.RED, PIT_WIDTH, PIT_WIDTH-5);
-        Style mancalaStyle3 = new EllipticStyle(Color.BLUE, MANCALA_WIDTH, MANCALA_HEIGHT);
+        Style pitStyle3 = new RectangularStyle(new Color(0,153,0), PIT_WIDTH, PIT_WIDTH-5);
+        Style mancalaStyle3 = new EllipticStyle(new Color(255,204,51), MANCALA_WIDTH, MANCALA_HEIGHT);
 
         menu.setVisible(true);
-
-        //variable to hold answer for number of stones per pit
-        final int numberOfStones;
 
         //add events to the buttons
         button1.addActionListener( displayQuestionForStones(menu, boardStyle1, pitStyle1, mancalaStyle1));
@@ -115,23 +114,28 @@ public class MancalaTester {
         button3.addActionListener(displayQuestionForStones(menu, boardStyle3, pitStyle3, mancalaStyle3));
     }
 
-    static ActionListener displayQuestionForStones(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
+     static ActionListener displayQuestionForStones(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
         //Pop up button options
          Object[] options = { "3", "4"};
 
         return (ActionListener) event -> {
             menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
-            View b = displayBoard(boardStyle, pitStyle, mancalaStyle);
+            displayBoard(boardStyle, pitStyle, mancalaStyle);
             int result = JOptionPane.showOptionDialog(menu, "How many stones per pit?", "Enter Number Of Stones",
                     JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
 
             if(result == JOptionPane.YES_OPTION)
             {
+                //numOfStones = 3;
+            }
+            else
+            {
+                //setStones(4);
             }
         };
     }
 
-    static View displayBoard(Style boardStyle, Style pitStyle, Style mancalaStyle){
+    static void displayBoard(Style boardStyle, Style pitStyle, Style mancalaStyle){
 
         ShapedBoard frame = new ShapedBoard(boardStyle, BOARD_WIDTH, BOARD_HEIGHT + 60);
 //        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
@@ -145,17 +149,24 @@ public class MancalaTester {
 
 
         frame.add(board, BorderLayout.CENTER);
+
+
+
+
 //        frame.pack();
         frame.setResizable(true);
 
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //Close frame
+        ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
+
+        /*close.addActionListener(event -> {
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        });*/
 
         frame.setVisible(true);
 
         Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,BOARD_WIDTH/2,BOARD_HEIGHT/6));
         frame.add(hand, BorderLayout.SOUTH);
-
-        return board;
     }
 
 }

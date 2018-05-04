@@ -27,7 +27,8 @@ public class State {
     public void changeTurn() {
         if(playerTurn == 'A')
             playerTurn = 'B';
-        else playerTurn = 'A';
+        else
+            playerTurn = 'A';
     }
 
     public void setNumberOfStones(int numOfStones) {
