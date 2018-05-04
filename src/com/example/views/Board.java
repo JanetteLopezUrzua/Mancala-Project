@@ -227,8 +227,9 @@ public class Board extends View {
                         int index = currentState.getHoles().indexOf(finalPit);
                         Hole hole = currentState.getHoles().get(index);
                         System.out.println("Player " + currentState.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
-                        if(hole.getStones() > 0)
+                        if(hole.getStones() > 0) {
                             turn(index);
+                        }
                     }
                 }
 

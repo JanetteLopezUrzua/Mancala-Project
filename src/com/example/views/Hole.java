@@ -78,13 +78,19 @@ public abstract class Hole extends View implements ChangeListener {
 //
 //
 //            y -= radiusStep; //
-            double r = getWidth()/2;
+            double r = getWidth() / 2;
             int stoneRad = 8;
-            double randAngle = Math.random()*2*Math.PI;
-            double xRand = Math.sin(randAngle) * ((Math.random()*r) - stoneRad);
-            double yRand = Math.cos(randAngle) * ((Math.random()*r) - stoneRad);
-            x = getWidth()/2 + (int) xRand;
-            y = getHeight()/2 + (int) yRand;
+            if(stones.get(i).isMoved()) {
+                double randAngle = Math.random() * 2 * Math.PI;
+                double xRand = Math.sin(randAngle) * ((Math.random() * r) - stoneRad);
+                double yRand = Math.cos(randAngle) * ((Math.random() * r) - stoneRad);
+                x = getWidth() / 2 + (int) xRand;
+                y = getHeight() / 2 + (int) yRand;
+                stones.get(i).setMoved(false);
+            }else{
+                x = stones.get(i).getX();
+                y = stones.get(i).getY();
+            }
 
             stone = new Stone(x, y, new EllipticStyle(Color.BLACK, stoneRad, stoneRad));
 
