@@ -31,7 +31,7 @@ public class Board extends View {
         setLayout(new BorderLayout());
         this.pitStyle = pitStyle;
         this.mancalaStyle = mancalaStyle;
-        _numOfStones = 3;
+        _numOfStones = 0;
         initialize();
     }
 
