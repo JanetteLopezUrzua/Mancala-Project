@@ -145,6 +145,8 @@ public class MancalaTester {
         frame.setResizable(true);
         frame.setVisible(true);
 
+        //Close frame and exit application
+        ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
         //Pop up button options
         Object[] options = { "3", "4"};
 
@@ -165,6 +167,8 @@ public class MancalaTester {
 
         //Close frame
         ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
+
+//        ((Board) board).getUndoButton().addActionListener(e-> );
     }
 
 }
