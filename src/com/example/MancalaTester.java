@@ -107,35 +107,28 @@ public class MancalaTester {
         menu.setVisible(true);
 
         //add events to the buttons
-        button1.addActionListener( displayQuestionForStones(menu, boardStyle1, pitStyle1, mancalaStyle1));
+        button1.addActionListener(event -> {
+                    menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
+                    displayBoard(menu, boardStyle1, pitStyle1, mancalaStyle1);
+        });
 
-        button2.addActionListener(displayQuestionForStones(menu, boardStyle2, pitStyle2, mancalaStyle2));
 
-        button3.addActionListener(displayQuestionForStones(menu, boardStyle3, pitStyle3, mancalaStyle3));
-    }
-
-     static ActionListener displayQuestionForStones(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
-        //Pop up button options
-         Object[] options = { "3", "4"};
-
-        return (ActionListener) event -> {
+        button2.addActionListener(event -> {
             menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
-            displayBoard(boardStyle, pitStyle, mancalaStyle);
-            int result = JOptionPane.showOptionDialog(menu, "How many stones per pit?", "Enter Number Of Stones",
-                    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+            displayBoard(menu, boardStyle2, pitStyle2, mancalaStyle2);
+        });
 
-            if(result == JOptionPane.YES_OPTION)
-            {
-                //numOfStones = 3;
-            }
-            else
-            {
-                //setStones(4);
-            }
-        };
+        button3.addActionListener(event -> {
+            menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
+            displayBoard(menu, boardStyle3, pitStyle3, mancalaStyle3);
+        });
     }
 
-    static void displayBoard(Style boardStyle, Style pitStyle, Style mancalaStyle){
+    /* static ActionListener displayQuestionForStones(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
+
+    }*/
+
+    static void displayBoard(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
 
         ShapedBoard frame = new ShapedBoard(boardStyle, BOARD_WIDTH, BOARD_HEIGHT + 60);
 //        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
@@ -147,26 +140,33 @@ public class MancalaTester {
         frame.addMouseListener(frameDragListener);
         frame.addMouseMotionListener(frameDragListener);
 
-
         frame.add(board, BorderLayout.CENTER);
 
-
-
-
-//        frame.pack();
         frame.setResizable(true);
+        frame.setVisible(true);
 
         //Close frame and exit application
         ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
+        //Pop up button options
+        Object[] options = { "3", "4"};
 
-        /*close.addActionListener(event -> {
-            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        });*/
+        int result = JOptionPane.showOptionDialog(menu, "How many stones per pit?", "Enter Number Of Stones",
+                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
 
-        frame.setVisible(true);
+        if(result == JOptionPane.YES_OPTION)
+        {
+            ((Board) board).setNumOfStones(3);
+        }
+        else if (result == JOptionPane.NO_OPTION)
+        {
+            ((Board) board).setNumOfStones(4);
+        }
 
         Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,BOARD_WIDTH/2,BOARD_HEIGHT/6));
         frame.add(hand, BorderLayout.SOUTH);
+
+        //Close frame
+        ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
     }
 
 }
