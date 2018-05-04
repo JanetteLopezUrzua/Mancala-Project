@@ -75,40 +75,57 @@ public class Board extends View {
     }
 
     public void turn(int startingPit) {
-        if(currentState.getPlayerTurn() != currentState.getHoles().get(startingPit).getPlayer())
+        if(currentState.getPlayerTurn() != currentState.getHoles().get(startingPit).getPlayer() || startingPit > currentState.getHoles().size())
             return;
 
         int moveResult = 0;
-        while (moveResult != -1){
-            moveResult = move(startingPit);
+        while (startingPit != -1) {
+
+            startingPit = move(startingPit);
+//            System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
             repaint();
         }
 
+
         currentState.changeTurn();
+        System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
     }
 
     public int move(int selectedPit) {
 
+        selectedPit %= 14;
         ArrayList<Hole> holes = currentState.getHoles();
-        if(selectedPit > holes.size() )
-            return -1;
+//        if(selectedPit > holes.size() )
+//            return;
 
         char player = holes.get(selectedPit).getPlayer();
         int numOfStones = holes.get(selectedPit).takeStones();
         while(numOfStones > 0) {
             selectedPit++;
-            selectedPit %= holes.size();
+            selectedPit %= (holes.size() - 1);
             Hole hole = holes.get(selectedPit);
-            if( (hole.getPlayer() == player && !hole.isPit()) || hole.isPit() ) holes.get(selectedPit).addStone();
-            numOfStones--;
+            if( ( (hole.getPlayer() == player && !hole.isPit()) ) || hole.isPit() ) {
+                holes.get(selectedPit).addStone();
+                numOfStones--;
+            }
         }
 
-        int oppositePit = (selectedPit + 6) % 12;
-        if( holes.get(selectedPit).getPlayer() == player && holes.get(oppositePit).getStones() >= 1 ) {
-            System.out.println("Transfer to your mancala");
+        // Calculate opposite pit formula n + (7 - n) * 2 = k
+        int oppositePit = selectedPit + (7 - selectedPit) * 2;
+
+        if( holes.get(selectedPit).getPlayer() == player && holes.get(oppositePit).getStones() >= 1 && holes.get(selectedPit).getStones() == 1) {
+            System.out.println("Transfer opposite stones to your mancala");
+            return -1;
+
         } else if(holes.get(selectedPit).getStones() > 1) {
+            System.out.println("Still " + currentState.getPlayerTurn() + "'s turn!");
             return selectedPit;
+
+        } else {
+//            currentState.changeTurn();
+            System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
         }
+        repaint();
 
         return -1;
     }
