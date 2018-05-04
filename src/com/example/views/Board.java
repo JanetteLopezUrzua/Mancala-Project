@@ -52,15 +52,15 @@ public class Board extends View {
         undo.setBackground(Color.BLUE);
         undo.setForeground(Color.WHITE);
 
-        undo.addActionListener(e ->{
-            if(currentState.getUndoCount() < 3){
-                currentState = previousState;
-                System.out.println("Player" + currentState.getPlayerTurn() + "'s turn has been undone");
-                currentState.incrementUndoCount();
-                undo.setEnabled(false);         //disable to prevent multi-undos
-            }
-            else System.out.println("Player" + currentState.getPlayerTurn() + "has already undone 3 times");
-        });
+//        undo.addActionListener(e ->{
+//            if(currentState.getUndoCount() < 3){
+//                currentState = previousState;
+//                System.out.println("Player" + currentState.getPlayerTurn() + "'s turn has been undone");
+//                currentState.incrementUndoCount();
+//                undo.setEnabled(false);         //disable to prevent multi-undos
+//            }
+//            else System.out.println("Player" + currentState.getPlayerTurn() + "has already undone 3 times");
+//        });
     }
 
     private void createUpperLowerPanels() {
@@ -115,7 +115,7 @@ public class Board extends View {
 
         upperPanelAndCloseAndUndo.add(upperPanel, BorderLayout.CENTER);
         upperPanelAndCloseAndUndo.add(close, BorderLayout.EAST);
-        upperPanelAndCloseAndUndo.add(undo, BorderLayout.WEST);
+//        upperPanelAndCloseAndUndo.add(undo, BorderLayout.WEST);
 
         lowerPanelAndScores.add(lowerPanel, BorderLayout.CENTER);
         lowerPanelAndScores.add(scoreA, BorderLayout.EAST);
@@ -235,9 +235,9 @@ public class Board extends View {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if(finalPit.contains(e.getX(), e.getY())) {
-                        int index = state.getHoles().indexOf(finalPit);
-                        Hole hole = state.getHoles().get(index);
-                        System.out.println("Player " + state.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
+                        int index = model.getHoles().indexOf(finalPit);
+                        Hole hole = model.getHoles().get(index);
+                        System.out.println("Player " + model.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
                         if(hole.getStones() > 0)
                             turn(index);
                     }
@@ -292,6 +292,7 @@ public class Board extends View {
         holdPitsAndMancalas.add(mancalaA, BorderLayout.EAST);
 
         state =  new State(holes);
+        model = new Model(state);
         displayTurnPopUp();
         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
         holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
