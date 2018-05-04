@@ -167,6 +167,8 @@ public class MancalaTester {
 
         //Close frame
         ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
+
+//        ((Board) board).getUndoButton().addActionListener(e-> );
     }
 
 }

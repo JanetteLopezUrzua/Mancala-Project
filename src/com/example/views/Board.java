@@ -58,6 +58,16 @@ public class Board extends View {
         undo.setBackground(Color.BLUE);
         undo.setForeground(Color.WHITE);
 
+        undo.addActionListener(e ->{
+            if(currentState.getUndoCount() < 3){
+                currentState = previousState;
+                System.out.println("Player" + currentState.getPlayerTurn() + "'s turn has been undone");
+                currentState.incrementUndoCount();
+                undo.setEnabled(false);         //disable to prevent multi-undos
+            }
+            else System.out.println("Player" + currentState.getPlayerTurn() + "has already undone 3 times");
+        });
+
         //Create score labels
         scoreA = new JLabel("Score A: " + 0);
         scoreB = new JLabel("Score B: " + 0);
@@ -216,7 +226,7 @@ public class Board extends View {
                     if(finalPit.contains(e.getX(), e.getY())) {
                         int index = currentState.getHoles().indexOf(finalPit);
                         Hole hole = currentState.getHoles().get(index);
-                        System.out.println("Player " + currentState.getPlayerTurn() + " clicked " + hole.getPlayer() + (finalPit.getPlayer() == 'B' ? index - currentState.getHoles().size()/2 : index));
+                        System.out.println("Player " + currentState.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
                         if(hole.getStones() > 0)
                             turn(index);
                     }
@@ -311,5 +321,9 @@ public class Board extends View {
 
     public JButton getCloseButton(){
         return close;
+    }
+
+    public JButton getUndoButton(){
+        return undo;
     }
 }
