@@ -171,11 +171,11 @@ public class Board extends View {
             if( ( (hole.getPlayer() == player && !hole.isPit()) ) || hole.isPit() ) {
                 holes.get(selectedPit).addStone();
                 numOfStones--;
-                repaint();
-                start = System.currentTimeMillis();
-                while( start + 300 >  System.currentTimeMillis() );
+//                repaint();
+//                start = System.currentTimeMillis();
+//                while( start + 300 >  System.currentTimeMillis() );
             }
-            repaint();
+//            repaint();
         }
 
         // Calculate opposite pit formula n + (7 - n) * 2 = k
