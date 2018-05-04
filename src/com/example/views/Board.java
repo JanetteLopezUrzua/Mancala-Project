@@ -124,9 +124,9 @@ public class Board extends View {
     //Keep score
     public void scoreCount(){
         if(currentState.getPlayerTurn() == 'A')
-             scoreA.setText("Score:" + Integer.toString(currentState.getHoles().get(7).getStones()));
+             scoreA.setText("Score A: " + Integer.toString(currentState.getHoles().get(7).getStones()));
         else if (currentState.getPlayerTurn() == 'B')
-             scoreB.setText("Score:" + Integer.toString(currentState.getHoles().get(0).getStones()));
+             scoreB.setText("Score B: " + Integer.toString(currentState.getHoles().get(0).getStones()));
     }
 
     public void draw(Graphics2D g2){
@@ -142,11 +142,12 @@ public class Board extends View {
         while (startingPit > -1) {
 
             startingPit = move(startingPit);
-            scoreCount();
+
 //            System.out.println("Now it's " + currentState.getPlayerTurn() + "'s turn!");
             repaint();
         }
 
+        scoreCount();
 
         if(startingPit == -1) {
             currentState.changeTurn();
