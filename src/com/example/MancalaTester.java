@@ -130,7 +130,7 @@ public class MancalaTester {
 
     static void displayBoard(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
 
-        ShapedBoard frame = new ShapedBoard(boardStyle, BOARD_WIDTH, BOARD_HEIGHT + 60);
+        ShapedBoard frame = new ShapedBoard(boardStyle, BOARD_WIDTH, BOARD_HEIGHT);
 //        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
 
         View board = new Board(boardStyle, pitStyle, mancalaStyle);
@@ -168,7 +168,7 @@ public class MancalaTester {
         //Close frame
         ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
 
-//        ((Board) board).getUndoButton().addActionListener(e-> );
+//        ((Board) board).getUndoButton().addActionListener(e-> )
     }
 
 }
