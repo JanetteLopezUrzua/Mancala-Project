@@ -96,7 +96,7 @@ public class MancalaTester {
 
         //Style 2
         Style boardStyle2  = new RectangularStyle(Color.GRAY, BOARD_WIDTH, BOARD_HEIGHT);
-        Style pitStyle2 = new RoundedRectangularStyle(new Color(255,102,95), PIT_WIDTH+40, PIT_WIDTH-5);
+        Style pitStyle2 = new RoundedRectangularStyle(new Color(255,102,95), PIT_WIDTH+25, PIT_WIDTH-5);
         Style mancalaStyle2 = new RectangularStyle(new Color(102,0,120), MANCALA_WIDTH, MANCALA_HEIGHT);
 
         //Style 3
@@ -145,6 +145,8 @@ public class MancalaTester {
         frame.setResizable(true);
         frame.setVisible(true);
 
+        //Close frame and exit application
+        ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
         //Pop up button options
         Object[] options = { "3", "4"};
 
@@ -165,6 +167,8 @@ public class MancalaTester {
 
         //Close frame
         ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
+
+//        ((Board) board).getUndoButton().addActionListener(e-> );
     }
 
 }

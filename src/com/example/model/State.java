@@ -10,6 +10,7 @@ public class State {
     private ArrayList<ChangeListener> views;
     private ArrayList<Hole> holes;
     private char playerTurn;
+    private int undoCount;
 
     public State(ArrayList<Hole> _holes) {
         holes = _holes;
@@ -37,5 +38,17 @@ public class State {
                 hole.setNumberOfStones(numOfStones);
             }
         }
+    }
+
+    public int getUndoCount(){
+        return undoCount;
+    }
+
+    public void setUndoCount(int undoCount){
+        this.undoCount = undoCount;
+    }
+
+    public void incrementUndoCount(){
+        this.undoCount++;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.views;
 
+import com.sun.deploy.security.WinDeployNTLMAuthCallback;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -34,6 +36,6 @@ public class ShapedBoard extends JFrame {
         setResizable(true);
 //        set;
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 }
