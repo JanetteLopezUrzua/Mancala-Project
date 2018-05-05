@@ -30,6 +30,7 @@ public class Board extends View {
     private int _numOfStones;
     private Style pitStyle;
     private Style mancalaStyle;
+    private Hand hand;
 
     public Board(Style boardStyle,  Style pitStyle, Style mancalaStyle) {
         super(boardStyle);
@@ -38,6 +39,7 @@ public class Board extends View {
         this.pitStyle = pitStyle;
         this.mancalaStyle = mancalaStyle;
         _numOfStones = 0;
+        hand = new Hand(new RectangularStyle(Color.BLACK, getWidth()/3, 10));
         initialize();
     }
 
@@ -121,7 +123,6 @@ public class Board extends View {
         lowerPanelAndScores.add(lowerPanel, BorderLayout.CENTER);
         lowerPanelAndScores.add(scoreA, BorderLayout.EAST);
         lowerPanelAndScores.add(scoreB, BorderLayout.WEST);
-        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,getWidth()/2,getHeight()/10));
         lowerPanelAndScores.add(hand, BorderLayout.SOUTH);
 
         add(upperPanelAndCloseAndUndo, BorderLayout.NORTH);
@@ -146,9 +147,9 @@ public class Board extends View {
         if(model.getPlayerTurn() != model.getHoles().get(startingPit).getPlayer() ||
                 startingPit > model.getHoles().size())
             return;
+        hand.addToHand(model.getHoles().get(startingPit).getStones());
 
         while (startingPit > -1) {
-
             startingPit = move(startingPit);
             repaint();
         }
@@ -179,6 +180,7 @@ public class Board extends View {
             if( ( (hole.getPlayer() == player && !hole.isPit()) ) || hole.isPit() ) {
                 holes.get(selectedPit).addStone();
                 numOfStones--;
+                hand.takeFromHand();
 //                repaint();
 //                start = System.currentTimeMillis();
 //                while( start + 300 >  System.currentTimeMillis() );
@@ -294,7 +296,7 @@ public class Board extends View {
         holdPitsAndMancalas.add(mancalaB, BorderLayout.WEST);
         holdPitsAndMancalas.add(mancalaA, BorderLayout.EAST);
 
-        state =  new State(holes);
+        state = new State(holes);
         model = new Model(state);
         displayTurnPopUp();
         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
