@@ -8,6 +8,7 @@ import com.example.views.concrete.RoundedRectangularStyle;
 import org.omg.PortableInterceptor.HOLDING;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,14 +30,16 @@ public class Board extends View {
     private int _numOfStones;
     private Style pitStyle;
     private Style mancalaStyle;
+    private Hand hand;
 
     public Board(Style boardStyle, Style pitStyle, Style mancalaStyle) {
         super(boardStyle);
         setSize(boardStyle.getWidth(), boardStyle.getHeight());
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout(30,0));
         this.pitStyle = pitStyle;
         this.mancalaStyle = mancalaStyle;
         _numOfStones = 0;
+        hand = new Hand(new RectangularStyle(Color.BLACK, getWidth()/3, 10));
         initialize();
     }
 
@@ -117,6 +120,7 @@ public class Board extends View {
         lowerPanelAndScores.add(lowerPanel, BorderLayout.CENTER);
         lowerPanelAndScores.add(scoreA, BorderLayout.EAST);
         lowerPanelAndScores.add(scoreB, BorderLayout.WEST);
+        lowerPanelAndScores.add(hand, BorderLayout.SOUTH);
 
         add(upperPanelAndCloseAndUndo, BorderLayout.NORTH);
         add(lowerPanelAndScores, BorderLayout.SOUTH);
@@ -159,6 +163,7 @@ public class Board extends View {
         if (model.getPlayerTurn() != model.getHoles().get(startingPit).getPlayer() ||
                 startingPit > model.getHoles().size())
             return;
+        hand.addToHand(model.getHoles().get(startingPit).getStones());
 
         startingPit = move(startingPit);
         repaint();
@@ -173,6 +178,7 @@ public class Board extends View {
 
         if (startingPit == -1) {
             model.changeTurn();
+            displayTurnPopUp(model.getPlayerTurn());
             model.resetUndoCounter();
             displayTurnPopUp();
             System.out.println("Now it's " + model.getPlayerTurn() + "'s turn!");
@@ -194,6 +200,10 @@ public class Board extends View {
             if (((hole.getPlayer() == player && !hole.isPit())) || hole.isPit()) {
                 holes.get(selectedPit).addStone();
                 numOfStones--;
+                hand.takeFromHand();
+//                repaint();
+//                start = System.currentTimeMillis();
+//                while( start + 300 >  System.currentTimeMillis() );
             }
         }
 
@@ -276,7 +286,7 @@ public class Board extends View {
         }
 
         //Set a Border on the JPanel to fit the mancalas in the board
-        setBorder(BorderFactory.createEmptyBorder(25, 120, 145, 150));
+        setBorder(BorderFactory.createEmptyBorder(25,120,120,150));
 
         //JPanel with GridLayout to hold the pits
         JPanel holdPits = new JPanel(new GridLayout(2, 6));
@@ -303,7 +313,6 @@ public class Board extends View {
 
         state = new State(holes);
         model = new Model(state);
-        displayTurnPopUp();
         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
         holdPits.setBorder(BorderFactory.createEmptyBorder(20, 90, 0, 0));
 
@@ -311,57 +320,36 @@ public class Board extends View {
         holdPitsAndMancalas.add(holdPits, BorderLayout.CENTER);
         holdPitsAndMancalas.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 70));
 
-        //Letters to create labels for mancalas
-        JLabel M = new JLabel("M");
-        JLabel A1 = new JLabel("A");
-        JLabel N = new JLabel("N");
-        JLabel C = new JLabel("C");
-        JLabel A2 = new JLabel("A");
-        JLabel L = new JLabel("L");
-        JLabel A3 = new JLabel("A");
-        JLabel blank = new JLabel("");
-        JLabel A4 = new JLabel("A");
-
-        JLabel M2 = new JLabel("M");
-        JLabel A5 = new JLabel("A");
-        JLabel N2 = new JLabel("N");
-        JLabel C2 = new JLabel("C");
-        JLabel A6 = new JLabel("A");
-        JLabel L2 = new JLabel("L");
-        JLabel A7 = new JLabel("A");
-        JLabel B = new JLabel("B");
-        JLabel blank2 = new JLabel("");
-
         //create panels to hold mancala labels
         JPanel labelMancalaA = new JPanel(new GridLayout(0, 1));
         JPanel labelMancalaB = new JPanel(new GridLayout(0, 1));
 
-        //add letters to label panel A
-        labelMancalaA.add(M);
-        labelMancalaA.add(A1);
-        labelMancalaA.add(N);
-        labelMancalaA.add(C);
-        labelMancalaA.add(A2);
-        labelMancalaA.add(L);
-        labelMancalaA.add(A3);
-        labelMancalaA.add(blank);
-        labelMancalaA.add(A4);
+        //Letters to create labels for mancalas
+        String m1 = "MANCALA A";
+        String m2 = "MANCALA B";
 
-        //add letters to label panel B
-        labelMancalaB.add(M2);
-        labelMancalaB.add(A5);
-        labelMancalaB.add(N2);
-        labelMancalaB.add(C2);
-        labelMancalaB.add(A6);
-        labelMancalaB.add(L2);
-        labelMancalaB.add(A7);
-        labelMancalaB.add(blank2);
-        labelMancalaB.add(B);
+        for(int l = 0; l < m1.length(); l++)
+        {
+            char a_char = m1.charAt(l);
+            JLabel letter = new JLabel(Character.toString(a_char));
+            letter.setFont(new Font("Mosk Typeface", Font.BOLD, 14));
+            labelMancalaA.add(letter);
+        }
+
+        for(int n = 0; n < m2.length(); n++)
+        {
+            char a_char = m2.charAt(n);
+            JLabel letter = new JLabel(Character.toString(a_char));
+            letter.setFont(new Font("Mosk Typeface", Font.BOLD, 14));
+            labelMancalaB.add(letter);
+        }
 
         //Add holdPitsAndMancalas and mancala labels to board
         add(holdPitsAndMancalas, BorderLayout.CENTER);
         add(labelMancalaB, BorderLayout.WEST);
         add(labelMancalaA, BorderLayout.EAST);
+        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,getWidth()/3,getHeight()/12));
+//        add(hand, BorderLayout.SOUTH);
     }
 
     public void setNumOfStones(int answer) {
@@ -370,27 +358,26 @@ public class Board extends View {
 //        repaint();
     }
 
-    void displayTurnPopUp() {
-
-        if (model.getPlayerTurn() == 'A') {
-            JOptionPane pane = new JOptionPane("Player A", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-            JDialog dialog = pane.createDialog(null, "Turn");
-            dialog.setModal(false);
-            dialog.setVisible(true);
-            dialog.setLocation(800, 700);
-            new Timer(800, e -> dialog.setVisible(false)).start();
-        } else if (model.getPlayerTurn() == 'B') {
-            JOptionPane pane = new JOptionPane("Player B", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-            JDialog dialog = pane.createDialog(null, "Turn");
-            dialog.setModal(false);
-            dialog.setVisible(true);
-            dialog.setLocation(800, 180);
-            new Timer(800, e -> dialog.setVisible(false)).start();
-        }
+    void displayTurnPopUp(char player){
+        JFrame playerTurn = new JFrame();
+       JLabel playerLabel = new JLabel("Turn: Player " + Character.toString(player));
+       playerLabel.setFont(new Font("Mosk Typeface", Font.BOLD, 18));
+       playerLabel.setHorizontalAlignment(JLabel.CENTER);
+       playerTurn.add(playerLabel);
+       //playerTurn.setBackground(new Color(0, 0, 0, 0));
+       playerTurn.pack();
+       playerTurn.setLocationRelativeTo(this);
+       playerTurn.setVisible(true);
+       Timer timer = new Timer(800, e -> playerTurn.dispose());
+       timer.start();
     }
 
 
     public JButton getCloseButton() {
         return close;
+    }
+
+    public JButton getUndoButton(){
+        return undo;
     }
 }
