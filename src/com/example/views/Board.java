@@ -341,12 +341,14 @@ public class Board extends View {
        JLabel playerLabel = new JLabel("Turn: Player " + Character.toString(player));
        playerLabel.setFont(new Font("Mosk Typeface", Font.BOLD, 18));
        playerLabel.setHorizontalAlignment(JLabel.CENTER);
+       playerTurn.setUndecorated(true);
        playerTurn.add(playerLabel);
        //playerTurn.setBackground(new Color(0, 0, 0, 0));
        playerTurn.pack();
        playerTurn.setLocationRelativeTo(this);
        playerTurn.setVisible(true);
-       Timer timer = new Timer(800, e -> playerTurn.dispose());
+       playerTurn.setOpacity(0.75f);
+       Timer timer = new Timer(900, e -> playerTurn.dispose());
        timer.start();
     }
 
