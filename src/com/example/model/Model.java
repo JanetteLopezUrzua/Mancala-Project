@@ -55,6 +55,25 @@ public class Model {
 
     public void undo() {
         //TODO Implement undo logic here
+        if(undoCount >= 3) {
+            return;
+        } else {
+            undoCount++;
+            currentState = (State) previousState.clone();
+        }
+    }
+
+    public int getMaxScore() {
+        return Math.max(currentState.getHoles().get(0).getStones(), currentState.getHoles().get(7).getStones() );
+    }
+
+    public char getWinningPlayer() {
+        return currentState.getHoles().get(0).getStones() > currentState.getHoles().get(7).getStones() ? 'A' : 'B';
+    }
+
+    public void resetUndoCounter() {
+        undoCount = 0;
+        previousState = (State) currentState.clone();
     }
 
 }
