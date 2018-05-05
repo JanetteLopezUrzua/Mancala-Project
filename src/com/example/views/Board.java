@@ -143,11 +143,11 @@ public class Board extends View {
                 startingPit > model.getHoles().size())
             return;
 
-        while (startingPit > -1) {
+//        while (startingPit > -1) {
 
-            startingPit = move(startingPit);
-            repaint();
-        }
+        startingPit = move(startingPit);
+        repaint();
+//        }
 
         scoreCount();
 
@@ -190,16 +190,20 @@ public class Board extends View {
 
         if( holes.get(selectedPit).getPlayer() == player && holes.get(oppositePit).getStones() >= 1 &&
                 holes.get(selectedPit).getStones() == 1) {
+            int stones = holes.get(oppositePit).takeStones();
+            stones += holes.get(selectedPit).takeStones();
+            model.moveToMancala(stones, player);
             System.out.println("Transfer opposite stones to your mancala");
             return -1;
 
-        } else if(holes.get(selectedPit).getStones() > 1) {
-            System.out.println("Still " + model.getPlayerTurn() + "'s turn!");
-            return selectedPit;
         }
-        else{
-            System.out.println("Player " +  player + ", please select your pits");
-        }
+//        else if(holes.get(selectedPit).getStones() > 1) {
+//            System.out.println("Still " + model.getPlayerTurn() + "'s turn!");
+//            return selectedPit;
+//        }
+//        else{
+//            System.out.println("Player " +  player + ", please select your pits");
+//        }
 
         repaint();
         return -1;

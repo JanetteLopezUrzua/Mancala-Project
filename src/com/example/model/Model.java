@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Model {
     private State currentState;
     private State previousState;
-    private ArrayList<View> views;
 
     private int undoCount;
 
@@ -23,14 +22,15 @@ public class Model {
 
     //attach a view to the model
     public void attach(View view){
-        views.add(view);
+
     }
 
     //update all of the view attached to the model
     public void update(){
-        for(ChangeListener c: views){
-            c.stateChanged(new ChangeEvent(this));      //pass the state as the changeEvent
-        }
+    }
+
+    public void moveToMancala(int stones, char player) {
+        currentState.moveToMancala(stones, player);
     }
 
     public void setNumberOfStones(int numOfStones) {
@@ -57,14 +57,4 @@ public class Model {
         //TODO Implement undo logic here
     }
 
-    public void increaseUndoCount() {undoCount++;}
-    public void decreaseUndoCount() {undoCount--;}
-
-    public void setUndoCount(int undoCount){
-        this.undoCount = undoCount;
-    }
-
-    public void incrementUndoCount(){
-        this.undoCount++;
-    }
 }
