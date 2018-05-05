@@ -8,6 +8,7 @@ import com.example.views.concrete.RoundedRectangularStyle;
 import org.omg.PortableInterceptor.HOLDING;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -120,6 +121,8 @@ public class Board extends View {
         lowerPanelAndScores.add(lowerPanel, BorderLayout.CENTER);
         lowerPanelAndScores.add(scoreA, BorderLayout.EAST);
         lowerPanelAndScores.add(scoreB, BorderLayout.WEST);
+        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,getWidth()/2,getHeight()/10));
+        lowerPanelAndScores.add(hand, BorderLayout.SOUTH);
 
         add(upperPanelAndCloseAndUndo, BorderLayout.NORTH);
         add(lowerPanelAndScores, BorderLayout.SOUTH);
@@ -266,7 +269,7 @@ public class Board extends View {
         }
 
          //Set a Border on the JPanel to fit the mancalas in the board
-         setBorder(BorderFactory.createEmptyBorder(25,120,145,150));
+         setBorder(BorderFactory.createEmptyBorder(25,120,120,150));
 
          //JPanel with GridLayout to hold the pits
          JPanel holdPits = new JPanel(new GridLayout(2,6));
@@ -352,6 +355,8 @@ public class Board extends View {
         add(holdPitsAndMancalas, BorderLayout.CENTER);
         add(labelMancalaB, BorderLayout.WEST);
         add(labelMancalaA, BorderLayout.EAST);
+        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,getWidth()/3,getHeight()/12));
+//        add(hand, BorderLayout.SOUTH);
     }
 
     public void setNumOfStones(int answer){
