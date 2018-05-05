@@ -11,10 +11,9 @@ import java.util.Set;
 
 public abstract class Hole extends View implements ChangeListener {
 
-    private ArrayList<Stone> stones;
-    private char player;
-    private boolean isPit;
-    protected int numOfStones;
+//    private char player;
+//    private boolean isPit;
+//    protected int numOfStones;
 
     int coils = 3;
     int radius = 50;
@@ -38,19 +37,23 @@ public abstract class Hole extends View implements ChangeListener {
         initStones2(g2);
     }
 
-    public Hole(char newPlayer, boolean _isPit, Style newStyle) {
-        super(newStyle);
-        player = newPlayer;
-        isPit = _isPit;
+    public Hole(){
+
     }
 
-    public Hole(char newPlayer, boolean _isPit, Style newStyle, int _numOfStones) {
-        super(newStyle);
-        player = newPlayer;
-        isPit = _isPit;
-        numOfStones = _numOfStones;
-//        initStones(numOfStones);
-    }
+//    public Hole(char newPlayer, boolean _isPit, Style newStyle) {
+//        super(newStyle);
+//        player = newPlayer;
+//        isPit = _isPit;
+//    }
+//
+//    public Hole(char newPlayer, boolean _isPit, Style newStyle, int _numOfStones) {
+//        super(newStyle);
+//        player = newPlayer;
+//        isPit = _isPit;
+//        numOfStones = _numOfStones;
+////        initStones(numOfStones);
+//    }
 
     public void initStones2(Graphics2D g2) {
 
@@ -168,7 +171,7 @@ public abstract class Hole extends View implements ChangeListener {
 //        }
 //    }
 
-    //when the state is changed by the model, redraw
+    //when the state is changed by the state, redraw
     @Override
     public void stateChanged(ChangeEvent e) {
 
@@ -179,38 +182,38 @@ public abstract class Hole extends View implements ChangeListener {
 
     }
 
-    public void addStone() {
-//        stones.add(new Stone());
-        numOfStones++;
-    }
-
-    public void removeStone() {
-//        stones.remove(0);
-        numOfStones--;
-    }
-
-    public char getPlayer() {
-        return player;
-    }
-
-    public boolean isPit() {
-        return isPit;
-    }
-
-    public int getStones() {
-        return numOfStones;
-    }
-
-    public int takeStones() {
-
-        int temp = numOfStones;
-        numOfStones = 0;
-        return temp;
-    }
-
-    public void setNumberOfStones(int _numOfStones) {
-
-        numOfStones = _numOfStones;
-        repaint();
-    }
+//    public void addStone() {
+////        stones.add(new Stone());
+//        numOfStones++;
+//    }
+//
+//    public void removeStone() {
+////        stones.remove(0);
+//        numOfStones--;
+//    }
+//
+//    public char getPlayer() {
+//        return player;
+//    }
+//
+//    public boolean isPit() {
+//        return isPit;
+//    }
+//
+//    public int getStones() {
+//        return numOfStones;
+//    }
+//
+//    public int takeStones() {
+//
+//        int temp = numOfStones;
+//        numOfStones = 0;
+//        return temp;
+//    }
+//
+//    public void setNumberOfStones(int _numOfStones) {
+//
+//        numOfStones = _numOfStones;
+//        repaint();
+//    }
 }

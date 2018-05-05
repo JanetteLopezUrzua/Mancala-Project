@@ -14,6 +14,20 @@ public class Pit extends Hole {
         super(newPlayer, _isPit, style, _numOfStones);
     }
 
+    public Hole(char newPlayer, boolean _isPit, Style newStyle) {
+        super(newStyle);
+        player = newPlayer;
+        isPit = _isPit;
+    }
+
+    public Hole(char newPlayer, boolean _isPit, Style newStyle, int _numOfStones) {
+        super(newStyle);
+        player = newPlayer;
+        isPit = _isPit;
+        numOfStones = _numOfStones;
+//        initStones(numOfStones);
+    }
+
 //    @Override
 //    public void draw(Graphics2D g2) {
 //        this.setSize(new Dimension(getStyle().getWidth(), getStyle().getHeight()));

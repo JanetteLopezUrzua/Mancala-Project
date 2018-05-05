@@ -2,24 +2,43 @@ package com.example.model;
 
 import com.example.views.Hole;
 import com.example.views.Pit;
+import com.example.views.View;
 
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.util.ArrayList;
 
 public class State implements Cloneable {
-    private ArrayList<ChangeListener> views;
-    private ArrayList<Hole> holes;
+//    private ArrayList<Hole> holes;
     private char playerTurn;
+    private State previousState;
+    private ArrayList<View> views;
+
+    private int undoCount;
 
 
-    public State(ArrayList<Hole> _holes) {
-        holes = _holes;
+    public State() {
+//        holes = _holes;
         playerTurn = 'A';
+        views = new ArrayList<>();
+        previousState = (State) this.clone();
     }
 
-    public ArrayList<Hole> getHoles(){
-        return holes;
+    //attach a view to the model
+    public void attach(View view){
+        views.add(view);
     }
+
+    //update all of the view attached to the model
+    public void update(){
+        for(ChangeListener c: views){
+            c.stateChanged(new ChangeEvent(this));      //pass the state as the changeEvent
+        }
+    }
+
+//    public ArrayList<Hole> getHoles(){
+//        return holes;
+//    }
 
     public char getPlayerTurn() {
         return playerTurn;
@@ -32,12 +51,31 @@ public class State implements Cloneable {
             playerTurn = 'A';
     }
 
-    public void setNumberOfStones(int numOfStones) {
-        for(Hole hole: holes) {
-            if(hole instanceof Pit) {
-                hole.setNumberOfStones(numOfStones);
-            }
-        }
+//    public void setNumberOfStones(int numOfStones) {
+//        for(Hole hole: holes) {
+//            if(hole instanceof Pit) {
+//                hole.setNumberOfStones(numOfStones);
+//            }
+//        }
+//    }
+
+    public void increaseUndoCount() {undoCount++;}
+    public void decreaseUndoCount() {undoCount--;}
+
+    public void setUndoCount(int undoCount){
+        this.undoCount = undoCount;
+    }
+
+    public void incrementUndoCount(){
+        this.undoCount++;
+    }
+
+    public State getPreviousState(){
+        return previousState;
+    }
+
+    public void setPreviousState(State state){
+        previousState = state;
     }
 
     @Override

@@ -1,24 +1,18 @@
 package com.example.views;
 
-import com.example.model.Model;
 import com.example.model.State;
-import com.example.views.concrete.EllipticStyle;
 import com.example.views.concrete.RectangularStyle;
 import com.example.views.concrete.RoundedRectangularStyle;
-import org.omg.PortableInterceptor.HOLDING;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class Board extends View {
 
-    Model model;
+    State state;
 
 //    private State currentState;
 //    private State previousState;
@@ -132,10 +126,10 @@ public class Board extends View {
 
     //Keep score
     public void scoreCount(){
-        if(model.getPlayerTurn() == 'A')
-             scoreA.setText("Score A: " + Integer.toString(model.getHoles().get(7).getStones()));
-        else if (model.getPlayerTurn() == 'B')
-             scoreB.setText("Score B: " + Integer.toString(model.getHoles().get(0).getStones()));
+        if(state.getPlayerTurn() == 'A')
+             scoreA.setText("Score A: " + Integer.toString(state.getHoles().get(7).getStones()));
+        else if (state.getPlayerTurn() == 'B')
+             scoreB.setText("Score B: " + Integer.toString(state.getHoles().get(0).getStones()));
     }
 
     public void draw(Graphics2D g2){
@@ -144,10 +138,10 @@ public class Board extends View {
 
     public void turn(int startingPit) {
 
-        if(model.getPlayerTurn() != model.getHoles().get(startingPit).getPlayer() ||
-                startingPit > model.getHoles().size())
+        if(state.getPlayerTurn() != state.getHoles().get(startingPit).getPlayer() ||
+                startingPit > state.getHoles().size())
             return;
-        hand.addToHand(model.getHoles().get(startingPit).getStones());
+        hand.addToHand(state.getHoles().get(startingPit).getStones());
 
         while (startingPit > -1) {
             startingPit = move(startingPit);
@@ -157,9 +151,9 @@ public class Board extends View {
         scoreCount();
 
         if(startingPit == -1) {
-            model.changeTurn();
-            displayTurnPopUp(model.getPlayerTurn());
-            System.out.println("Now it's " + model.getPlayerTurn() + "'s turn!");
+            state.changeTurn();
+            displayTurnPopUp(state.getPlayerTurn());
+            System.out.println("Now it's " + state.getPlayerTurn() + "'s turn!");
         }
 
     }
@@ -167,11 +161,11 @@ public class Board extends View {
     public int move(int selectedPit) {
 
         selectedPit %= 14;
-        ArrayList<Hole> holes = model.getHoles();
+        ArrayList<Hole> holes = state.getHoles();
 
         long start;
 
-        char player = model.getPlayerTurn();
+        char player = state.getPlayerTurn();
         int numOfStones = holes.get(selectedPit).takeStones();
         while(numOfStones > 0) {
             selectedPit++;
@@ -200,7 +194,7 @@ public class Board extends View {
             return -1;
 
         } else if(holes.get(selectedPit).getStones() > 1) {
-            System.out.println("Still " + model.getPlayerTurn() + "'s turn!");
+            System.out.println("Still " + state.getPlayerTurn() + "'s turn!");
             return selectedPit;
         }
         else{
@@ -240,9 +234,9 @@ public class Board extends View {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if(finalPit.contains(e.getX(), e.getY())) {
-                        int index = model.getHoles().indexOf(finalPit);
-                        Hole hole = model.getHoles().get(index);
-                        System.out.println("Player " + model.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
+                        int index = Board.this.state.getHoles().indexOf(finalPit);
+                        Hole hole = Board.this.state.getHoles().get(index);
+                        System.out.println("Player " + Board.this.state.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
                         if(hole.getStones() > 0)
                             turn(index);
                     }
@@ -296,8 +290,8 @@ public class Board extends View {
         holdPitsAndMancalas.add(mancalaB, BorderLayout.WEST);
         holdPitsAndMancalas.add(mancalaA, BorderLayout.EAST);
 
-        state = new State(holes);
-        model = new Model(state);
+        state = new State(holes);           //create State
+//        state = new Model(state);
         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
         holdPits.setBorder(BorderFactory.createEmptyBorder(20,90,0,0));
 
@@ -339,7 +333,7 @@ public class Board extends View {
 
     public void setNumOfStones(int answer){
         _numOfStones = answer;
-        model.setNumberOfStones(_numOfStones);
+        state.setNumberOfStones(_numOfStones);
 //        repaint();
     }
 
