@@ -67,9 +67,9 @@ public class MancalaTester {
         JButton button3 = new JButton("Style Three");
 
         //Set color of buttons
-        button1.setBackground(Color.GRAY);
-        button2.setBackground(Color.GRAY);
-        button3.setBackground(Color.GRAY);
+        button1.setBackground(new Color(0,0,204));
+        button2.setBackground(new Color(0,0,204));
+        button3.setBackground(new Color(0,0,204));
 
         //set color and font of buttons text
         button1.setForeground(Color.WHITE);
