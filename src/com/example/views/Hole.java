@@ -184,9 +184,9 @@ public abstract class Hole extends View implements ChangeListener {
         numOfStones++;
     }
 
-    public void removeStone() {
+    public void appendStones(int stones) {
 //        stones.remove(0);
-        numOfStones--;
+        numOfStones += stones;
     }
 
     public char getPlayer() {

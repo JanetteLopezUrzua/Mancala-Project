@@ -135,7 +135,7 @@ public class Board extends View {
             c += 7;
         }
 
-        int limit = c + 7;
+        int limit = c + 6;
 
         ArrayList<Hole> holes = model.getHoles();
         for(; c < limit; c++) {
@@ -180,7 +180,7 @@ public class Board extends View {
             model.changeTurn();
             displayTurnPopUp(model.getPlayerTurn());
             model.resetUndoCounter();
-            displayTurnPopUp();
+//            displayTurnPopUp(model.getPlayerTurn());
             System.out.println("Now it's " + model.getPlayerTurn() + "'s turn!");
         }
 
