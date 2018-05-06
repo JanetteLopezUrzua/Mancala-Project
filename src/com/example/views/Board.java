@@ -217,16 +217,14 @@ public class Board extends View {
         String m1 = "MANCALA A";
         String m2 = "MANCALA B";
 
-        for(int l = 0; l < m1.length(); l++)
-        {
+        for(int l = 0; l < m1.length(); l++) {
             char a_char = m1.charAt(l);
             JLabel letter = new JLabel(Character.toString(a_char));
             letter.setFont(new Font("Mosk Typeface", Font.BOLD, 14));
             labelMancalaA.add(letter);
         }
 
-        for(int n = 0; n < m2.length(); n++)
-        {
+        for(int n = 0; n < m2.length(); n++) {
             char a_char = m2.charAt(n);
             JLabel letter = new JLabel(Character.toString(a_char));
             letter.setFont(new Font("Mosk Typeface", Font.BOLD, 14));
