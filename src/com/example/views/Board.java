@@ -27,7 +27,7 @@ public class Board extends View {
     private int _numOfStones;
     private Style pitStyle;
     private Style mancalaStyle;
-    private Hand hand;
+//    private Hand hand;
     private ArrayList<Hole> holes;
 
     public Board(Style boardStyle, Style pitStyle, Style mancalaStyle, State state, ArrayList<Hole> holes) {
@@ -37,7 +37,7 @@ public class Board extends View {
         this.pitStyle = pitStyle;
         this.mancalaStyle = mancalaStyle;
         _numOfStones = 0;
-        hand = new Hand(new RectangularStyle(Color.BLACK, getWidth()/3, 10));
+//        hand = new Hand(new RectangularStyle(Color.BLACK, getWidth()/3, 10));
         this.state = state;
         this.holes = holes;
         initialize();
@@ -133,7 +133,7 @@ public class Board extends View {
         lowerPanelAndScores.add(lowerPanel, BorderLayout.CENTER);
         lowerPanelAndScores.add(scoreA, BorderLayout.EAST);
         lowerPanelAndScores.add(scoreB, BorderLayout.WEST);
-        lowerPanelAndScores.add(hand, BorderLayout.SOUTH);
+//        lowerPanelAndScores.add(hand, BorderLayout.SOUTH);
 
         add(upperPanelAndCloseAndUndo, BorderLayout.NORTH);
         add(lowerPanelAndScores, BorderLayout.SOUTH);
@@ -418,7 +418,7 @@ public class Board extends View {
         add(holdPitsAndMancalas, BorderLayout.CENTER);
         add(labelMancalaB, BorderLayout.WEST);
         add(labelMancalaA, BorderLayout.EAST);
-        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,getWidth()/3,getHeight()/12));
+//        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,getWidth()/3,getHeight()/12));
 //        add(hand, BorderLayout.SOUTH);
     }
 

@@ -119,11 +119,12 @@ public class State implements Cloneable {
     }
 
     public void undo() {
+        System.out.println(undoCount);
         //TODO Implement undo logic here
         if(undoCount >= 3) {
             return;
         } else {
-            undoCount+=3;
+            undoCount++;
 //            this = (State) previousState.clone();
             this.holes = previousState.getHoles();
             this.scoreA = previousState.scoreA;
@@ -209,17 +210,17 @@ public class State implements Cloneable {
             System.out.println("Game over");
             System.out.println("Winner is player " + this.getWinningPlayer() + " with score of " + this.getMaxScore());
             gameOver = true;
-            update();
         }
 
         if (startingPit == -1) {
             this.changeTurn();
 //            displayTurnPopUp(this.getPlayerTurn());
-            this.resetUndoCounter();
+            resetUndoCounter();
+            setPreviousState(this);
 //            displayTurnPopUp(state.getPlayerTurn());
             System.out.println("Now it's " + this.getPlayerTurn() + "'s turn!");
-            update();
         }
+        update();
     }
 
     public boolean checkPits(boolean first) {
