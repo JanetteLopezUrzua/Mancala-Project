@@ -14,17 +14,24 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+/**
+ * Mancala Game Project
+ * @author Janette Lopez Urzua, Omar Riaz, Nikita Voloshenko
+ */
+
+/**Class to hold the main method**/
 public class MancalaTester {
 
     private static final int BOARD_WIDTH = 1150;
     private static final int BOARD_HEIGHT = 450;
     private static final int MANCALA_WIDTH = BOARD_WIDTH/15;
     private static final int MANCALA_HEIGHT = BOARD_HEIGHT - 190;
-
     private static final int PIT_WIDTH = BOARD_WIDTH/12;
 
+    /**
+     * Create main screen that asks a user to choose a style to begin playing Mancala
+     */
     public static void main(String[] args) {
-
         //Create Menu
         JFrame menu = new JFrame();
         menu.setLayout(new BorderLayout());
@@ -70,11 +77,12 @@ public class MancalaTester {
         button2.setBackground(new Color(0,0,204));
         button3.setBackground(new Color(0,0,204));
 
-        //set color and font of buttons text
+        //set color of buttons text
         button1.setForeground(Color.WHITE);
         button2.setForeground(Color.WHITE);
         button3.setForeground(Color.WHITE);
 
+        //set font of buttons text
         button1.setFont(new Font("Mosk Typeface", Font.BOLD, 20));
         button2.setFont(new Font("Mosk Typeface", Font.BOLD, 20));
         button3.setFont(new Font("Mosk Typeface", Font.BOLD, 20));
@@ -95,8 +103,8 @@ public class MancalaTester {
 
         //Style 2
         Style boardStyle2  = new RectangularStyle(Color.GRAY, BOARD_WIDTH, BOARD_HEIGHT);
-        Style pitStyle2 = new RoundedRectangularStyle(new Color(255,102,95), PIT_WIDTH+25, PIT_WIDTH-5);
-        Style mancalaStyle2 = new RectangularStyle(new Color(102,0,120), MANCALA_WIDTH, MANCALA_HEIGHT);
+        Style pitStyle2 = new RoundedRectangularStyle(new Color(255,102,95), PIT_WIDTH+15, PIT_WIDTH-5);
+        Style mancalaStyle2 = new RectangularStyle(new Color(102,0,120), MANCALA_WIDTH, MANCALA_HEIGHT-3);
 
         //Style 3
         Style boardStyle3  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
@@ -107,8 +115,8 @@ public class MancalaTester {
 
         //add events to the buttons
         button1.addActionListener(event -> {
-                    menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
-                    displayBoard(menu, boardStyle1, pitStyle1, mancalaStyle1);
+            menu.dispatchEvent(new WindowEvent(menu, WindowEvent.WINDOW_CLOSING));
+            displayBoard(menu, boardStyle1, pitStyle1, mancalaStyle1);
         });
 
 
@@ -123,27 +131,32 @@ public class MancalaTester {
         });
     }
 
-    /* static ActionListener displayQuestionForStones(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
-
-    }*/
-
+    /**
+     * Function displayBoard displays the board after the user chooses a style
+     * @param menu first screen/frame that asks a user to choose a style
+     * @param boardStyle Style for the board
+     * @param pitStyle    Style for the pit
+     * @param mancalaStyle Style for the mancala
+     */
     static void displayBoard(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
 
-
+        //frame to display board in a certain shape
         ShapedBoard frame = new ShapedBoard(boardStyle, BOARD_WIDTH, BOARD_HEIGHT + 90);
-//        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
 
-
+        //create a new state
         State state = new State();
+
+        //hold pits and mancalas
         ArrayList<com.example.views.Hole> holes = new ArrayList<>();
 
         for (int c = 0; c < 12; c++) {
-//            pit = new Pit('A', true, pitStyle, _numOfStones);
+
             com.example.model.Hole hole;
             if (c < 6)
                 hole = new com.example.model.Hole('A', true);
             else
                 hole = new com.example.model.Hole('B', true);
+
             Pit pit = new Pit(pitStyle, hole);
             hole.attach(pit);
             holes.add(pit); //belongs in Board
@@ -151,6 +164,7 @@ public class MancalaTester {
 
             Pit finalPit = pit;
 
+            //pit listener
             pit.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -173,6 +187,7 @@ public class MancalaTester {
                 public void mouseExited(MouseEvent e) {}
             });
         }
+
         //adding Mancalas
         Hole mancalaHoleA = new Hole('A', false);
         Hole mancalaHoleB = new Hole('B', false);
@@ -184,9 +199,11 @@ public class MancalaTester {
         holes.add(0, mancalaB);
         state.addHole(6, mancalaHoleA);
         state.addHole(0, mancalaHoleB);
+
         //Pop up button options
         Object[] options = { "3", "4"};
 
+        //Display question for number of stones
         int result = JOptionPane.showOptionDialog(menu, "How many stones per pit?", "Enter Number Of Stones",
                 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
 
@@ -199,6 +216,7 @@ public class MancalaTester {
             state.setNumberOfStones(4);
         }
 
+        //create board
         View board = new Board(boardStyle, pitStyle, mancalaStyle, state, holes);
         state.attach(board);
 
@@ -215,14 +233,10 @@ public class MancalaTester {
         //Close frame and exit application
         ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
 
-
-//        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,BOARD_WIDTH/2,BOARD_HEIGHT/8));
-//        frame.add(hand, BorderLayout.SOUTH);
-
         //Close frame
         ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
 
-//        ((Board) board).getUndoButton().addActionListener(e-> )
+ //       ((Board) board).getUndoButton().addActionListener(e-> )
     }
 
 }
