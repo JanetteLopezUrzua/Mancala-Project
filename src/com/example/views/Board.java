@@ -173,7 +173,7 @@ public class Board extends View {
         if(checkPits(true) || checkPits(false)) {
 
             System.out.println("Game over");
-            System.out.println("Winner is player " + model.getWinningPlayer() + " with score of " + model.getMaxScore());
+            System.out.println(model.getWinningPlayer());
         }
 
         if (startingPit == -1) {

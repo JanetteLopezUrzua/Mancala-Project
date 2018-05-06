@@ -67,8 +67,10 @@ public class Model {
         return Math.max(currentState.getHoles().get(0).getStones(), currentState.getHoles().get(7).getStones() );
     }
 
-    public char getWinningPlayer() {
-        return currentState.getHoles().get(0).getStones() > currentState.getHoles().get(7).getStones() ? 'A' : 'B';
+    public String getWinningPlayer() {
+        return currentState.getHoles().get(0).getStones() == currentState.getHoles().get(7).getStones()
+                ? "It's a draw! Miracle!"
+                : ( currentState.getHoles().get(0).getStones() == getMaxScore() ? "B" : "A" );
     }
 
     public void resetUndoCounter() {
