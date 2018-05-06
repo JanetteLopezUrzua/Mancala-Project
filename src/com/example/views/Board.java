@@ -11,6 +11,10 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+/**
+ * Mancala Game Project
+ * @author Janette Lopez Urzua, Omar Riaz, Nikita Voloshenko
+ */
 
 /**
  * Board class represents board view with controllers
@@ -24,8 +28,6 @@ public class Board extends View {
 //    private State previousState;
     private JButton close;
     private JButton undo;
-    private JLabel scoreA;
-    private JLabel scoreB;
     private int LABEL_HEIGHT;
     private int _numOfStones;
     private Style pitStyle;
@@ -63,10 +65,6 @@ public class Board extends View {
     public void stateChanged(ChangeEvent c){
         state = (State) c.getSource();
 
-        //update scores
-        scoreA.setText(String.valueOf(state.getScoreA()));
-        scoreB.setText(String.valueOf(state.getScoreB()));
-
         displayTurnPopUp(state.getPlayerTurn());
         if(state.isGameOver())    displayGameOver();
     }
@@ -99,7 +97,7 @@ public class Board extends View {
     private void createUpperLowerPanels() {
 
         JPanel upperPanel = new JPanel(new GridLayout(0, 6, 40, 0));
-        JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 90, 0));
+        JPanel lowerPanel = new JPanel(new GridLayout(0, 6, 0, 0));
 
         //Create button to close board and put it with upperPanel
         close = new JButton("X");
@@ -111,15 +109,8 @@ public class Board extends View {
 
         createUndoButton();
 
-        //Create score labels
-        scoreA = new JLabel("Score A: " + 0);
-        scoreB = new JLabel("Score B: " + 0);
-
         //panel to hold upper panel and close button
         JPanel upperPanelAndCloseAndUndo = new JPanel(new BorderLayout(30, 0));
-
-        //panel to hold lower panel and scores
-        JPanel lowerPanelAndScores = new JPanel(new BorderLayout(20, 0));
 
         upperPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
         lowerPanel.setPreferredSize(new Dimension(getStyle().getWidth(), LABEL_HEIGHT));
@@ -138,27 +129,14 @@ public class Board extends View {
         }
 
         upperPanelAndCloseAndUndo.setBorder((BorderFactory.createEmptyBorder(0, 40, 0, 0)));
-        lowerPanelAndScores.setBorder((BorderFactory.createEmptyBorder(0, 20, 0, 0)));
-        lowerPanel.setBorder((BorderFactory.createEmptyBorder(0, 10, 0, 0)));
-
-        scoreA.setHorizontalAlignment(JLabel.RIGHT);
-        scoreB.setHorizontalAlignment(JLabel.LEFT);
-        scoreA.setFont(new Font("Mosk Typeface", Font.BOLD, 18));
-        scoreB.setFont(new Font("Mosk Typeface", Font.BOLD, 18));
-        scoreA.setForeground(Color.RED);
-        scoreB.setForeground(Color.RED);
+        lowerPanel.setBorder((BorderFactory.createEmptyBorder(0, 150, 0, 50)));
 
         upperPanelAndCloseAndUndo.add(upperPanel, BorderLayout.CENTER);
         upperPanelAndCloseAndUndo.add(close, BorderLayout.EAST);
         upperPanelAndCloseAndUndo.add(undo, BorderLayout.WEST);
 
-        lowerPanelAndScores.add(lowerPanel, BorderLayout.CENTER);
-        lowerPanelAndScores.add(scoreA, BorderLayout.EAST);
-        lowerPanelAndScores.add(scoreB, BorderLayout.WEST);
-//        lowerPanelAndScores.add(hand, BorderLayout.SOUTH);
-
         add(upperPanelAndCloseAndUndo, BorderLayout.NORTH);
-        add(lowerPanelAndScores, BorderLayout.SOUTH);
+        add(lowerPanel, BorderLayout.SOUTH);
     }
 
     /**
