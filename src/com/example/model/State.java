@@ -9,6 +9,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.util.ArrayList;
 
+/**
+ * Model of the program
+ */
 public class State implements Cloneable {
     private ArrayList<Hole> holes;
     private char playerTurn;
@@ -21,6 +24,9 @@ public class State implements Cloneable {
     private int undoCount;
 
 
+    /**
+     * State constructor, initializes holes, playerTurn, prev state and change listeners
+     */
     public State(){
         holes = new ArrayList<>();
         playerTurn = 'A';
@@ -34,28 +40,39 @@ public class State implements Cloneable {
         previousState = (State) this.clone();
     }
 
+    /**
+     * Attaches views to model
+     * @param view is a view to be hold and updated in state
+     */
     //attach a view to the model
     public void attach(ChangeListener view){
         changeListeners.add(view);
     }
 
-    //update all of the view attached to the model
+    /**
+     * Update all of the view attached to the model
+     */
     public void update(){
         for(ChangeListener c: changeListeners){
             c.stateChanged(new ChangeEvent(this));      //pass the state as the changeEvent
         }
     }
 
-    //used for undo
+    /**
+     * Used for undo
+     */
     public void updateAllHoles(){
         for(Hole hole: holes){
             hole.update();
         }
     }
 
-//    public ArrayList<Hole> getHoles(){
-//        return holes;
-//    }
+    /**
+     * Implements "move stones to mancala from opposite pit" logic
+     * @param stones is amount of stones to be moved
+     * @param player indicates whose mancala should be appended
+     */
+
     public void moveToMancala(int stones, char player) {
         Hole hole;
         if(player == 'A') {
@@ -70,10 +87,17 @@ public class State implements Cloneable {
         }
     }
 
+    /**
+     * Indicated player whose turn is at this point in program
+     * @return player label
+     */
     public char getPlayerTurn() {
         return playerTurn;
     }
 
+    /**
+     * Switches indicator of current player
+     */
     public void changeTurn() {
         if(playerTurn == 'A')
             playerTurn = 'B';
@@ -81,6 +105,10 @@ public class State implements Cloneable {
             playerTurn = 'A';
     }
 
+    /**
+     * Set amount of stones in pit
+     * @param numOfStones to set
+     */
     public void setNumberOfStones(int numOfStones) {
         for(Hole hole: holes) {
             if(hole.isPit()) {
@@ -104,10 +132,18 @@ public class State implements Cloneable {
         return previousState;
     }
 
+    /**
+     * Updates previous state
+     * @param state is current state
+     */
     public void setPreviousState(State state){
         previousState = state;
     }
 
+    /**
+     * Implements Clonable
+     * @return this instance
+     */
     @Override
     public Object clone() {
         try {
@@ -118,6 +154,9 @@ public class State implements Cloneable {
         }
     }
 
+    /**
+     * Implements undo button logic
+     */
     public void undo() {
         System.out.println(undoCount);
         //TODO Implement undo logic here
@@ -135,6 +174,11 @@ public class State implements Cloneable {
         }
     }
 
+    /**
+     * Implements single move logic
+     * @param selectedPit by user
+     * @return
+     */
     public int move(int selectedPit) {
 
         selectedPit %= 14;
@@ -193,6 +237,10 @@ public class State implements Cloneable {
         return -1;
     }
 
+    /**
+     * Manages multiple moves if any
+     * @param startingPit is an index of user-selected pit
+     */
     public void turn(int startingPit) {
 
         if (this.getPlayerTurn() != this.getHoles().get(startingPit).getPlayer() ||
@@ -223,6 +271,11 @@ public class State implements Cloneable {
         update();
     }
 
+    /**
+     * Identifies if one's side of pits is empty
+     * @param first for player A
+     * @return
+     */
     public boolean checkPits(boolean first) {
 
         int c = 1;
@@ -242,6 +295,9 @@ public class State implements Cloneable {
         return true;
     }
 
+    /**
+     * Updates player scores
+     */
     //Keep score
     public void scoreCount(){
         if(this.getPlayerTurn() == 'A')
@@ -253,39 +309,73 @@ public class State implements Cloneable {
         update();
     }
 
+    /**
+     * Holes accessor
+     * @return holes
+     */
     public ArrayList<Hole> getHoles(){
         return holes;
     }
 
+    /**
+     * Identifies maximum score in the game
+     * @return maximum score
+     */
     public int getMaxScore() {
         return Math.max(this.getHoles().get(0).getStones(), this.getHoles().get(7).getStones());
     }
 
+    /**
+     * Returns winning player label
+     * @return player label
+     */
     public char getWinningPlayer() {
         return this.getHoles().get(0).getStones() == getMaxScore() ? 'B' : 'A';
     }
 
+    /**
+     * Resets undo counter
+     */
     public void resetUndoCounter() {
         undoCount = 0;
         previousState = (State) this.clone();
     }
 
+    /**
+     * @return A's score
+     */
     public int getScoreA(){
         return scoreA;
     }
 
+    /**
+     * @return B's score
+     */
     public int getScoreB(){
         return scoreB;
     }
 
+    /**
+     * Hole array mutator
+     * @param hole
+     */
     public void addHole(Hole hole){
         holes.add(hole);
     }
 
+    /**
+     * Hole array mutator for specific space
+     * @param index
+     * @param hole
+     */
     public void addHole(int index, Hole hole){
         holes.add(index, hole);
     }
 
+    /**
+     * Identifies if game is over
+     * @return true if over
+     */
     public boolean isGameOver() {
         return gameOver;
     }
