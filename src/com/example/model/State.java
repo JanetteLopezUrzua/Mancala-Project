@@ -262,7 +262,7 @@ public class State implements Cloneable {
     }
 
     public char getWinningPlayer() {
-        return this.getHoles().get(0).getStones() > this.getHoles().get(7).getStones() ? 'A' : 'B';
+        return this.getHoles().get(0).getStones() == getMaxScore() ? 'B' : 'A';
     }
 
     public void resetUndoCounter() {

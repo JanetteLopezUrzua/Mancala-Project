@@ -4,6 +4,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Adapter
+ */
 public class FrameDragListener extends MouseAdapter {
 
     private final JFrame frame;
