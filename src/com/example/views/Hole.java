@@ -4,6 +4,11 @@ import com.example.views.concrete.EllipticStyle;
 
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+/**
+ * Mancala Game Project
+ * @author Janette Lopez Urzua, Omar Riaz, Nikita Voloshenko
+ */
+
 
 public abstract class Hole extends View implements ChangeListener {
 

@@ -1,6 +1,10 @@
 package com.example.views;
 
 import java.awt.*;
+/**
+ * Mancala Game Project
+ * @author Janette Lopez Urzua, Omar Riaz, Nikita Voloshenko
+ */
 
 public class Mancala extends Hole {
 

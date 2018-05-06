@@ -5,6 +5,11 @@ import javafx.scene.control.TextFormatter;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Mancala Game Project
+ * @author Janette Lopez Urzua, Omar Riaz, Nikita Voloshenko
+ */
+
 public class Hole {
     private char player;
     private boolean isPit;

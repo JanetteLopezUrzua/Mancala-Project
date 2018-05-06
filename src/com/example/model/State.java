@@ -9,6 +9,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.util.ArrayList;
 
+/**
+ * Mancala Game Project
+ * @author Janette Lopez Urzua, Omar Riaz, Nikita Voloshenko
+ */
+
 public class State implements Cloneable {
     private ArrayList<Hole> holes;
     private char playerTurn;

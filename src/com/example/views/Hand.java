@@ -2,6 +2,10 @@ package com.example.views;
 
 import java.awt.*;
 import java.util.ArrayList;
+/**
+ * Mancala Game Project
+ * @author Janette Lopez Urzua, Omar Riaz, Nikita Voloshenko
+ */
 
 public class Hand extends View {
 

@@ -5,6 +5,10 @@ package com.example.views;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+/**
+ * Mancala Game Project
+ * @author Janette Lopez Urzua, Omar Riaz, Nikita Voloshenko
+ */
 
 public class ShapedBoard extends JFrame {
 

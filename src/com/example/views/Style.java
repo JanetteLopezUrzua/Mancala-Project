@@ -2,6 +2,11 @@ package com.example.views;
 
 import java.awt.*;
 
+/**
+ * Mancala Game Project
+ * @author Janette Lopez Urzua, Omar Riaz, Nikita Voloshenko
+ */
+
 public abstract class Style {
 
     private Color color;

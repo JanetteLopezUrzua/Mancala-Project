@@ -1,4 +1,8 @@
 package com.example.views;
+/**
+ * Mancala Game Project
+ * @author Janette Lopez Urzua, Omar Riaz, Nikita Voloshenko
+ */
 
 public class Stone {
 

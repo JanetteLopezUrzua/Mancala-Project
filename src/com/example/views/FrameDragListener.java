@@ -3,9 +3,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+/**
+ * Mancala Game Project
+ * @author Janette Lopez Urzua, Omar Riaz, Nikita Voloshenko
+ */
 
 /**
- * Adapter
+ * Adapter to make the board frame draggable
  */
 public class FrameDragListener extends MouseAdapter {
 
