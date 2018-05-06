@@ -64,6 +64,7 @@ public class Board extends View {
         scoreB.setText(String.valueOf(state.getScoreB()));
 
         displayTurnPopUp(state.getPlayerTurn());
+        if(state.isGameOver())    displayGameOver();
 //        initialize();
     }
 
@@ -455,6 +456,23 @@ public class Board extends View {
        playerTurn.setVisible(true);
        Timer timer = new Timer(800, e -> playerTurn.dispose());
        timer.start();
+    }
+
+    void displayGameOver(){
+        JFrame gameOver = new JFrame();
+        gameOver.setLayout(new BorderLayout());
+        JLabel gameOverLabel = new JLabel(" Game Over ");
+        gameOverLabel.setFont(new Font("Mosk Typeface", Font.BOLD, 90));
+        gameOverLabel.setForeground(Color.RED);
+        gameOverLabel.setHorizontalAlignment(JLabel.CENTER);
+        JLabel winnerLabel = new JLabel("Winner is player " + state.getWinningPlayer() + " with score of " + state.getMaxScore());
+        winnerLabel.setFont(new Font("Mosk Typeface", Font.BOLD, 25));
+        winnerLabel.setHorizontalAlignment(JLabel.CENTER);
+        gameOver.add(gameOverLabel, BorderLayout.NORTH);
+        gameOver.add(winnerLabel, BorderLayout.CENTER);
+        gameOver.pack();
+        gameOver.setLocationRelativeTo(this);
+        gameOver.setVisible(true);
     }
 
 

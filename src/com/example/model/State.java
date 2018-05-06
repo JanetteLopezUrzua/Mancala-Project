@@ -16,6 +16,7 @@ public class State implements Cloneable {
     private int scoreA;
     private int scoreB;
     private ArrayList<ChangeListener> changeListeners;
+    private boolean gameOver;
 
     private int undoCount;
 
@@ -42,6 +43,13 @@ public class State implements Cloneable {
     public void update(){
         for(ChangeListener c: changeListeners){
             c.stateChanged(new ChangeEvent(this));      //pass the state as the changeEvent
+        }
+    }
+
+    //used for undo
+    public void updateAllHoles(){
+        for(Hole hole: holes){
+            hole.update();
         }
     }
 
@@ -115,9 +123,14 @@ public class State implements Cloneable {
         if(undoCount >= 3) {
             return;
         } else {
-            undoCount++;
+            undoCount+=3;
 //            this = (State) previousState.clone();
             this.holes = previousState.getHoles();
+            this.scoreA = previousState.scoreA;
+            this.scoreB = previousState.scoreB;
+            this.playerTurn = previousState.playerTurn;
+            update();
+            updateAllHoles();
         }
     }
 
@@ -195,6 +208,7 @@ public class State implements Cloneable {
 
             System.out.println("Game over");
             System.out.println("Winner is player " + this.getWinningPlayer() + " with score of " + this.getMaxScore());
+            gameOver = true;
         }
 
         if (startingPit == -1) {
@@ -268,5 +282,9 @@ public class State implements Cloneable {
 
     public void addHole(int index, Hole hole){
         holes.add(index, hole);
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 }
