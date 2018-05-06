@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Model {
     private State currentState;
     private State previousState;
-    private ArrayList<View> views;
 
     private int undoCount;
 
@@ -23,14 +22,15 @@ public class Model {
 
     //attach a view to the model
     public void attach(View view){
-        views.add(view);
+
     }
 
     //update all of the view attached to the model
     public void update(){
-        for(ChangeListener c: views){
-            c.stateChanged(new ChangeEvent(this));      //pass the state as the changeEvent
-        }
+    }
+
+    public void moveToMancala(int stones, char player) {
+        currentState.moveToMancala(stones, player);
     }
 
     public void setNumberOfStones(int numOfStones) {
@@ -53,14 +53,27 @@ public class Model {
         return undoCount;
     }
 
-    public void increaseUndoCount() {undoCount++;}
-    public void decreaseUndoCount() {undoCount--;}
-
-    public void setUndoCount(int undoCount){
-        this.undoCount = undoCount;
+    public void undo() {
+        //TODO Implement undo logic here
+        if(undoCount >= 3) {
+            return;
+        } else {
+            undoCount++;
+            currentState = (State) previousState.clone();
+        }
     }
 
-    public void incrementUndoCount(){
-        this.undoCount++;
+    public int getMaxScore() {
+        return Math.max(currentState.getHoles().get(0).getStones(), currentState.getHoles().get(7).getStones() );
     }
+
+    public char getWinningPlayer() {
+        return currentState.getHoles().get(0).getStones() > currentState.getHoles().get(7).getStones() ? 'A' : 'B';
+    }
+
+    public void resetUndoCounter() {
+        undoCount = 0;
+        previousState = (State) currentState.clone();
+    }
+
 }

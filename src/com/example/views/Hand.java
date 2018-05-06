@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Hand extends View {
 
-    private ArrayList<Stone> stones;
+    private int numStones;
 
     public Hand(Style style) {
         super(style);
@@ -13,11 +13,11 @@ public class Hand extends View {
     }
 
     //add a collection of stones to the hand
-    public void addToHand(ArrayList<Stone> stones){
-        this.stones = stones;
+    public void addToHand(int numStones){
+        this.numStones = numStones;
     }
     //take a specified stone out of the hand
-    public void takeFromHand(Stone stone){
-        this.stones.remove(stone);
+    public void takeFromHand(){
+        numStones--;
     }
 }

@@ -21,6 +21,20 @@ public class State implements Cloneable {
         return holes;
     }
 
+    public void moveToMancala(int stones, char player) {
+        Hole hole;
+        if(player == 'A') {
+            hole = holes.get(7);
+        } else {
+            hole = holes.get(0);
+        }
+
+        while(stones > 0) {
+            hole.addStone();
+            stones--;
+        }
+    }
+
     public char getPlayerTurn() {
         return playerTurn;
     }

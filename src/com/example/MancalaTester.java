@@ -16,11 +16,11 @@ import java.awt.event.WindowEvent;
 public class MancalaTester {
 
     private static final int BOARD_WIDTH = 1200;
-    private static final int BOARD_HEIGHT = 550;
+    private static final int BOARD_HEIGHT = 450;
 /*    //variable to hold answer for number of stones per pit
     private static int numberOfStones;*/
     private static final int MANCALA_WIDTH = BOARD_WIDTH/15;
-    private static final int MANCALA_HEIGHT = BOARD_HEIGHT - 135;
+    private static final int MANCALA_HEIGHT = BOARD_HEIGHT - 190;
 
     private static final int PIT_WIDTH = BOARD_WIDTH/12;
 
@@ -90,7 +90,7 @@ public class MancalaTester {
 
         //set 3 different styles
         //Style 1
-        Style boardStyle1  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
+        Style boardStyle1  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT+50);
         Style pitStyle1 = new EllipticStyle(new Color(204,0,0), PIT_WIDTH, PIT_WIDTH);
         Style mancalaStyle1 = new RoundedRectangularStyle(new Color(0,0,204), MANCALA_WIDTH, MANCALA_HEIGHT);
 
@@ -130,7 +130,7 @@ public class MancalaTester {
 
     static void displayBoard(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
 
-        ShapedBoard frame = new ShapedBoard(boardStyle, BOARD_WIDTH, BOARD_HEIGHT + 60);
+        ShapedBoard frame = new ShapedBoard(boardStyle, BOARD_WIDTH, BOARD_HEIGHT + 90);
 //        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
 
         View board = new Board(boardStyle, pitStyle, mancalaStyle);
@@ -162,8 +162,8 @@ public class MancalaTester {
             ((Board) board).setNumOfStones(4);
         }
 
-        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,BOARD_WIDTH/2,BOARD_HEIGHT/6));
-        frame.add(hand, BorderLayout.SOUTH);
+//        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,BOARD_WIDTH/2,BOARD_HEIGHT/8));
+//        frame.add(hand, BorderLayout.SOUTH);
 
         //Close frame
         ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
