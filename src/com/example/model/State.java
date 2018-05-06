@@ -45,6 +45,13 @@ public class State implements Cloneable {
         }
     }
 
+    //used for undo
+    public void updateAllHoles(){
+        for(Hole hole: holes){
+            hole.update();
+        }
+    }
+
 //    public ArrayList<Hole> getHoles(){
 //        return holes;
 //    }
@@ -115,9 +122,14 @@ public class State implements Cloneable {
         if(undoCount >= 3) {
             return;
         } else {
-            undoCount++;
+            undoCount+=3;
 //            this = (State) previousState.clone();
             this.holes = previousState.getHoles();
+            this.scoreA = previousState.scoreA;
+            this.scoreB = previousState.scoreB;
+            this.playerTurn = previousState.playerTurn;
+            update();
+            updateAllHoles();
         }
     }
 
