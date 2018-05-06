@@ -97,7 +97,7 @@ public class MancalaTester {
 
         //set 3 different styles
         //Style 1
-        Style boardStyle1  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT+50);
+        Style boardStyle1  = new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT);
         Style pitStyle1 = new EllipticStyle(new Color(204,0,0), PIT_WIDTH, PIT_WIDTH);
         Style mancalaStyle1 = new RoundedRectangularStyle(new Color(0,0,204), MANCALA_WIDTH, MANCALA_HEIGHT);
 
