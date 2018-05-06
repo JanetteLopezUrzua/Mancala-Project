@@ -12,9 +12,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+/**
+ * Board class represents board view with controllers
+ */
 public class Board extends View {
 
-
+    // State is model object
     private State state;
 
     //    private State currentState;
@@ -30,6 +33,15 @@ public class Board extends View {
 //    private Hand hand;
     private ArrayList<Hole> holes;
 
+
+    /**
+     * Public constructor of Board
+     * @param boardStyle is user chosen style of the board
+     * @param pitStyle user choose
+     * @param mancalaStyle
+     * @param state
+     * @param holes
+     */
     public Board(Style boardStyle, Style pitStyle, Style mancalaStyle, State state, ArrayList<Hole> holes) {
         super(boardStyle);
         setSize(boardStyle.getWidth(), boardStyle.getHeight());
@@ -61,6 +73,10 @@ public class Board extends View {
         super.setSize(width, height);
         LABEL_HEIGHT = this.getHeight() / 8;
     }
+
+    /**
+     * Sets up button
+     */
 
     private void createUndoButton() {
         //Create button to undo
@@ -139,121 +155,9 @@ public class Board extends View {
         add(lowerPanelAndScores, BorderLayout.SOUTH);
     }
 
-//    public boolean checkPits(boolean first) {
-//
-//        int c = 1;
-//
-//        if(!first) {
-//            c += 7;
-//        }
-//
-//        int limit = c + 6;
-//
-//        ArrayList<Hole> holes = state.getHoles();
-//        for(; c < limit; c++) {
-//            if( holes.get(c).getStones() != 0 )
-//                return false;
-//        }
-//
-//        return true;
-//    }
-
-//    //Keep score
-//    public void scoreCount(){
-//        if(state.getPlayerTurn() == 'A')
-//             scoreA.setText("Score A: " + Integer.toString(state.getHoles().get(7).getStones()));
-//        else if (state.getPlayerTurn() == 'B')
-//             scoreB.setText("Score B: " + Integer.toString(state.getHoles().get(0).getStones()));
-//    }
-
     public void draw(Graphics2D g2) {
         super.draw(g2);
     }
-
-//    private void turn(int startingPit) {
-//
-//
-//        if (state.getPlayerTurn() != state.getHoles().get(startingPit).getPlayer() ||
-//                startingPit > state.getHoles().size())
-//            return;
-//        hand.addToHand(state.getHoles().get(startingPit).getStones());
-//
-//        startingPit = move(startingPit);
-//        repaint();
-//
-//        scoreCount();
-//
-//        if(checkPits(true) || checkPits(false)) {
-//
-//            System.out.println("Game over");
-//            System.out.println("Winner is player " + state.getWinningPlayer() + " with score of " + state.getMaxScore());
-//        }
-//
-//        if (startingPit == -1) {
-//            state.changeTurn();
-//            displayTurnPopUp(state.getPlayerTurn());
-//            state.resetUndoCounter();
-////            displayTurnPopUp(state.getPlayerTurn());
-//            System.out.println("Now it's " + state.getPlayerTurn() + "'s turn!");
-//        }
-//
-//    }
-
-//    public int move(int selectedPit) {
-//
-//        selectedPit %= 14;
-//        ArrayList<Hole> holes = state.getHoles();
-//
-////<<<<<<< HEAD
-////        long start;
-////
-////        char player = state.getPlayerTurn();
-////=======
-//        char player = state.getPlayerTurn();
-//        int numOfStones = holes.get(selectedPit).takeStones();
-//        while (numOfStones > 0) {
-//            selectedPit++;
-//            selectedPit %= holes.size();
-//            Hole hole = holes.get(selectedPit);
-//            if (((hole.getPlayer() == player && !hole.isPit())) || hole.isPit()) {
-//                holes.get(selectedPit).addStone();
-//                numOfStones--;
-//                hand.takeFromHand();
-////                repaint();
-////                start = System.currentTimeMillis();
-////                while( start + 300 >  System.currentTimeMillis() );
-//            }
-//        }
-//
-//        // Calculate opposite pit formula n + (7 - n) * 2 = k
-//        int oppositePit = selectedPit + (7 - selectedPit) * 2;
-//
-//        if ((player == 'A' && selectedPit == 7) || (player == 'B' && selectedPit == 0))
-//            return -2;
-//
-//        if (holes.get(selectedPit).getPlayer() == player && holes.get(oppositePit).getStones() >= 1 &&
-//                holes.get(selectedPit).getStones() == 1) {
-//            int stones = holes.get(oppositePit).takeStones();
-//            stones += holes.get(selectedPit).takeStones();
-//            state.moveToMancala(stones, player);
-//            System.out.println("Transfer opposite stones to your mancala");
-//            return -1;
-////<<<<<<< HEAD
-////
-////        } else if(holes.get(selectedPit).getStones() > 1) {
-////            System.out.println("Still " + state.getPlayerTurn() + "'s turn!");
-////            return selectedPit;
-////        }
-////        else{
-////            System.out.println("Player " +  player + ", please select your pits");
-////=======
-////>>>>>>> 61dae2aa5008e0d9813c3f3c32c745dde8fa7624
-//        }
-//
-//        repaint();
-//        return -1;
-//    }
-
 
     /**
      * Initialize the board view
@@ -261,98 +165,10 @@ public class Board extends View {
     private void initialize() {
 
         createUpperLowerPanels();
-//        ArrayList<Hole> holes = ;
-
-        //Add mancala B to the array of holes = holes[0]
-//        Mancala mancalaB = new Mancala('B', false, mancalaStyle);
-//        Mancala mancalaB = new Mancala(mancalaStyle, state.getHoles().get(7));
-//
-//        holes.add(mancalaB);
 
         //Add Pits to the array of holes
         Pit pit;
         JLabel label;
-//        for (int c = 0; c < 12; c++) {
-//            if (c < 6)
-//                pit = new Pit('A', true, pitStyle, _numOfStones);
-//            else
-//                pit = new Pit('B', true, pitStyle, _numOfStones);
-//            holes.add(pit);
-//            //
-//            Pit finalPit = pit;
-//
-//            pit.addMouseListener(new MouseListener() {
-//                @Override
-//                public void mouseClicked(MouseEvent e) {
-//                    if (finalPit.contains(e.getX(), e.getY())) {
-//                        int index = Board.this.state.getHoles().indexOf(finalPit);
-//                        Hole hole = Board.this.state.getHoles().get(index);
-//                        System.out.println("Player " + Board.this.state.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
-//                        if (hole.getStones() > 0)
-//                            turn(index);
-//                    }
-//                }
-//
-//                @Override
-//                public void mousePressed(MouseEvent e) {
-//                }
-//
-//                @Override
-//                public void mouseReleased(MouseEvent e) {
-//                }
-//
-//                @Override
-//                public void mouseEntered(MouseEvent e) {
-//                }
-//
-//                @Override
-//                public void mouseExited(MouseEvent e) {
-//                }
-//            });
-//        }
-//        for (int c = 0; c < 12; c++) {
-////            pit = new Pit('A', true, pitStyle, _numOfStones);
-//            pit = new Pit(pitStyle);
-//            com.example.model.Hole hole;
-//            if (c < 6)
-//                hole = new com.example.model.Hole('A', true);
-//            else
-//                hole = new com.example.model.Hole('B', true);
-//            hole.attach(pit);
-//
-//            holes.add(pit); //belongs in Board
-//
-//            Pit finalPit = pit;
-//
-//            pit.addMouseListener(new MouseListener() {
-//                @Override
-//                public void mouseClicked(MouseEvent e) {
-//                    if (finalPit.contains(e.getX(), e.getY())) {
-//                        int index = Board.this.state.getHoles().indexOf(finalPit);
-//                        com.example.model.Hole hole = Board.this.state.getHoles().get(index);
-//                        System.out.println("Player " + Board.this.state.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
-//                        if (hole.getStones() > 0)
-//                            turn(index);
-//                    }
-//                }
-//
-//                @Override
-//                public void mousePressed(MouseEvent e) {
-//                }
-//
-//                @Override
-//                public void mouseReleased(MouseEvent e) {
-//                }
-//
-//                @Override
-//                public void mouseEntered(MouseEvent e) {
-//                }
-//
-//                @Override
-//                public void mouseExited(MouseEvent e) {
-//                }
-//            });
-//        }
 
         //Set a Border on the JPanel to fit the mancalas in the board
         setBorder(BorderFactory.createEmptyBorder(25,120,120,150));
@@ -369,11 +185,6 @@ public class Board extends View {
             holdPits.add(holes.get(i));
         }
 
-        //Add mancala A to the array of holes = holes[13]
-//        Mancala mancalaA = new Mancala('A', false, mancalaStyle);
-//        Mancala mancalaA = new Mancala(mancalaStyle, state.getHoles().get(0));
-//        holes.add(7, mancalaA);
-
         //Panel to hold pits and mancalas
         JPanel holdPitsAndMancalas = new JPanel(new BorderLayout());
 
@@ -381,8 +192,6 @@ public class Board extends View {
         holdPitsAndMancalas.add(holes.get(0), BorderLayout.WEST);
         holdPitsAndMancalas.add(holes.get(7), BorderLayout.EAST);
 
-//        state = new State(holes);           //create State  --> should NOT be creating a state! we should be using a created state
-//        state = new Model(state);
         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
         holdPits.setBorder(BorderFactory.createEmptyBorder(20, 70, 0, 0));
 
@@ -421,12 +230,6 @@ public class Board extends View {
 //        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,getWidth()/3,getHeight()/12));
 //        add(hand, BorderLayout.SOUTH);
     }
-
-//    public void setNumOfStones(int answer) {
-//        _numOfStones = answer;
-//        state.setNumberOfStones(_numOfStones);
-////        repaint();
-//    }
 
     void displayTurnPopUp(char player){
         JFrame playerTurn = new JFrame();
