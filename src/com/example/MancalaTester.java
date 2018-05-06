@@ -17,8 +17,6 @@ public class MancalaTester {
 
     private static final int BOARD_WIDTH = 1200;
     private static final int BOARD_HEIGHT = 450;
-/*    //variable to hold answer for number of stones per pit
-    private static int numberOfStones;*/
     private static final int MANCALA_WIDTH = BOARD_WIDTH/15;
     private static final int MANCALA_HEIGHT = BOARD_HEIGHT - 190;
 
