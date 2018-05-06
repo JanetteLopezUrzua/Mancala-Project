@@ -51,6 +51,7 @@ public class Board extends View {
         scoreA.setText(String.valueOf(state.getScoreA()));
         scoreB.setText(String.valueOf(state.getScoreB()));
 
+        displayTurnPopUp(state.getPlayerTurn());
 //        initialize();
     }
 
@@ -359,7 +360,7 @@ public class Board extends View {
         JPanel holdPits = new JPanel(new GridLayout(2, 6));
 
         //Add pits to the holdPits JPanel
-        for (int i = 12; i > 6; i--) {
+        for (int i = 13; i > 7; i--) {
             holdPits.add(holes.get(i));
         }
 
@@ -376,13 +377,13 @@ public class Board extends View {
         JPanel holdPitsAndMancalas = new JPanel(new BorderLayout());
 
         //Add mancalas to the holdPitsAndMancalas JPanel
-        holdPitsAndMancalas.add(holes.get(7), BorderLayout.WEST);
-        holdPitsAndMancalas.add(holes.get(0), BorderLayout.EAST);
+        holdPitsAndMancalas.add(holes.get(0), BorderLayout.WEST);
+        holdPitsAndMancalas.add(holes.get(7), BorderLayout.EAST);
 
 //        state = new State(holes);           //create State  --> should NOT be creating a state! we should be using a created state
 //        state = new Model(state);
         //Set a border on the holdPits JPanel to fit the pits in the middle of the board
-        holdPits.setBorder(BorderFactory.createEmptyBorder(20, 90, 0, 0));
+        holdPits.setBorder(BorderFactory.createEmptyBorder(20, 70, 0, 0));
 
         //Add holdPits JPanel to the holdPitsAndMancalas JPanel
         holdPitsAndMancalas.add(holdPits, BorderLayout.CENTER);

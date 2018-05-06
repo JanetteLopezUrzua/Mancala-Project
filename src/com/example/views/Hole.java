@@ -137,6 +137,10 @@ public abstract class Hole extends View implements ChangeListener {
 
     }
 
+    public com.example.model.Hole getHole(){
+        return hole;
+    }
+
 //    public void initStones(Graphics2D g2) {
 //
 //        int centerX = getWidth() / 2;

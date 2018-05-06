@@ -16,7 +16,6 @@ public class State implements Cloneable {
     private int scoreA;
     private int scoreB;
     private ArrayList<ChangeListener> changeListeners;
-    private char winner;
 
     private int undoCount;
 
@@ -25,6 +24,7 @@ public class State implements Cloneable {
         holes = new ArrayList<>();
         playerTurn = 'A';
         previousState = (State) this.clone();
+        changeListeners = new ArrayList<>();
     }
 
     public State(ArrayList<Hole> _holes) {
@@ -117,6 +117,7 @@ public class State implements Cloneable {
         } else {
             undoCount++;
 //            this = (State) previousState.clone();
+            this.holes = previousState.getHoles();
         }
     }
 
@@ -157,6 +158,7 @@ public class State implements Cloneable {
         if (holes.get(selectedPit).getPlayer() == player && holes.get(oppositePit).getStones() >= 1 &&
                 holes.get(selectedPit).getStones() == 1) {
             int stones = holes.get(oppositePit).takeStones();
+            holes.get(oppositePit).update();
             stones += holes.get(selectedPit).takeStones();
             this.moveToMancala(stones, player);
             System.out.println("Transfer opposite stones to your mancala");
@@ -228,10 +230,10 @@ public class State implements Cloneable {
     public void scoreCount(){
         if(this.getPlayerTurn() == 'A')
 //            scoreA.setText("Score A: " + Integer.toString(this.getHoles().get(7).getStones()));
-            scoreA = this.getHoles().get(7).getStones();
+            scoreA = this.getHoles().get(0).getStones();
         else if (this.getPlayerTurn() == 'B')
 //            scoreB.setText("Score B: " + Integer.toString(this.getHoles().get(0).getStones()));
-            scoreB = this.getHoles().get(0).getStones();
+            scoreB = this.getHoles().get(7).getStones();
         update();
     }
 
@@ -240,7 +242,7 @@ public class State implements Cloneable {
     }
 
     public int getMaxScore() {
-        return Math.max(this.getHoles().get(0).getStones(), this.getHoles().get(7).getStones() );
+        return Math.max(this.getHoles().get(0).getStones(), this.getHoles().get(7).getStones());
     }
 
     public char getWinningPlayer() {
@@ -262,5 +264,9 @@ public class State implements Cloneable {
 
     public void addHole(Hole hole){
         holes.add(hole);
+    }
+
+    public void addHole(int index, Hole hole){
+        holes.add(index, hole);
     }
 }

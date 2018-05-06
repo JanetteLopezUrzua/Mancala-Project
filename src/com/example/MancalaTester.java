@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class MancalaTester {
 
-    private static final int BOARD_WIDTH = 1200;
+    private static final int BOARD_WIDTH = 1150;
     private static final int BOARD_HEIGHT = 450;
 /*    //variable to hold answer for number of stones per pit
     private static int numberOfStones;*/
@@ -157,7 +157,7 @@ public class MancalaTester {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if (finalPit.contains(e.getX(), e.getY())) {
-                        int index = holes.indexOf(pit);
+                        int index = state.getHoles().indexOf(pit.getHole());
 //                        com.example.model.Hole hole = this.state.getHoles().get(index);
                         System.out.println("Player " + state.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
                         if (hole.getStones() > 0)
@@ -182,10 +182,10 @@ public class MancalaTester {
         Mancala mancalaB = new Mancala(mancalaStyle, mancalaHoleB);
         mancalaHoleA.attach(mancalaA);
         mancalaHoleB.attach(mancalaB);
-        holes.add(6, mancalaB);
-        holes.add(0, mancalaA);
-        state.addHole(mancalaHoleA);
-        state.addHole(mancalaHoleB);
+        holes.add(6, mancalaA);
+        holes.add(0, mancalaB);
+        state.addHole(6, mancalaHoleA);
+        state.addHole(0, mancalaHoleB);
         //Pop up button options
         Object[] options = { "3", "4"};
 
@@ -202,6 +202,7 @@ public class MancalaTester {
         }
 
         View board = new Board(boardStyle, pitStyle, mancalaStyle, state, holes);
+        state.attach(board);
 
         FrameDragListener frameDragListener = new FrameDragListener(frame);
 
