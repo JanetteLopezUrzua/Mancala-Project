@@ -209,6 +209,7 @@ public class State implements Cloneable {
             System.out.println("Game over");
             System.out.println("Winner is player " + this.getWinningPlayer() + " with score of " + this.getMaxScore());
             gameOver = true;
+            update();
         }
 
         if (startingPit == -1) {
