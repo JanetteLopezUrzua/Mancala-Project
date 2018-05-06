@@ -6,8 +6,8 @@ public class Mancala extends Hole {
 
     //draw the Mancala as a rounded rectangle
 
-    public Mancala(char newPlayer, boolean isPit, Style newStyle) {
-        super(newPlayer, isPit, newStyle);
+    public Mancala(Style newStyle, com.example.model.Hole hole) {
+        super(newStyle, hole);
     }
 
 //    @Override

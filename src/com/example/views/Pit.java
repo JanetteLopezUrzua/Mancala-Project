@@ -6,27 +6,28 @@ import java.awt.event.MouseListener;
 
 public class Pit extends Hole {
 
-    public Pit(char newPlayer, boolean _isPit, Style style) {
-        super(newPlayer, _isPit, style);
+//    public Pit(char newPlayer, boolean _isPit, Style style) {
+//        super(newPlayer, _isPit, style);
+//    }
+//
+//    public Pit(char newPlayer, boolean _isPit, Style style, int _numOfStones) {
+//        super(newPlayer, _isPit, style, _numOfStones);
+//    }
+//
+//    public Hole(char newPlayer, boolean _isPit, Style newStyle) {
+//        super(newStyle);
+//        player = newPlayer;
+//        isPit = _isPit;
+//    }
+
+    public Pit(Style newStyle, com.example.model.Hole hole) {
+        super(newStyle, hole);
     }
 
-    public Pit(char newPlayer, boolean _isPit, Style style, int _numOfStones) {
-        super(newPlayer, _isPit, style, _numOfStones);
-    }
-
-    public Hole(char newPlayer, boolean _isPit, Style newStyle) {
-        super(newStyle);
-        player = newPlayer;
-        isPit = _isPit;
-    }
-
-    public Hole(char newPlayer, boolean _isPit, Style newStyle, int _numOfStones) {
-        super(newStyle);
-        player = newPlayer;
-        isPit = _isPit;
-        numOfStones = _numOfStones;
-//        initStones(numOfStones);
-    }
+//    public Hole(Style newStyle, int _numOfStones) {
+//        super(newStyle);
+//        numOfStones = _numOfStones;
+//    }
 
 //    @Override
 //    public void draw(Graphics2D g2) {

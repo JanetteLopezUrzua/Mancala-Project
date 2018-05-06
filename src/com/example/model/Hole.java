@@ -1,9 +1,20 @@
 package com.example.model;
 
+import javafx.scene.control.TextFormatter;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 public class Hole {
     private char player;
     private boolean isPit;
     protected int numOfStones;
+    private ChangeListener changeListener;
+
+    public Hole(char player, boolean isPit) {
+        this.player = player;
+        this.isPit = isPit;
+    }
 
     public void addStone() {
 //        stones.add(new Stone());
@@ -39,4 +50,18 @@ public class Hole {
         numOfStones = _numOfStones;
 //        repaint();
     }
+
+    public void appendStones(int stones) {
+        numOfStones += stones;
+    }
+
+    //attaching one view to this model object. Overwrites previous one
+    public void attach(ChangeListener c){
+        changeListener = c;
+    }
+
+    public void update(){
+        changeListener.stateChanged(new ChangeEvent(this));
+    }
+
 }

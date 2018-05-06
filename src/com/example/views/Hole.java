@@ -14,6 +14,7 @@ public abstract class Hole extends View implements ChangeListener {
 //    private char player;
 //    private boolean isPit;
 //    protected int numOfStones;
+    private com.example.model.Hole hole;
 
     int coils = 3;
     int radius = 50;
@@ -37,8 +38,9 @@ public abstract class Hole extends View implements ChangeListener {
         initStones2(g2);
     }
 
-    public Hole(){
-
+    public Hole(Style newStyle, com.example.model.Hole hole){
+        super(newStyle);
+        this.hole = hole;
     }
 
 //    public Hole(char newPlayer, boolean _isPit, Style newStyle) {
@@ -75,7 +77,7 @@ public abstract class Hole extends View implements ChangeListener {
 
         ArrayList<Stone> stonesDrawn = new ArrayList<>();
         int stoneDist = 8;
-        for (int i = 0; i < numOfStones; i++ ) {
+        for (int i = 0; i < hole.getStones(); i++ ) {
 
 //            if (i % 2 == 1) // move the x position every other repetition
 //                x -= 2 * radiusStep;
@@ -171,11 +173,12 @@ public abstract class Hole extends View implements ChangeListener {
 //        }
 //    }
 
-    //when the state is changed by the state, redraw
-    @Override
-    public void stateChanged(ChangeEvent e) {
-
-    }
+//    //when the state is changed by the state, redraw
+//    @Override
+//    public void stateChanged(ChangeEvent e) {
+//        repaint();
+////        initStones2();
+//    }
 
     //using a spiral function, locate points and use them to draw stones
     public void drawStone(){
@@ -216,4 +219,10 @@ public abstract class Hole extends View implements ChangeListener {
 //        numOfStones = _numOfStones;
 //        repaint();
 //    }
+
+//    public void appendStones(int stones) {
+////        stones.remove(0);
+//        numOfStones += stones;
+//    }
+
 }
