@@ -12,9 +12,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+/**
+ * Board class represents board view with controllers
+ */
 public class Board extends View {
 
-
+    // State is model object
     private State state;
 
     //    private State currentState;
@@ -30,6 +33,15 @@ public class Board extends View {
     private Hand hand;
     private ArrayList<Hole> holes;
 
+
+    /**
+     * Public constructor of Board
+     * @param boardStyle is user chosen style of the board
+     * @param pitStyle user choose
+     * @param mancalaStyle
+     * @param state
+     * @param holes
+     */
     public Board(Style boardStyle, Style pitStyle, Style mancalaStyle, State state, ArrayList<Hole> holes) {
         super(boardStyle);
         setSize(boardStyle.getWidth(), boardStyle.getHeight());
@@ -60,6 +72,10 @@ public class Board extends View {
         super.setSize(width, height);
         LABEL_HEIGHT = this.getHeight() / 8;
     }
+
+    /**
+     * Sets up button
+     */
 
     private void createUndoButton() {
         //Create button to undo
