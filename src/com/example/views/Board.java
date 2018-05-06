@@ -55,6 +55,10 @@ public class Board extends View {
         initialize();
     }
 
+    /**
+     * Redraw logic for board
+     * @param c ChangeEvent
+     */
     @Override
     public void stateChanged(ChangeEvent c){
         state = (State) c.getSource();
@@ -65,7 +69,6 @@ public class Board extends View {
 
         displayTurnPopUp(state.getPlayerTurn());
         if(state.isGameOver())    displayGameOver();
-//        initialize();
     }
 
     @Override
@@ -75,7 +78,7 @@ public class Board extends View {
     }
 
     /**
-     * Sets up button
+     * Sets up undo button
      */
 
     private void createUndoButton() {
@@ -90,6 +93,9 @@ public class Board extends View {
         });
     }
 
+    /**
+     * Sets up control and info panels on North and South
+     */
     private void createUpperLowerPanels() {
 
         JPanel upperPanel = new JPanel(new GridLayout(0, 6, 40, 0));
@@ -155,6 +161,10 @@ public class Board extends View {
         add(lowerPanelAndScores, BorderLayout.SOUTH);
     }
 
+    /**
+     * Default drawing
+     * @param g2 Graphics context
+     */
     public void draw(Graphics2D g2) {
         super.draw(g2);
     }
@@ -227,18 +237,19 @@ public class Board extends View {
         add(holdPitsAndMancalas, BorderLayout.CENTER);
         add(labelMancalaB, BorderLayout.WEST);
         add(labelMancalaA, BorderLayout.EAST);
-//        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,getWidth()/3,getHeight()/12));
-//        add(hand, BorderLayout.SOUTH);
     }
 
-    void displayTurnPopUp(char player){
+    /**
+     * Displays turn of current player
+     * @param player's turn
+     */
+    private void displayTurnPopUp(char player){
         JFrame playerTurn = new JFrame();
         JLabel playerLabel = new JLabel("Turn: Player " + Character.toString(player));
         playerLabel.setFont(new Font("Mosk Typeface", Font.BOLD, 18));
         playerLabel.setHorizontalAlignment(JLabel.CENTER);
         playerTurn.setUndecorated(true);
         playerTurn.add(playerLabel);
-        //playerTurn.setBackground(new Color(0, 0, 0, 0));
         playerTurn.pack();
         playerTurn.setLocationRelativeTo(this);
         playerTurn.setVisible(true);
@@ -247,7 +258,10 @@ public class Board extends View {
         timer.start();
     }
 
-    void displayGameOver(){
+    /**
+     * Informs user that game is over and shows result
+     */
+    private void displayGameOver(){
         JFrame gameOver = new JFrame();
         gameOver.setLayout(new BorderLayout());
         JLabel gameOverLabel = new JLabel(" Game Over ");
@@ -264,7 +278,10 @@ public class Board extends View {
         gameOver.setVisible(true);
     }
 
-
+    /**
+     * Provides close buttn
+     * @return close button
+     */
     public JButton getCloseButton() {
         return close;
     }
