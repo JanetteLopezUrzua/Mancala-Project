@@ -41,7 +41,7 @@ public abstract class View extends JPanel implements ChangeListener {
         return style;
     }
 
-    //when the state is changed by the model, redraw the panel
+    //when the state is changed by the state, redraw the panel
     @Override
     public void stateChanged(ChangeEvent e) {
         repaint();
