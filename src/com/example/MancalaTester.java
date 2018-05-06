@@ -1,6 +1,8 @@
 package com.example;
 
 
+import com.example.model.Hole;
+import com.example.model.State;
 import com.example.views.*;
 import com.example.views.concrete.EllipticStyle;
 import com.example.views.concrete.RectangularStyle;
@@ -9,13 +11,12 @@ import com.example.views.concrete.RoundedRectangularStyle;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.util.ArrayList;
 
 public class MancalaTester {
 
-    private static final int BOARD_WIDTH = 1200;
+    private static final int BOARD_WIDTH = 1150;
     private static final int BOARD_HEIGHT = 450;
 /*    //variable to hold answer for number of stones per pit
     private static int numberOfStones;*/
@@ -130,10 +131,78 @@ public class MancalaTester {
 
     static void displayBoard(JFrame menu, Style boardStyle, Style pitStyle, Style mancalaStyle){
 
+
         ShapedBoard frame = new ShapedBoard(boardStyle, BOARD_WIDTH, BOARD_HEIGHT + 90);
 //        JFrame frame = new JFrame(); //new RoundedRectangularStyle(Color.BLACK, BOARD_WIDTH, BOARD_HEIGHT), BOARD_WIDTH, BOARD_HEIGHT);
 
-        View board = new Board(boardStyle, pitStyle, mancalaStyle);
+
+        State state = new State();
+        ArrayList<com.example.views.Hole> holes = new ArrayList<>();
+
+        for (int c = 0; c < 12; c++) {
+//            pit = new Pit('A', true, pitStyle, _numOfStones);
+            com.example.model.Hole hole;
+            if (c < 6)
+                hole = new com.example.model.Hole('A', true);
+            else
+                hole = new com.example.model.Hole('B', true);
+            Pit pit = new Pit(pitStyle, hole);
+            hole.attach(pit);
+            holes.add(pit); //belongs in Board
+            state.addHole(hole);
+
+            Pit finalPit = pit;
+
+            pit.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (finalPit.contains(e.getX(), e.getY())) {
+                        int index = state.getHoles().indexOf(pit.getHole());
+//                        com.example.model.Hole hole = this.state.getHoles().get(index);
+                        System.out.println("Player " + state.getPlayerTurn() + " clicked " + hole.getPlayer() + index);
+                        if (hole.getStones() > 0)
+//                            turn(index);
+                            state.turn(index);
+                    }
+                }
+                @Override
+                public void mousePressed(MouseEvent e) {}
+                @Override
+                public void mouseReleased(MouseEvent e) {}
+                @Override
+                public void mouseEntered(MouseEvent e) {}
+                @Override
+                public void mouseExited(MouseEvent e) {}
+            });
+        }
+        //adding Mancalas
+        Hole mancalaHoleA = new Hole('A', false);
+        Hole mancalaHoleB = new Hole('B', false);
+        Mancala mancalaA = new Mancala(mancalaStyle, mancalaHoleA);
+        Mancala mancalaB = new Mancala(mancalaStyle, mancalaHoleB);
+        mancalaHoleA.attach(mancalaA);
+        mancalaHoleB.attach(mancalaB);
+        holes.add(6, mancalaA);
+        holes.add(0, mancalaB);
+        state.addHole(6, mancalaHoleA);
+        state.addHole(0, mancalaHoleB);
+        //Pop up button options
+        Object[] options = { "3", "4"};
+
+        int result = JOptionPane.showOptionDialog(menu, "How many stones per pit?", "Enter Number Of Stones",
+                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
+
+        if(result == JOptionPane.YES_OPTION)
+        {
+            state.setNumberOfStones(3);
+        }
+        else if (result == JOptionPane.NO_OPTION)
+        {
+            state.setNumberOfStones(4);
+        }
+
+        View board = new Board(boardStyle, pitStyle, mancalaStyle, state, holes);
+        state.attach(board);
 
         FrameDragListener frameDragListener = new FrameDragListener(frame);
 
@@ -147,20 +216,7 @@ public class MancalaTester {
 
         //Close frame and exit application
         ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
-        //Pop up button options
-        Object[] options = { "3", "4"};
 
-        int result = JOptionPane.showOptionDialog(menu, "How many stones per pit?", "Enter Number Of Stones",
-                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
-
-        if(result == JOptionPane.YES_OPTION)
-        {
-            ((Board) board).setNumOfStones(3);
-        }
-        else if (result == JOptionPane.NO_OPTION)
-        {
-            ((Board) board).setNumOfStones(4);
-        }
 
 //        Hand hand = new Hand(new RoundedRectangularStyle(Color.GRAY,BOARD_WIDTH/2,BOARD_HEIGHT/8));
 //        frame.add(hand, BorderLayout.SOUTH);
@@ -168,7 +224,7 @@ public class MancalaTester {
         //Close frame
         ((Board) board).getCloseButton().addActionListener(e -> frame.dispose());
 
-//        ((Board) board).getUndoButton().addActionListener(e-> );
+//        ((Board) board).getUndoButton().addActionListener(e-> )
     }
 
 }
